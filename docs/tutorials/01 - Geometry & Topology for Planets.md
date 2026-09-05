@@ -88,6 +88,46 @@ Meshes describe **surfaces**; voxels describe **volume** (Minecraft-style 3D gri
 - *"Explain cube-sphere mapping like I'm building a planet renderer. Why does everyone use it for LOD?"*
 - *"My deformed sphere's lighting looks faceted/broken — here's my code."* (paste it — it's probably normals)
 
+## My progress — 2026-09-02 ✅
+
+**Prompt used:** *"Add a wireframe toggle to Planet Studio, then let me switch between SphereGeometry and IcosahedronGeometry to compare pole pinching."*
+
+**What changed in `app/src/App.tsx`:**
+
+- Added `topology: 'uv' | 'ico'` and `wireframe: boolean` to `PlanetSettings`
+- `buildPlanetGeometry()` now branches: `SphereGeometry` vs `IcosahedronGeometry`. The resolution slider (16–128) maps to icosphere detail 1–6, because each detail step **quadruples** the triangle count
+- New UI: a Topology dropdown + Wireframe checkbox
+- Wireframe mode also hides the transparent ocean shell — otherwise it covers the mesh you're trying to inspect
+
+### Step 1 — where I started
+
+This is the Planet Studio I already had: UV sphere, fake sine noise, ocean shell on top. Looks fine… until you ask what the mesh underneath actually looks like.
+
+![Planet Studio before: solid UV sphere with the slider panel](images/01-app-baseline.png)
+
+### Step 2 — turn on wireframe (UV sphere)
+
+Wireframe on, auto-spin off. And there it is — the latitude/longitude grid, with the quads visibly squeezing together at the top pole. The "pole pinching" from section 2, but on *my* planet, not in some textbook figure.
+
+![Wireframe on, auto spin off — the lat/long grid pinches at the pole](images/01-app-uv-wireframe.png)
+
+> honestly I didn't expect it to be THIS obvious. the top of the sphere looks like fabric being pulled into a drawstring bag. every tutorial says "vertices crowd at the poles" but seeing my own terrain get denser up there for no terrain-related reason made it click.
+
+### Step 3 — same planet, different topology
+
+One dropdown change: `SphereGeometry` → `IcosahedronGeometry`. Same radius, same noise, same elevation.
+
+![Icosphere wireframe — uniform triangles, no pole](images/01-app-icosphere-wireframe.png)
+
+> two things I noticed while flipping back and forth: (1) there is just… no pole. no special point anywhere, the triangles are boringly uniform, which is exactly the point. (2) the planet's silhouette actually CHANGED even though I didn't touch the noise sliders — took me a minute to realize the noise is sampled *at the vertices*, and the vertices moved. so "same algorithm, different topology" ≠ same shape. sneaky.
+
+> also, small confession: the first wireframe screenshot looked wrong because the "ocean" was still covering everything. I genuinely thought water was somehow part of the planet mesh. it's not — it's literally a second, slightly bigger sphere wearing the planet like a coat. hiding it in wireframe mode was the fix.
+
+**Bonus lesson (React, found by accident):** while automating the browser we set the checkbox's DOM value directly and *nothing happened* — the box looked checked but the planet didn't change. A real mouse click worked. Reason: this is a **controlled component** — the DOM checkbox is just a picture of React state; only an `onChange` event actually updates the state that Three.js reads. Screen ≠ state.
+
+> (the AI called this "screen ≠ state" and I'm keeping that phrase. the checkbox was checked. the app disagreed. rude.)
+
 ## What surprised me
 
-- *(fill in after doing the exercise)*
+- The ocean is a separate sphere. Still not over it.
+- Switching topology while keeping every slider identical produces a *differently-shaped* planet, because the noise gets sampled at different vertex positions.

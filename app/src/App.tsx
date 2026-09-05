@@ -3,12 +3,16 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import './App.css'
 
+type Topology = 'uv' | 'ico'
+
 type PlanetSettings = {
   radius: number
   resolution: number
   elevation: number
   frequency: number
   spin: boolean
+  topology: Topology
+  wireframe: boolean
 }
 
 const initialSettings: PlanetSettings = {
@@ -17,6 +21,8 @@ const initialSettings: PlanetSettings = {
   elevation: 0.35,
   frequency: 2.8,
   spin: true,
+  topology: 'uv',
+  wireframe: false,
 }
 
 function terrainNoise(direction: THREE.Vector3, frequency: number) {
@@ -32,11 +38,19 @@ function terrainNoise(direction: THREE.Vector3, frequency: number) {
 }
 
 function buildPlanetGeometry(settings: PlanetSettings) {
-  const geometry = new THREE.SphereGeometry(
-    settings.radius,
-    settings.resolution,
-    settings.resolution / 2,
-  )
+  // Icosphere "detail" grows triangle count 4x per step, so map the
+  // 16-128 resolution slider down to a 1-6 subdivision level.
+  const geometry =
+    settings.topology === 'ico'
+      ? new THREE.IcosahedronGeometry(
+          settings.radius,
+          Math.max(1, Math.min(6, Math.round(settings.resolution / 20))),
+        )
+      : new THREE.SphereGeometry(
+          settings.radius,
+          settings.resolution,
+          settings.resolution / 2,
+        )
   const position = geometry.attributes.position
   const normal = new THREE.Vector3()
 
@@ -62,9 +76,10 @@ function PlanetCanvas({ settings }: { settings: PlanetSettings }) {
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null)
   const controlsRef = useRef<OrbitControls | null>(null)
   const planetRef = useRef<THREE.Mesh | null>(null)
+  const oceanRef = useRef<THREE.Mesh | null>(null)
   const animationFrameRef = useRef<number | null>(null)
   const spinRef = useRef(settings.spin)
-  const { radius, resolution, elevation, frequency } = settings
+  const { radius, resolution, elevation, frequency, topology, wireframe } = settings
 
   useEffect(() => {
     spinRef.current = settings.spin
@@ -82,7 +97,8 @@ function PlanetCanvas({ settings }: { settings: PlanetSettings }) {
     const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100)
     camera.position.set(0, 1.2, 6)
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    // preserveDrawingBuffer lets canvas.toDataURL() capture the scene for screenshots
+    const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
     renderer.setPixelRatio(window.devicePixelRatio)
     renderer.setSize(mount.clientWidth, mount.clientHeight)
     mount.appendChild(renderer.domElement)
@@ -156,6 +172,7 @@ function PlanetCanvas({ settings }: { settings: PlanetSettings }) {
     cameraRef.current = camera
     controlsRef.current = controls
     planetRef.current = planet
+    oceanRef.current = ocean
 
     return () => {
       if (animationFrameRef.current !== null) {
@@ -184,10 +201,22 @@ function PlanetCanvas({ settings }: { settings: PlanetSettings }) {
       resolution,
       elevation,
       frequency,
+      topology,
       spin: false,
+      wireframe: false,
     })
     oldGeometry.dispose()
-  }, [radius, resolution, elevation, frequency])
+  }, [radius, resolution, elevation, frequency, topology])
+
+  useEffect(() => {
+    if (!planetRef.current || !oceanRef.current) {
+      return
+    }
+
+    // The ocean shell hides the mesh structure, so park it in wireframe mode.
+    ;(planetRef.current.material as THREE.MeshStandardMaterial).wireframe = wireframe
+    oceanRef.current.visible = !wireframe
+  }, [wireframe])
 
   return <div ref={mountRef} className="planet-canvas" aria-label="Procedural planet preview" />
 }
@@ -257,6 +286,26 @@ function App() {
             value={settings.frequency}
             onChange={(event) => updateSetting('frequency', Number(event.target.value))}
           />
+        </label>
+
+        <label>
+          Topology <span>{settings.topology === 'uv' ? 'UV sphere' : 'Icosphere'}</span>
+          <select
+            value={settings.topology}
+            onChange={(event) => updateSetting('topology', event.target.value as Topology)}
+          >
+            <option value="uv">UV sphere (lat/long grid)</option>
+            <option value="ico">Icosphere (subdivided d20)</option>
+          </select>
+        </label>
+
+        <label className="toggle">
+          <input
+            type="checkbox"
+            checked={settings.wireframe}
+            onChange={(event) => updateSetting('wireframe', event.target.checked)}
+          />
+          Wireframe
         </label>
 
         <label className="toggle">
