@@ -29,28 +29,24 @@ Procedural world building = generating all three **with algorithms instead of by
 4. [[02 - Textures, UVs & Heightmaps]] — how surfaces get their look, and how a grayscale image becomes terrain
 5. [[03 - Shaders 101 for World Builders]] — vertex & fragment shaders, GLSL, displacing a planet on the GPU
 
+6. [[04 - Simulation Map and Hydraulic Erosion]] — shared noise, water flow, stepping, and visual comparisons
+
 ### Ongoing records
 
-- [[Visual Changelog]] — before/after screenshots of every UI & scene styling change
+- [[Visual Changelog]] — screenshots of UI and scene changes
+- [[2026-09-09 - Progress Log]] — today’s prompts, five saved screenshots, and the terrain playground
 
-### Progress so far (2026-09-08)
+### Progress so far (2026-09-09)
 
-| Note | Status |
-|---|---|
-| [[01 - Geometry & Topology for Planets]] | ✅ exercise done — UV vs icosphere, wireframe, screenshots in note |
-| [[02 - Textures, UVs & Heightmaps]] | ⏳ next — swap the sine terrain for real layered noise |
-| [[03 - Shaders 101 for World Builders]] | ✅ done early — the low-poly world shader *is* this tutorial's exercise |
-| [[Visual Changelog]] | entries 001–004: one rejected direction, three kept |
+- Geometry: UV sphere / icosphere comparison and wireframe exercise recorded.
+- Shaders: the original planet has a stylized low-poly shader; simulation terrain now uses smooth lighting and blended height colors.
+- Noise: layered Perlin, Cellular, and Sine controls drive the laboratory previews and Simulation map. Migrating the original planet to this stack remains open.
+- Simulation: rainfall, erosion, deposition, batch stepping, and diagnostic views implemented. Five screenshots preserve one paused step-14 experiment.
+- Visual Changelog: entries 001–005; entry 005 links the terrain comparison views.
 
-### How they connect to the course weeks
+### Topic connections
 
-| Course week | Topic | My note |
-|---|---|---|
-| 1 | Terrain foundations (noise, heightmaps) | [[02 - Textures, UVs & Heightmaps]] |
-| 2 | Sphere mapping & geometry | [[01 - Geometry & Topology for Planets]] |
-| 3 | Voxel terrain | [[01 - Geometry & Topology for Planets]] |
-| 5 | Vector fields & atmospheres | [[03 - Shaders 101 for World Builders]] |
-| 8 | Performance (LOD, streaming) | all three |
+Geometry sets the sampling grid. Noise supplies initial heights. Materials help read the surface. Erosion changes heights over steps. Resolution and performance affect how much detail can be represented. These are learning connections, not an official course timetable.
 
 ## How I study each note (with AI)
 

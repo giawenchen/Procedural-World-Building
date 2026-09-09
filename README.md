@@ -14,14 +14,19 @@ I am learning to build a procedural planet in the browser using React, TypeScrip
 
 ## Current progress
 
-**Week 1–2 (as of 2026-09-08).** Planet Studio is a full-bleed planet with a floating control column:
+**As of 2026-09-09**, the app has three workspaces:
 
-- Terrain controls (radius, resolution, elevation, noise frequency) and UV sphere / icosphere topology with a wireframe toggle — [geometry tutorial](docs/tutorials/01%20-%20Geometry%20%26%20Topology%20for%20Planets.md)
-- A custom low-poly shader: flat shading from screen-space derivatives, elevation colour bands, 4-step toon lighting, coloured shadows, rim light — [shader tutorial](docs/tutorials/03%20-%20Shaders%20101%20for%20World%20Builders.md)
-- Four UI iterations documented with before/after screenshots, including one rejected direction — [Visual Changelog](docs/tutorials/Visual%20Changelog.md)
-- A [style guide](STYLE-GUIDE.md) whose palette is sampled from the rendered world
+- **Planet:** the original terrain controls, UV sphere / icosphere comparison, and stylized low-poly shader.
+- **Noise laboratory:** seeded Perlin, Cellular, and Sine layers with shaping, blending, and 2D/3D previews.
+- **Simulation map:** a height field driven by that shared stack, keyboard exploration, and a hydraulic erosion playground. Paint rain, trigger a storm, advance 100 steps, and inspect Water or Ground change alongside the original terrain.
 
-Next: replace the sine-based terrain with seeded, layered noise so the mountains (and the snow line) become real.
+[Today’s learning log](docs/tutorials/2026-09-09%20-%20Progress%20Log.md) records the prompts, explanations, and five real screenshots of a paused step-14 experiment. [Tutorial 04](docs/tutorials/04%20-%20Simulation%20Map%20and%20Hydraulic%20Erosion.md) walks through the controls. The [Visual Changelog](docs/tutorials/Visual%20Changelog.md) preserves earlier design decisions and the new comparison views.
+
+![Ground-change view in the simulation playground](docs/tutorials/images/2026-09-09/03-ground-change-step-14.jpg)
+
+The simulation terrain uses smooth lighting and blended elevation colors; the original planet keeps its low-poly style and earlier sine terrain. The hydraulic model is educational: its steps and units are not calibrated to real geological time.
+
+Next: save/restore evolving simulations, improve water-flow distribution, verify PNG export delivery, and connect the original planet to the shared noise stack. The [style guide](STYLE-GUIDE.md) continues to guide the dark interface and sand accent.
 
 ## Run locally
 
@@ -34,6 +39,8 @@ npm run dev
 ```
 
 Open the local URL printed by Vite in the terminal.
+
+Validation from `app/`: `npm run build`, `npm run lint`, and `npm run test:simulation` (the simulation tests need a Node.js version that supports `--experimental-strip-types`).
 
 ## Repository layout
 

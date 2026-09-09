@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import './App.css'
+import NoiseLab from './NoiseLab'
+import SimulationMap from './SimulationMap'
+import { makeLayer } from './noiseEngine'
+import type { Layer } from './noiseEngine'
 
 type Topology = 'uv' | 'ico'
 type Shading = 'standard' | 'lowpoly-hard' | 'lowpoly-soft'
@@ -248,6 +252,7 @@ function PlanetCanvas({ settings }: { settings: PlanetSettings }) {
 
     const resizeObserver = new ResizeObserver(([entry]) => {
       const { width, height } = entry.contentRect
+      if (!width || !height) return
       renderer.setSize(width, height)
       camera.aspect = width / height
       // Nudge the planet right of centre so the floating control column
@@ -385,7 +390,7 @@ function settingsFromUrl(): PlanetSettings {
   }
 }
 
-function App() {
+function OriginalPlanet() {
   const [settings, setSettings] = useState(settingsFromUrl)
 
   const updateSetting = <Key extends keyof PlanetSettings>(
@@ -552,4 +557,14 @@ function ToggleRow({ index, label, on, onChange }: ToggleRowProps) {
   )
 }
 
+function App() {
+  const [tab, setTab] = useState('planet')
+  const [layers,setLayers]=useState<Layer[]>([{...makeLayer(1),name:'Base terrain',weight:1}])
+  const [solo,setSolo]=useState<number|null>(null)
+  return <><nav className="workspace-nav" role="tablist" aria-label="Workspace">
+    <button role="tab" aria-selected={tab==='planet'} onClick={()=>setTab('planet')}>Original planet</button>
+    <button role="tab" aria-selected={tab==='noise'} onClick={()=>setTab('noise')}>Noise laboratory</button>
+  <button role="tab" aria-selected={tab==='simulation'} onClick={()=>setTab('simulation')}>Simulation map</button>
+  </nav><div hidden={tab!=='planet'}><OriginalPlanet /></div><div hidden={tab!=='noise'}><NoiseLab {...{layers,setLayers,solo,setSolo}} /></div>{tab==='simulation'&&<SimulationMap {...{layers,solo}} />}</>
+}
 export default App

@@ -23,6 +23,30 @@ Repeatable capture command (dev server must be running):
 
 ---
 
+## 005 — Noise and erosion playground · 2026-09-09
+
+**Prompt:** “Make it more playful and interesting,” following requests for a noise-driven simulation map and hydraulic erosion.
+
+**What changed:** shared noise layers feed a terrain window; rain painting, storms, single/batch steps, and original comparison make it possible to test a prediction. Smooth lighting and blended elevation colors soften the terrain. Water and Ground change views explain the state using explicit scales and measurements.
+
+![Original ground preview](images/2026-09-09/00-original-preview.jpg)
+
+*Original ground, viewed without resetting the stored experiment.*
+
+![Current landscape at step 14](images/2026-09-09/01-landscape-step-14.jpg)
+
+*Current ground at step 14, using the same camera. The difference is easier to inspect in a diagnostic view:*
+
+![Ground change at step 14](images/2026-09-09/03-ground-change-step-14.jpg)
+
+*Orange is erosion; teal is deposition. Color saturates at ±0.5 units.*
+
+**Capture note:** these images compare original/current simulation states in the implemented UI. No pre-change screenshot of the earlier simulation UI was saved, so they should not be read as a UI redesign before/after pair. No steps were advanced during capture.
+
+**Status:** implemented; build, lint, and four simulation tests pass. Export delivery and simulation persistence remain open. See the [September 9 progress log](2026-09-09%20-%20Progress%20Log.md) for all five images, readings, prompts, and the next experiment.
+
+---
+
 ## 004 — Floating controls, full-bleed world · 2026-09-08
 
 **Goal:** borrow the *feel* of editorial portfolio sites (subdivision.work was the reference) — thin rules, small type, big empty space, dim/bright hierarchy — **without** turning a tool into a poster. Every control stays visible, labelled, and easy to grab.
