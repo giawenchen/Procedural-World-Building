@@ -8,3 +8,5 @@ alwaysApply: true
 Follow the project learning-record workflow in [AGENTS.md](../../AGENTS.md).
 
 Each material app update includes real saved progress screenshots, a brief English explanation, and an update to the dated Obsidian tutorial log. Keep actual observations separate from suggested experiments. Preserve the current simulation, verify image links, and update feature status honestly.
+
+All submission content must be in English, including quoted user questions, UI text, notes, captions, comments, and commit messages. Translate non-English prompts and label them as translations without retaining the original text. Check tracked text before committing.

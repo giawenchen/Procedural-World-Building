@@ -24,7 +24,7 @@ The original planet still uses its earlier sine terrain and stylized shader. The
 
 The simulation adds rain, moves water downhill, removes ground, carries sediment, deposits it, and evaporates water. Start/Pause and +1 step make the process inspectable. Explore mode is a separate way to travel through a generated field; erosion stays inside one fixed window.
 
-**Question asked:** “所以这个simulation是实时的吗 根据时间有什么变化” — Is this simulation real-time, and what changes over time?
+**Question asked (translated into English):** “Is this simulation real-time, and what changes over time?”
 
 It updates interactively while running. Each simulation step updates water, sediment, and ground height. Pausing stops those updates. A step is a numerical iteration, not a day or a year, and this model has no real-world time calibration. Changing the display view does not advance time.
 
@@ -32,7 +32,7 @@ It updates interactively while running. Each simulation step updates water, sedi
 
 ## 3. Make the surface easier to read
 
-**Question asked:** “为什么感觉有点太lowpoly了 是本该就是这样吗” — Why does it look so low-poly? Is it supposed to?
+**Question asked (translated into English):** “Why does it look so low-poly? Is it supposed to look like this?”
 
 The simulation terrain now uses smooth lighting and blended elevation colors. Geometry resolution still controls how much shape detail the mesh can represent. Smooth lighting can soften visible triangles, but it cannot create missing valleys. The original planet keeps its chosen low-poly style.
 

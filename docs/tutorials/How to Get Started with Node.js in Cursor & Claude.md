@@ -39,7 +39,7 @@ Already installed. Zero work needed.
 
 ## Step 2 — Install the GitHub CLI (AI-driven)
 
-I told the AI: *"帮我装一下 gh cli"* (install the GitHub CLI for me). It ran:
+I asked the AI (translated into English): *"Install the GitHub CLI for me."* It ran:
 
 ```bash
 brew install gh
