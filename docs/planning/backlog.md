@@ -11,6 +11,9 @@ My next goal is to understand each change before adding another feature. These a
 - [x] Build a React and Three.js planet sandbox with terrain controls.
 - [x] Add a wireframe toggle and switch between UV sphere and icosphere.
 - [x] Record the first geometry experiment with screenshots.
+- [x] Stylized low-poly world shader (flat shading, elevation bands, toon light, rim). Chose the "soft" variant. *(Visual Changelog 002)*
+- [x] Interface follows the world: dark, sand accent sampled from the beach line, floating control column over a full-bleed planet. *(Visual Changelog 003–004)*
+- [x] URL presets (`?shading=…&spin=0`) and a repeatable headless-Chrome screenshot command for honest before/after captures.
 
 ## Next: terrain and topology
 
@@ -25,7 +28,7 @@ Done when: I can reproduce a planet with the same seed and explain what each con
 
 - [ ] Add a checker texture to inspect UV seams and stretching.
 - [ ] Compare height-based displacement with a normal map.
-- [ ] Color the terrain by elevation with a shader.
+- [x] Color the terrain by elevation with a shader. *(done early — stylized low-poly shader, see Visual Changelog 002/003)*
 - [ ] Add a sea-level control and compare ocean, land, and snow regions.
 
 Done when: each experiment has a prompt, screenshot, and a short observation in the tutorials.

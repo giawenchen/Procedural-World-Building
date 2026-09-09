@@ -29,6 +29,19 @@ Procedural world building = generating all three **with algorithms instead of by
 4. [[02 - Textures, UVs & Heightmaps]] — how surfaces get their look, and how a grayscale image becomes terrain
 5. [[03 - Shaders 101 for World Builders]] — vertex & fragment shaders, GLSL, displacing a planet on the GPU
 
+### Ongoing records
+
+- [[Visual Changelog]] — before/after screenshots of every UI & scene styling change
+
+### Progress so far (2026-09-08)
+
+| Note | Status |
+|---|---|
+| [[01 - Geometry & Topology for Planets]] | ✅ exercise done — UV vs icosphere, wireframe, screenshots in note |
+| [[02 - Textures, UVs & Heightmaps]] | ⏳ next — swap the sine terrain for real layered noise |
+| [[03 - Shaders 101 for World Builders]] | ✅ done early — the low-poly world shader *is* this tutorial's exercise |
+| [[Visual Changelog]] | entries 001–004: one rejected direction, three kept |
+
 ### How they connect to the course weeks
 
 | Course week | Topic | My note |

@@ -1,0 +1,119 @@
+{
+  "nodes": [
+    {
+      "id": "n0",
+      "type": "text",
+      "text": "## Terrain & biomes\n**Making maps with noise \u00b7 Red Blob Games**\n\nLook at how broad landforms and small details combine. Compare elevation-only colors with elevation plus moisture.\n\n**Try:** Keep the seed fixed; compare one noise layer with three layers.\n\nStatus: collected; not yet tried.",
+      "x": 0,
+      "y": 0,
+      "width": 430,
+      "height": 300,
+      "color": "1"
+    },
+    {
+      "id": "w0",
+      "type": "link",
+      "url": "https://www.redblobgames.com/maps/terrain-from-noise/",
+      "x": 0,
+      "y": 320,
+      "width": 430,
+      "height": 370
+    },
+    {
+      "id": "n1",
+      "type": "text",
+      "text": "## Landforms & rivers\n**Mapgen4 \u00b7 Red Blob Games**\n\nExplore the relationship between painted terrain and the generated map. Look at river placement and mountain shapes.\n\n**Try:** Sketch one island outline and record which features you want to control manually.\n\nStatus: collected; not yet tried.",
+      "x": 470,
+      "y": 0,
+      "width": 430,
+      "height": 300,
+      "color": "2"
+    },
+    {
+      "id": "w1",
+      "type": "link",
+      "url": "https://www.redblobgames.com/maps/mapgen4/",
+      "x": 470,
+      "y": 320,
+      "width": 430,
+      "height": 370
+    },
+    {
+      "id": "n2",
+      "type": "text",
+      "text": "## Water & atmosphere\n**Ocean shader example \u00b7 Three.js contributors**\n\nWatch the horizon, reflections, and wave scale separately. A convincing ocean involves several effects.\n\n**Try:** Start with one adjustable water color and roughness control; save animated waves for later.\n\nStatus: collected; not yet tried.",
+      "x": 940,
+      "y": 0,
+      "width": 430,
+      "height": 300,
+      "color": "3"
+    },
+    {
+      "id": "w2",
+      "type": "link",
+      "url": "https://threejs.org/examples/webgl_shaders_ocean.html",
+      "x": 940,
+      "y": 320,
+      "width": 430,
+      "height": 370
+    },
+    {
+      "id": "n3",
+      "type": "text",
+      "text": "## Vegetation & style\n**Nature Kit \u00b7 Kenney**\n\nCompare simple tree silhouettes, rock shapes, and a limited palette. Detail can come from placement rather than complex models.\n\n**Try:** Try ten simple placeholder trees above sea level before importing an asset pack.\n\nStatus: collected; not yet tried.",
+      "x": 0,
+      "y": 740,
+      "width": 430,
+      "height": 300,
+      "color": "4"
+    },
+    {
+      "id": "w3",
+      "type": "link",
+      "url": "https://kenney.nl/assets/nature-kit",
+      "x": 0,
+      "y": 1060,
+      "width": 430,
+      "height": 370
+    },
+    {
+      "id": "n4",
+      "type": "text",
+      "text": "## Surface materials\n**Texture collection \u00b7 Poly Haven**\n\nCompare rock, ground, and sand under lighting. Separate color detail from normal and roughness detail.\n\n**Try:** Use one small texture on a test sphere and inspect the seam before adding it to the planet.\n\nStatus: collected; not yet tried.",
+      "x": 470,
+      "y": 740,
+      "width": 430,
+      "height": 300,
+      "color": "5"
+    },
+    {
+      "id": "w4",
+      "type": "link",
+      "url": "https://polyhaven.com/textures",
+      "x": 470,
+      "y": 1060,
+      "width": 430,
+      "height": 370
+    },
+    {
+      "id": "n5",
+      "type": "text",
+      "text": "## Settlements & networks\n**Medieval Fantasy City Generator \u00b7 Watabou**\n\nLook at streets, blocks, walls, and the overall city shape. Collect layout ideas before attempting a full city generator.\n\n**Try:** Draw five building positions and the paths between them; explain the placement rule.\n\nStatus: collected; not yet tried.",
+      "x": 940,
+      "y": 740,
+      "width": 430,
+      "height": 300,
+      "color": "6"
+    },
+    {
+      "id": "w5",
+      "type": "link",
+      "url": "https://watabou.itch.io/medieval-fantasy-city-generator",
+      "x": 940,
+      "y": 1060,
+      "width": 430,
+      "height": 370
+    }
+  ],
+  "edges": []
+}
