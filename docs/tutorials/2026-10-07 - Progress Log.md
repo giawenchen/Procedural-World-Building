@@ -180,3 +180,50 @@ Next: implement one bounded voxel sphere and its density slice, then test a cave
 Production build, lint and all seven simulation/placement tests passed again. The existing 807.49 kB JavaScript bundle warning remains. Local Markdown targets and screenshot file signatures were checked; submission text contains no Chinese passages. The report and embedded image were verified in Obsidian reading mode.
 
 ![New course report rendered in Obsidian](images/2026-10-07/17-obsidian-course-progress.jpg)
+
+## Experiment 4 — Connected coast, caves and living vegetation
+
+**Request, translated and condensed:** Implement the pending world concepts, including paths, reefs, biomes, tides and currents, and develop richer woodland detail and shaders from the supplied game references.
+
+### Implemented
+
+Three new studies now sit beside the original three: Living coast, Voxel terrain and Fluid laboratory. Living coast connects shared-noise terrain, climate classification, sinusoidal tides, fixed reef colonies, A* trails and a persistent plant population. Voxel terrain adds spatial density, ordered CSG, Marching Cubes, slices and local chunk rebuilding. Fluid laboratory compares prescribed wind with a 2D advected-dye and pressure-projection solver.
+
+World detail now includes branching tree geometry, leaf-cutout clusters, tapered grass, rocks, shadows, procedural ground variation and depth-aware coastal water. The warm-paper controls retain their separate design role. Diagnostic views prioritize data readability over atmosphere.
+
+![Before: the earlier Simulation map at its paused step-100 checkpoint](images/2026-10-07/18-before-connected-systems.jpg)
+![After: Living coast forest detail at time zero](images/2026-10-07/19-living-forest-detail.jpg)
+
+These are different studies and cameras, not a controlled shader comparison. The before frame was saved before implementation. Development used another browser tab; hot reload can still recreate scenes, so this record does not claim the original in-memory run survived every code edit. Normal workspace navigation now retains mounted state and pauses hidden studies. Page reload still resets runs.
+
+### Actual checks and observations
+
+- Tide amplitude 4 u / period 24 s: +4 u at 6 s, −4 u at 18 s. The trail changed from 0 u at high tide to 78 u at low tide. Colonies stayed at 343; the approximate exposed-tip indicator changed from 0 to 312.
+- In that coupled run, 104 initial trees became 145 after 70 births and 29 deaths at 18 s. Growth and tide advanced together.
+- Default 48³ voxel cells / 16³ chunks: 14,480 triangles across 27 chunks. A local pocket rebuilt 8 chunks and produced 14,588 triangles. Captured build times were 157.0 ms full and 62.9 ms local, single observations on this machine.
+- Fluid defaults at 8 s: divergence 0.20236 before projection and 0.13739 afterward. Wind mode and manual stepping were also exercised.
+- Build, lint and all 13 tests passed. The tests include repeatable population dynamics, flood mortality, path exclusions, tide extrema, CSG ordering, Marching Cubes geometry/winding, chunk count equivalence and divergence reduction. The existing base-bundle size warning remains.
+
+![High tide](images/2026-10-07/24-high-tide-6s.jpg)
+![Low tide](images/2026-10-07/25-low-tide-18s.jpg)
+![Local voxel edit](images/2026-10-07/21-voxel-chunks.jpg)
+![Fluid advection](images/2026-10-07/22-fluid-advection.jpg)
+
+### Learning record
+
+[Tutorial 12](12%20-%20Connected%20Worlds%20-%20Coast,%20Caves%20and%20Living%20Forests.md) was written directly in the shared Obsidian vault. It records controls, reset behavior, evidence, course connections and limitations. Tutorials 09–11 now link to their working implementations while retaining their original planning material as historical context.
+
+> Development insight: preserving readable water, land and foliage matters more than applying one palette everywhere. A separate diagnostic view lets the illustration remain expressive without hiding the rules.
+
+### Scope and next experiment
+
+This is an interactive educational implementation, not a complete physical environment. Coastal currents and tides are prescribed; fluid pressure is solved only in the separate 2D study. Coral growth, 3D cave water, cloud formation, streaming terrain and alternate meshers remain future work. The existing hydraulic erosion study is separate from the living coast.
+
+Next controlled experiment: reset Fluid laboratory and compare 0 versus 40 pressure iterations at eight seconds with every other parameter fixed. Save both divergence readings and screenshots before drawing a conclusion about convergence.
+
+### Final delivery checks
+
+The 390-CSS-pixel layout had no horizontal overflow (document width 390). Living coast Save frame delivered an actual 865 × 547 PNG to Downloads; its file signature and pixels were inspected. The browser download-event listener timed out, but filesystem verification confirmed delivery. This verifies the new coast export only, not every study export. No browser errors were captured in the final fresh runtime.
+
+![Coast overview at time zero](images/2026-10-07/23-living-coast-overview.jpg)
+![Narrow layout check](images/2026-10-07/28-mobile-layout.jpg)

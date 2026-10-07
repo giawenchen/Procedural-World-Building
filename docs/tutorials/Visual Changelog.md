@@ -23,6 +23,19 @@ Repeatable capture command (dev server must be running):
 
 ---
 
+## 013 — Connected worlds and detailed woodland · 2026-10-07
+
+**Request, translated:** make trails, reefs, biomes, tides, currents and the missing course systems demonstrable; add richer woodland and shader detail.
+
+![Before: earlier geometric groves](images/2026-10-07/18-before-connected-systems.jpg)
+![After: branching forest and terrain trail](images/2026-10-07/19-living-forest-detail.jpg)
+
+Different studies and cameras: this is an implementation comparison, not a controlled shader A/B. New leaf silhouettes, grass, rocks, shadows and depth-aware water give the world detail while controls retain the paper/sage style. Diagnostic colors remain independent of atmosphere.
+
+Three new studies cover connected coastal ecology, voxel CSG/meshing and vector-field/fluid experiments. [Tutorial 12](12%20-%20Connected%20Worlds%20-%20Coast,%20Caves%20and%20Living%20Forests.md) records measured tide, population, chunking and divergence trials, with model limitations. These systems remain bounded educational prototypes.
+
+---
+
 ## 012 — Course checkpoint and tree-density comparison · 2026-10-07
 
 **Request, translated:** save this version with screenshots and explanations, align the learning record with Sessions 3–7, and supplement the last three sessions' tutorials and insights.

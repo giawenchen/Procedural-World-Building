@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import './App.css'
@@ -9,6 +9,10 @@ import { makeLayer } from './noiseEngine'
 import type { Layer } from './noiseEngine'
 import { createAtlasMaterial, applyAppearance, PAPER } from './worldStyle'
 import type { Appearance, Palette, Surface } from './worldStyle'
+
+const LivingWorld = lazy(() => import('./LivingWorld'))
+const VoxelLab = lazy(() => import('./VoxelLab'))
+const FieldLab = lazy(() => import('./FieldLab'))
 
 type Topology = 'uv' | 'ico'
 type Shading = 'standard' | 'lowpoly-hard' | 'lowpoly-soft'
@@ -337,8 +341,11 @@ function ToggleRow({ index, label, on, onChange }: ToggleRowProps) {
 function App() {
   const [tab, setTab] = useState(() => {
     const workspace = new URLSearchParams(window.location.search).get('workspace')
-    return workspace && ['planet', 'noise', 'simulation'].includes(workspace) ? workspace : 'simulation'
+    return workspace && ['planet', 'noise', 'simulation', 'living', 'voxels', 'fields'].includes(workspace) ? workspace : 'simulation'
   })
+  const [visited,setVisited] = useState<string[]>([tab])
+  const changeTab=(id:string)=>{setVisited(v=>v.includes(id)?v:[...v,id]);setTab(id)}
+  useEffect(()=>{const url=new URL(window.location.href);url.searchParams.set('workspace',tab);window.history.replaceState(null,'',url)},[tab])
   const [layers,setLayers]=useState<Layer[]>([{...makeLayer(1),name:'Base terrain',weight:1}])
   const [solo,setSolo]=useState<number|null>(null)
   const [appearance, setAppearance] = useState<Appearance>(() => {
@@ -349,7 +356,10 @@ function App() {
   const studies = [
     { id: 'planet', name: 'Original planet', subtitle: 'Form & topology', number: '01' },
     { id: 'noise', name: 'Noise laboratory', subtitle: 'Layers & height fields', number: '02' },
-    { id: 'simulation', name: 'Simulation map', subtitle: 'Water & vegetation', number: '03' },
+    { id: 'simulation', name: 'Simulation map', subtitle: 'Erosion & height fields', number: '03' },
+    { id: 'living', name: 'Living coast', subtitle: 'Biomes, tides & life', number: '04' },
+    { id: 'voxels', name: 'Voxel terrain', subtitle: 'Caves & solid space', number: '05' },
+    { id: 'fields', name: 'Fluid laboratory', subtitle: 'Wind & transported dye', number: '06' },
   ]
   return <div className="atlas workbench" data-palette={interfacePalette} data-surface={appearance.surface}>
     <header className="atlas-masthead"><div className="studio-wordmark"><span className="studio-seal" aria-hidden="true">✳</span><div><span className="atlas-brand">Fieldwork <span>Nature Studio</span></span><p>A small world, a closer look.</p></div></div><span className="atlas-edition">PROCEDURAL WORLD BUILDING<br/><b>OBSERVE · EXPERIMENT · UNDERSTAND</b></span></header>
@@ -360,13 +370,18 @@ function App() {
         event.preventDefault()
         const current=studies.findIndex(item=>item.id===study.id)
         const next=event.key==='Home'?0:event.key==='End'?studies.length-1:(current+(['ArrowUp','ArrowLeft'].includes(event.key)?-1:1)+studies.length)%studies.length
-        setTab(studies[next].id);document.getElementById(`tab-${studies[next].id}`)?.focus()
-      }} onClick={()=>setTab(study.id)}><StudyMark kind={study.id}/><span><strong>{study.name}</strong><small>{study.subtitle}</small></span><i>{study.number}</i></button>)}
+        changeTab(studies[next].id);document.getElementById(`tab-${studies[next].id}`)?.focus()
+      }} onClick={()=>changeTab(study.id)}><StudyMark kind={study.id}/><span><strong>{study.name}</strong><small>{study.subtitle}</small></span><i>{study.number}</i></button>)}
     </nav><section className="library-note"><span className="atlas-label">IN THE FIELD</span><h2>Look for the<br/>little connections.</h2><p>Shape the ground.<br/>Follow the water.<br/>Find where trees belong.</p><div className="library-colors" aria-hidden="true"><i/><i/><i/><i/></div></section><div className="library-foot"><span className="inspector-dot"/> An interactive field notebook</div></aside>
-    <div className="atlas-appearance"><div className="appearance-domain"><span className="atlas-label">WORLD</span><label>Rendering<select aria-label="World rendering" value={appearance.surface} onChange={e=>setAppearance({surface:e.target.value as Surface})}><option value="studio">Natural illustration</option><option value="illustrated">Illustrated map · archive</option><option value="relief">Natural materials</option><option value="contours">Materials + contours</option><option value="stipple">Materials + stipple</option></select></label></div><div className="appearance-domain"><label>Panel accent<select aria-label="Interface accent" value={interfacePalette} onChange={e=>setInterfacePalette(e.target.value as Palette)}><option value="forest">Sage</option><option value="graphite">Graphite</option></select></label></div><span className="atlas-appearance-note">Same world. A different way to see it.</span></div>
+    <div className="atlas-appearance"><div className="appearance-domain"><span className="atlas-label">WORLD</span><label>Rendering<select disabled={["living","voxels","fields"].includes(tab)} aria-label="World rendering" value={appearance.surface} onChange={e=>setAppearance({surface:e.target.value as Surface})}><option value="studio">Natural illustration</option><option value="illustrated">Illustrated map · archive</option><option value="relief">Natural materials</option><option value="contours">Materials + contours</option><option value="stipple">Materials + stipple</option></select></label></div><div className="appearance-domain"><label>Panel accent<select aria-label="Interface accent" value={interfacePalette} onChange={e=>setInterfacePalette(e.target.value as Palette)}><option value="forest">Sage</option><option value="graphite">Graphite</option></select></label></div><span className="atlas-appearance-note">{["living","voxels","fields"].includes(tab)?"This study uses its own material and data views.":"Same world. A different way to see it."}</span></div>
     <div className="studio-content" role="tabpanel" id="study-planet" aria-labelledby="tab-planet" hidden={tab!=='planet'}><OriginalPlanet appearance={appearance}/></div>
     <div className="studio-content" role="tabpanel" id="study-noise" aria-labelledby="tab-noise" hidden={tab!=='noise'}><NoiseLab {...{layers,setLayers,solo,setSolo,appearance}}/></div>
-    {tab==='simulation'&&<div className="studio-content" role="tabpanel" id="study-simulation" aria-labelledby="tab-simulation"><SimulationMap {...{layers,solo,appearance}}/></div>}
+    {(visited.includes('simulation')||tab==='simulation')&&<div hidden={tab!=='simulation'} className="studio-content" role="tabpanel" id="study-simulation" aria-labelledby="tab-simulation"><SimulationMap {...{layers,solo,appearance}} active={tab==='simulation'}/></div>}
+    <Suspense fallback={<div className="studio-content field-note">Preparing the field study…</div>}>
+      {(visited.includes('living')||tab==='living')&&<div className="studio-content" role="tabpanel" id="study-living" aria-labelledby="tab-living" hidden={tab!=='living'}><LivingWorld layers={layers} solo={solo} active={tab==='living'}/></div>}
+      {(visited.includes('voxels')||tab==='voxels')&&<div className="studio-content" role="tabpanel" id="study-voxels" aria-labelledby="tab-voxels" hidden={tab!=='voxels'}><VoxelLab active={tab==='voxels'}/></div>}
+      {(visited.includes('fields')||tab==='fields')&&<div className="studio-content" role="tabpanel" id="study-fields" aria-labelledby="tab-fields" hidden={tab!=='fields'}><FieldLab active={tab==='fields'}/></div>}
+    </Suspense>
   </div>
 }
 export default App

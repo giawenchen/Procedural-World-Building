@@ -1,4 +1,6 @@
 # Nature Studio — Course Progress
+
+> Later implementation update: the new voxel, fluid and ecosystem studies are now available. See [Tutorial 12](12%20-%20Connected%20Worlds%20-%20Coast,%20Caves%20and%20Living%20Forests.md) for the current scope, screenshots and results. This note retains the earlier checkpoint and proposed experiments.
 Date: 2026-10-07
 
 **Request, translated and condensed:** Save this version with screenshots, explain the changes and experiments, connect the app to Sessions 3–7, and add tutorials and insights for the last three sessions.

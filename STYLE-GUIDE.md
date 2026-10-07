@@ -1,7 +1,7 @@
 ---
 tags: [world-building, design, style-guide]
 status: revised-preview-awaiting-owner-review
-version: 0.6
+version: 0.7
 updated: 2026-10-07
 ---
 
@@ -99,3 +99,13 @@ Capture both stages in the learning record. Historical experiments stay visible 
 See [tutorial 07](docs/tutorials/07%20-%20A%20Consistent%20Visual%20Language%20for%20Procedural%20Worlds.md) and the third experiment in the [September 17 log](docs/tutorials/2026-09-17%20-%20Progress%20Log.md).
 
 The October implementation and comparison method are explained in [tutorial 08](docs/tutorials/08%20-%20Nature%20Studio,%20Shadows%20and%20Tree%20Distribution.md).
+
+## Connected-world rendering update — October 7
+
+The supplied woodland game references guide world detail: dark branching silhouettes, clustered warm foliage, visible grass, stones and paths, soft shadow overlap and atmospheric depth. The reference settings panels inform the paper-like instrument; they do not dictate a monochrome world.
+
+Living coast uses actual branching geometry and leaf-cutout clusters rather than solid low-detail crowns. Smooth terrain normals and procedural surface variation support the form. Coastal water stays blue/teal with sand-colored shoreline foam. Autumn color is an explicit appearance parameter; it does not alter climate or advance growth.
+
+Biome, moisture and temperature maps retain semantic legends and use unlit materials. Never grade a diagnostic map until its values become unreadable. Voxel slices use green for solid and cream for air; fluid dye uses a separate concentration palette. Preserve the same typography, cards and inspector spacing across all six studies.
+
+The result is an implemented stylized prototype, not a claim of matching the reference games’ complete art production. Fine branch mechanics, full weather and photorealistic water are outside this release.

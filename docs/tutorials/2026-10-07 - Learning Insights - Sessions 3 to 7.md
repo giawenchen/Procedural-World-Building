@@ -3,6 +3,18 @@ Date: 2026-10-07
 
 These are explanations drawn from the current implementation and the linked study tutorials. They are not invented personal reflections or a claim that all course features are complete.
 
+## Follow-up after implementation
+
+The earlier sections below record the planning checkpoint. The new [Connected Worlds tutorial](12%20-%20Connected%20Worlds%20-%20Coast,%20Caves%20and%20Living%20Forests.md) adds actual evidence:
+
+- **Session 3:** leaf cutouts, branching silhouettes and shadows add readable detail without replacing geometric inspection. Unlit diagnostics keep data separate from lighting.
+- **Session 4:** at a +4 u tide the trail was disconnected; at −4 u it returned. Reef colonies stayed fixed while exposure changed. Classification and appearance are separate controls.
+- **Session 5:** a local cave edit rebuilt 8 of 27 chunks. Chunking limits invalidation; it does not remove total storage cost.
+- **Session 6:** fluid projection reduced measured divergence from 0.20236 to 0.13739 at eight seconds. Prescribed coastal currents do not become a pressure solver just because they animate.
+- **Session 7:** 104 initial plants became 145 after 70 births and 29 deaths in the tide experiment. Grammar defines branch structure; persistent state defines a population history. A 300-plant cap is a rendering constraint, not an ecological explanation.
+
+These are development observations. The models are deliberately simplified and not calibrated to physical or biological time.
+
 ## Session 3 — A convincing image is not the same as a detailed model
 
 **Observed:** the same terrain can use Natural illustration or the archived Illustrated map treatment without advancing erosion. Shadows improve spatial reading while the height samples stay the same.

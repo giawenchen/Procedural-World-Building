@@ -1,0 +1,3 @@
+import type { ReactNode } from 'react'
+export function FieldRange({label,value,min,max,step=.01,onChange,unit=''}:{label:string;value:number;min:number;max:number;step?:number;onChange:(v:number)=>void;unit?:string}){return <label className="grove-range"><span>{label}<output>{Number(value.toFixed(step<.01?3:2))}{unit}</output></span><input aria-label={label} type="range" min={min} max={max} step={step} value={value} onChange={e=>onChange(+e.target.value)}/></label>}
+export function FieldCard({title,children}:{title:string;children:ReactNode}){return <section className="field-card"><h2>{title}</h2>{children}</section>}

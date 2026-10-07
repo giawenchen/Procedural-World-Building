@@ -1,7 +1,7 @@
 # 10 — Session 6: Vector Fields, Fluids and Atmosphere
 Session: September 30 · Study note prepared October 7, 2026
 
-**Status:** new learning tutorial and proposed implementation. There are no wind arrows, advected particles or velocity-field controls in the current app.
+**Implementation update, October 7:** Fluid laboratory now includes prescribed wind, arrows and particles, plus a separate 2D fluid grid with dye advection and approximate pressure projection. Living coast adds current vectors and wind-driven foliage. Read [Tutorial 12](12%20-%20Connected%20Worlds%20-%20Coast,%20Caves%20and%20Living%20Forests.md) for actual controls and the eight-second divergence result. The original plan below remains a learning sequence; full weather and 3D cave flow are not implemented.
 
 ## What changes from the previous sessions?
 

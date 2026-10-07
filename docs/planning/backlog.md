@@ -6,6 +6,22 @@ tags: [planning, world-building]
 
 My next goal is to understand each change before adding another feature. These are plans, not completed work.
 
+## Connected-world implementation — October 7 update
+
+- [x] A* trail with water exclusions, slope cost and flooded-route feedback.
+- [x] Explicit moisture/temperature biome classification and diagnostic maps.
+- [x] Sinusoidal tides, fixed shallow warm-water reef placement and exposure readout.
+- [x] Prescribed current/wind vectors and advected tracers.
+- [x] Separate 2D fluid advection and approximate pressure projection with divergence metrics.
+- [x] Voxel study: density shapes, ordered CSG, slices and Marching Cubes.
+- [x] Cached equal-resolution chunks and local-edit rebuild measurements.
+- [x] L-system branches and persistent growth, seeds, competition, health and mortality.
+- [x] Detailed leaf cutouts, grass, rocks, shadows, terrain variation and depth-aware coastal water.
+- [x] Retain study state during tab navigation and pause hidden studies.
+- [x] English parameter tutorial and real screenshots: [Tutorial 12](../tutorials/12%20-%20Connected%20Worlds%20-%20Coast,%20Caves%20and%20Living%20Forests.md).
+
+Remaining boundaries: save/reload sessions, worker meshing, streaming and LOD, alternative meshers, 3D cave flow, coral growth, cloud physics and coupling the erosion arrays into Living coast. Earlier sections below retain their original study-specific plans; new implementations are identified by workspace above.
+
 ## Already implemented
 
 - [x] Build a React and Three.js planet sandbox with terrain controls.

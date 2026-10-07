@@ -19,7 +19,7 @@ type Command = { storm:()=>void; step:()=>void; runBatch:()=>void; home:()=>void
 const SPAN=192
 const EMPTY:FieldStats={cut:0,fill:0,changed:0,water:0}
 
-export default function SimulationMap({layers,solo,appearance}:{appearance:Appearance;layers:Layer[];solo:number|null}) {
+export default function SimulationMap({layers,solo,appearance,active=true}:{appearance:Appearance;layers:Layer[];solo:number|null;active?:boolean}) {
  const mood: Mood = 'lakeside'
  const [groves,setGroves]=useState(true)
  const [groveSettings,setGroveSettings]=useState(DEFAULT_GROVE)
@@ -30,11 +30,11 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
  const [hud,setHud]=useState({steps:0,x:0,z:0,storm:0,trees:0,...EMPTY})
  const [message,setMessage]=useState('Try a storm. Then inspect where the ground moved.')
  const mount=useRef<HTMLDivElement>(null),map=useRef<HTMLCanvasElement>(null),commands=useRef<Command|null>(null)
- const live=useRef({running,wire,speed,rain,view,tool,before,mood,groves,groveSettings,appearance})
- useEffect(()=>{live.current={running,wire,speed,rain,view,tool,before,mood,groves,groveSettings,appearance}},[running,wire,speed,rain,view,tool,before,mood,groves,groveSettings,appearance])
- const active=layers.filter(l=>l.enabled&&(solo===null||solo===l.id))
+ const live=useRef({active,running,wire,speed,rain,view,tool,before,mood,groves,groveSettings,appearance})
+ useEffect(()=>{live.current={active,running,wire,speed,rain,view,tool,before,mood,groves,groveSettings,appearance}},[active,running,wire,speed,rain,view,tool,before,mood,groves,groveSettings,appearance])
+ const activeLayers=layers.filter(l=>l.enabled&&(solo===null||solo===l.id))
  const spacing=SPAN/resolution
- const shortest=active.length?64/Math.max(...active.map(l=>l.frequency*2**(l.octaves-1))):Infinity
+ const shortest=activeLayers.length?64/Math.max(...activeLayers.map(l=>l.frequency*2**(l.octaves-1))):Infinity
  const restart=()=>{setRunning(false);setBefore(false);setHud({steps:0,x:0,z:0,storm:0,trees:0,...EMPTY});setReset(v=>v+1);setMessage('Fresh terrain. Same noise stack, a new experiment.')}
  const compare=()=>{setRunning(false);setBefore(v=>!v)}
  useEffect(()=>{
@@ -169,7 +169,7 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
   }
   const editable=(target:EventTarget|null)=>target instanceof HTMLElement&&!!target.closest('input,select,textarea,button,[contenteditable="true"]')
   const down=(e:KeyboardEvent)=>{
-   if(editable(e.target)||e.ctrlKey||e.metaKey||e.altKey)return
+   if(!live.current.active||editable(e.target)||e.ctrlKey||e.metaKey||e.altKey)return
    const key=e.key.toLowerCase()
    if(['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright',' ','f','b'].includes(key)){
     e.preventDefault();keys.add(key)
@@ -195,6 +195,7 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
   generate();updateSurface()
   const animate=(now:number)=>{
    const dt=Math.min((now-last)/1000,.05);last=now
+   if(!live.current.active){frame=requestAnimationFrame(animate);return}
    controls.enableRotate=mode!=='erosion'||live.current.tool==='orbit'||live.current.before
    renderer.domElement.style.cursor=mode==='erosion'&&live.current.tool==='rain'&&!live.current.before?'crosshair':'grab'
    if(!document.hidden&&live.current.running&&!live.current.before&&mode==='explore'){
@@ -273,7 +274,7 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
     <section className="grove-card"><div className="grove-title"><div><span className="atlas-label">VEGETATION STUDY</span><h2>A place to grow.</h2></div><svg viewBox="0 0 60 60" aria-hidden="true"><ellipse cx="31" cy="51" rx="24" ry="6" fill="#e3e7d5"/><path d="M17 50V24M41 50V31" stroke="#736953" strokeWidth="3"/><path d="M17 6L6 39H28Z" fill="#527452"/><ellipse cx="41" cy="30" rx="10" ry="15" fill="#9dac79"/></svg></div><div className="grove-count"><strong>{hud.trees}</strong><span>trees placed <small>{groves&&view==='landscape'&&!wire?'visible in landscape':'hidden in this view'}</small></span></div>{([{key:'density',label:'Tree density',min:0,max:1,step:.01},{key:'clustering',label:'Clustering',min:0,max:.5,step:.01},{key:'size',label:'Tree size',min:.5,max:1.4,step:.05}] as const).map(c=><label key={c.key} className="grove-range"><span>{c.label}<output>{c.key==='size'?`${groveSettings[c.key].toFixed(2)}×`:`${Math.round(groveSettings[c.key]*100)}%`}</output></span><input aria-label={c.label} type="range" min={c.min} max={c.max} step={c.step} value={groveSettings[c.key]} onChange={e=>setGroveSettings(v=>({...v,[c.key]:+e.target.value}))}/></label>)}<p>Groves favor gentle, dry ground. Controls redistribute existing candidates without resetting erosion. Placement only; no growth or reproduction.</p></section>
     <figure className="sim-map"><canvas ref={map} aria-label="Height map of the visible terrain window"/><figcaption>Height field / north up<span>Dark = low · light = high<br/>Same samples as the mesh</span></figcaption></figure>
     <label className="sim-check"><input type="checkbox" checked={wire} onChange={e=>setWire(e.target.checked)}/>Wireframe <kbd>F</kbd></label>
-    <details className="sim-calibration"><summary>Terrain & calibration</summary><label className="sim-field">Resolution<select value={resolution} onChange={e=>{setResolution(+e.target.value);restart()}}><option value={64}>64 × 64 · draft</option><option value={96}>96 × 96 · balanced</option><option value={128}>128 × 128 · fine</option></select></label>{([{label:'Relief height',value:height,min:0,max:45,set:setHeight},{label:'Sea level',value:sea,min:-20,max:15,set:setSea},{label:'Travel speed',value:speed,min:2,max:30,set:setSpeed}]).filter(c=>!erosion||c.label==='Relief height').map(c=><label className="sim-field" key={c.label}>{c.label}<output>{c.value} {c.label==='Travel speed'?'u/s':'u'}</output><input aria-label={c.label} type="range" min={c.min} max={c.max} step={1} value={c.value} onChange={e=>{c.set(+e.target.value);if(c.label!=='Travel speed')restart()}}/></label>)}<p>{active.length} active layers · {2*resolution*resolution} triangles · {spacing.toFixed(2)} units/sample.</p><p>{shortest/spacing<4?'Fine noise is undersampled: reduce frequency/octaves or use a finer grid.':'Nominal detail has at least four samples per feature scale.'} Shaping can add smaller details.</p><p>Calibration changes reset the experiment. Fixed 192-unit erosion window; closed edges; approximate educational model. Steps are not real-world days. Leaving this workspace resets its progress.</p></details>
+    <details className="sim-calibration"><summary>Terrain & calibration</summary><label className="sim-field">Resolution<select value={resolution} onChange={e=>{setResolution(+e.target.value);restart()}}><option value={64}>64 × 64 · draft</option><option value={96}>96 × 96 · balanced</option><option value={128}>128 × 128 · fine</option></select></label>{([{label:'Relief height',value:height,min:0,max:45,set:setHeight},{label:'Sea level',value:sea,min:-20,max:15,set:setSea},{label:'Travel speed',value:speed,min:2,max:30,set:setSpeed}]).filter(c=>!erosion||c.label==='Relief height').map(c=><label className="sim-field" key={c.label}>{c.label}<output>{c.value} {c.label==='Travel speed'?'u/s':'u'}</output><input aria-label={c.label} type="range" min={c.min} max={c.max} step={1} value={c.value} onChange={e=>{c.set(+e.target.value);if(c.label!=='Travel speed')restart()}}/></label>)}<p>{activeLayers.length} active layers · {2*resolution*resolution} triangles · {spacing.toFixed(2)} units/sample.</p><p>{shortest/spacing<4?'Fine noise is undersampled: reduce frequency/octaves or use a finer grid.':'Nominal detail has at least four samples per feature scale.'} Shaping can add smaller details.</p><p>Calibration changes reset the experiment. Fixed 192-unit erosion window; closed edges; approximate educational model. Steps are not real-world days. Switching studies pauses and preserves progress in this page session.</p></details>
    </aside>
   </div>
   <footer className="sim-footer"><p role="status">{erosion?message:`X ${hud.x.toFixed(1)} · Z ${hud.z.toFixed(1)} · Start, then use WASD / arrows to explore.`}</p><span>Drag: orbit · Scroll: zoom · Space: pause · F: wireframe{erosion?' · B: compare':''}</span></footer>

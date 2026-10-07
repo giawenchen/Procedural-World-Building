@@ -1,7 +1,7 @@
 # 09 — Session 5: Voxels and Spatial Density
 Session: September 23 · Study note prepared October 7, 2026
 
-**Status:** learning guide and implementation plan. The current app has no voxel tab. Read the [Assignment 1 guide](06%20-%20Assignment%201%20-%20Voxel%20Terrain,%20CSG%20and%20Meshing.md) for the broader brief.
+**Implementation update, October 7:** Voxel terrain now provides Terrain/Sphere/Box/Ridged/Noise volume density, CSG union/subtraction/intersection, Marching Cubes, a vertical slice and local chunk rebuilding. The actual domain is 48 units wide, with 32/48/64 cells and 8/16-cell chunks. Read [Tutorial 12](12%20-%20Connected%20Worlds%20-%20Coast,%20Caves%20and%20Living%20Forests.md) for controls and measured evidence. The steps below preserve the original learning plan; proposed dimensions, horizontal slices and additional optimizations are not all implemented. Read the [Assignment 1 guide](06%20-%20Assignment%201%20-%20Voxel%20Terrain,%20CSG%20and%20Meshing.md) for the broader brief.
 
 ## The new question: what exists below the surface?
 

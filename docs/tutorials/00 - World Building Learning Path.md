@@ -8,6 +8,10 @@ created: 2026-09-02
 
 > A map of my notes for learning procedural world building. Order matters: each note builds on the previous one.
 
+## New working studies
+
+Start [Tutorial 12 — Connected Worlds](12%20-%20Connected%20Worlds%20-%20Coast,%20Caves%20and%20Living%20Forests.md) for the implemented coast, caves and fluid laboratory, with real screenshots, course links and step-by-step parameter trials.
+
 ## The big picture
 
 Everything you see in a 3D world is the result of three questions:

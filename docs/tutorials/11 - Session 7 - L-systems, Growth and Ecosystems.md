@@ -1,9 +1,9 @@
 # 11 — Session 7: L-systems, Growth and Ecosystems
 Session: October 7, 2026
 
-**Status:** tree distribution is implemented. L-system branching, time-based growth and ecological population dynamics are not.
+**Implementation update, October 7:** Living coast now has a 3D L-system grammar, plant identity/age/size/health, growth, reproduction, dispersal, competition and mortality. Read [Tutorial 12](12%20-%20Connected%20Worlds%20-%20Coast,%20Caves%20and%20Living%20Forests.md) for the captured population trial and the distinction between grammar complexity and growth. The distribution-only description below refers to the earlier Simulation map; its 650-instance limit differs from the new coast’s 300-plant cap.
 
-## Three different questions
+## Three different questions — original planning checkpoint
 
 | Question | Model needed | Current status |
 | --- | --- | --- |

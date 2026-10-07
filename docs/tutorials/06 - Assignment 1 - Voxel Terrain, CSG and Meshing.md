@@ -6,6 +6,8 @@ status: learning-guide-and-implementation-plan
 
 # Assignment 1 — Voxel Terrain, CSG, and Meshing
 
+> Later implementation update: the new voxel, fluid and ecosystem studies are now available. See [Tutorial 12](12%20-%20Connected%20Worlds%20-%20Coast,%20Caves%20and%20Living%20Forests.md) for the current scope, screenshots and results. This note retains the earlier checkpoint and proposed experiments.
+
 > This note explains the supplied assignment and proposes experiments for the current app. The Voxel Terrain tab, density editor, mesher, and chunk manager are not implemented yet. All result fields below are deliberately left for actual experiments.
 
 ## What the assignment is asking
