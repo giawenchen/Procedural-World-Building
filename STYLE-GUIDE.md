@@ -1,146 +1,89 @@
 ---
 tags: [world-building, design, style-guide]
-status: draft-for-visual-preview
-version: 0.1
+status: revised-preview-awaiting-owner-review
+version: 0.5
+updated: 2026-09-17
 ---
 
-# Style Guide
+# Style Guide — A Quiet Instrument, a Readable World
 
-## Direction
+## Decision and priority
 
-**Minimal editorial interface × stylized miniature world.**
+The owner rejected the first September 17 world treatment because the monochrome palette removed the distinction between water, land and mountains. The reference images were intended primarily for the control panels. Interface design and world rendering have different purposes and must be evaluated separately.
 
-Create a calm, spacious tool for exploring a playful procedural world. The interface should feel clear and carefully composed. The world should express character through simple geometry, color, light, and shadow.
+Priority: **geographical meaning → readability → visual harmony**. Consistency does not require giving every material the interface's accent color.
 
-This is the first design direction, not a description of the current implementation. This document does not change the app by itself.
+## 1. Control panels: reference, purpose and boundaries
 
-**Owner decision (2026-09-08):** the interface stays **dark**, matching the black low-poly space the world lives in. A light "paper" panel was tried and rejected — see [Visual Changelog 001](docs/tutorials/Visual%20Changelog.md). Order of work: **the world gets its stylized look first** (shader-driven color, expressive light and shadow); the panel is then tuned to follow the scene's palette, not the other way round.
+The control-panel reference is a printed Grand Canyon shuttle guide. Its cream information columns, compact headings, thin rules, aligned text and selective route colors provide an information-design reference. We borrow its hierarchy and restraint, not the printed map's faded reproduction quality, route data, icons or grain.
 
-**World look v1 (chosen, Changelog 002):** flat-shaded low-poly, 4-step toon lighting with soft band edges, blue-violet shadow tint, warm light, fresnel rim. Elevation bands: sand → grass → forest → rock → snow.
+Panels help someone operate the app and understand parameters. Use warm paper, dark readable type, quiet grouping and restrained accents across every tab.
 
-**Palette v1 (Changelog 003)** — interface colours are sampled from the world, never introduced separately:
+- Paper `#f1eee5`; panels `#f8f5ec`; text `#30382f`; secondary text `#646b5f`; rules `#c9cbbb`.
+- Forest ink `#234e3b` or Graphite `#454944` affects interface accents only.
+- System sans-serif labels and headings; sparse monospace study labels and numerical values.
+- Fine boundaries and nearly square panels; deliberate spacing rather than decorative shadows or artificial wear.
+- Desktop: world left, controls right. Narrow screens: world before controls.
+- Visible focus, readable units, real sliders and explicit selected states remain required.
+- All app and submission text is English.
 
-| Token | Value | Source in the world | Used for |
-|---|---|---|---|
-| `--space` | `#080810` | scene background | app background |
-| `--panel` | `#0c0c16` | space, one step lighter | panel surface |
-| `--sand` | `#dcc27f` | beach band | the single accent: sliders, checkboxes, eyebrow |
-| `--ocean` | `#4a86e6` | ocean albedo | focus rings only |
-| `--shadow-tint` | `#2b2f52` | toon shadow tint | reserved for hover/selected surfaces |
+**Boundary:** changing Interface accent must not recolor the earth, trees, oceans or diagnostic data.
 
-## References and interpretation
+## 2. World display: meaning first
 
-- [New Layer Capital, designed by Obys](https://nlc.obys.agency/): reference for bold scale, fine rules, large color fields, and layered landscape silhouettes. Borrow its compositional clarity, rather than copying its branding or turning the app into a scrolling marketing page. Its rendering implementation has not been verified.
-- The owner's description of an **OpenAI-like simplicity**: interpret this as restrained controls, readable typography, and generous space. No particular OpenAI screen, font, or exact palette has been selected.
-- The owner's preference for **comic/game-like shading**: explore simplified light and shade, limited palettes, and readable geometric silhouettes. Thick outlines, pixel art, and neon effects are not implied.
+The scene helps someone identify what exists and what changes. Preserve useful material distinctions:
 
-## Established principles
+- Water: recognizable blue `#327b9d`.
+- Coast / exposed earth: sand `#c8ac72` and soil `#96734e`.
+- Vegetation: meadow `#75934f` and deeper forest `#365d3d`.
+- Rock: mineral gray-brown `#8a837a`.
+- Highest terrain: pale snow-like material `#edece1`.
 
-### Let the world lead
+These are illustrative elevation/slope material rules, not measured land-cover data, ecological growth or a climate model. A mountain's geometry and lighting must also convey its shape. Do not rely on color alone, and do not flatten everything to a paper silhouette for visual consistency.
 
-The scene is the main visual element. Keep navigation and controls secondary. Preserve enough space around the world to read its silhouette and its lighting. Avoid a large permanent title that competes with the scene.
+Coordinate the scene with the interface using restrained saturation, warm soil, neutral backgrounds and consistent light. Never remove blue water or green vegetation simply to match an accent.
 
-### Keep the interface quiet
+**Boundary:** the interface reference must not override the semantic roles of these colors. Do not create water, vegetation or snow data merely to make an attractive composition.
 
-Use consistent alignment, whitespace, typography, and subtle separators to establish hierarchy. Avoid wrapping every control in a separate card. Reveal secondary settings progressively while keeping essential controls easy to find.
+### Illustrated world treatment — September 17, third iteration
 
-### Use color deliberately
+The supplied Mont-Blanc poster informs world rendering only. Borrow distinct material shapes, conifer silhouettes, indigo rock faces, warm pale summits and local pen marks. Keep the printed-guide control panels unchanged.
 
-Keep interface surfaces mostly neutral. Start with one interaction accent for selected controls and primary actions. The world may use several coordinated colors; the interface accent does not restrict the scene to one color. Minimalism here means fewer competing elements, not necessarily muted or monochrome artwork.
+- Low ground / shore: ochre `#e5cb7e`; meadow `#a1af69`; forest `#42684d`.
+- Rock faces: indigo `#565b99`, with directional shade and sparse hatching.
+- High, less steep ground: warm white `#fff8e6`; this is an illustrative snow mask, not a snowfall simulation.
+- Water: blue `#79afd0`, with short pale pen marks. Marks are static texture cues, never flow vectors or measured currents.
+- Trees: stepped conifer geometry, with the same deterministic placements and bounded instance count.
+- Narrow, slightly irregular elevation transitions and view-dependent ink rims improve separation. Terrain remains three-dimensional and follows the existing field.
 
-### Shape before texture
+The style must not import fictional routes, buildings, labels or glaciers into the simulation. Natural materials and illustrated materials intentionally use different visual thresholds; neither is a measured biome classification. The same terrain geometry, source samples and hydraulic arrays remain the comparison baseline.
 
-Prioritize simple, recognizable geometry. Mountains, rocks, trees, and water should read at a glance. Explore large color regions and lighting before adding texture detail. Photorealistic surface noise is not the default direction.
+## 3. Controls and rendering modes
 
-### Give shadow a purpose
+The toolbar has separate **Control panel / Accent** and **World display / Rendering** groups.
 
-Use light and shadow to explain volume, distance, and contact. Distinguish shadows inside the 3D world from decorative UI drop shadows. The former can be expressive; keep the latter minimal.
+Default: **Illustrated map**. **Natural materials** remains available for comparison. Optional **Materials + contours** and **Materials + stipple** add information or shading while retaining the material colors. Neither is a default monochrome replacement.
 
-## Interface guidelines
+Contours follow actual height: 0.05 u radial on Original planet, 0.1 u in Noise laboratory, 2 u in Simulation map. Stipple is a screen-space shading overlay, not a point cloud or a particle system. Both preserve the current terrain and simulation.
 
-### Layout
+Original planet retains its sine terrain. Noise laboratory is an explicitly labeled height study with grayscale source samples: its lowlands are not automatically water. Simulation map uses the shared noise stack and measured slopes. Groves still use deterministic height/slope/water placement rules.
 
-- Keep the main canvas dominant on desktop.
-- Group controls by task, such as Terrain, Water, and Light, as those features become available. Do not display nonfunctional controls.
-- **Decided (Changelog 004):** no solid side panel. The scene is full-bleed; controls float over it in a ~300px column with a faint scrim, grouped under hairline headers, rows dim at rest and bright on hover/focus. Sliders stay real range inputs (hairline styling); selects become inline text choices; checkboxes become text switches with a dot. Reference feel: editorial portfolio sites (thin rules, small type, space) — borrow the restraint, not the gallery layout.
-- On small screens, keep the scene visible before a long list of settings. Allow controls to collapse or scroll without blocking scene interaction.
-- Treat exact panel widths and scene-to-control proportions as preview decisions, not fixed requirements.
+## 4. Water and diagnostic boundaries
 
-### Typography
+- Planet ocean: a radial shell at 1.01 × base radius; land above it forms the coast.
+- Explore water: a plane at the selected sea level, not a hydraulic-flow result.
+- Erosion landscape water: a separate surface at ground height + simulated water depth. Depths below 0.015 u are hidden to suppress nearly dry films; this is a display threshold, not removal of water from the model.
+- The erosion surface is a shallow height-field visualization, not a physically complete fluid mesh or an equilibrium lake surface. It can follow wet slopes during rainfall.
+- Water analysis: fixed pale-to-blue scale from 0–1 u, with larger values saturated. It still measures water below the landscape display threshold.
+- Slope analysis: fixed pale-to-forest scale from 0–60 degrees.
+- Ground change: ochre erosion, neutral zero, teal deposition; saturation at ±0.5 u.
 
-- Use one clean sans-serif family, initially the existing system sans-serif stack. Do not assume an external font is installed.
-- Use regular and medium weights for most interface text.
-- Reserve large type for a short title or a meaningful introductory state.
-- Keep parameter names readable. Use tabular numerals where possible so values do not shift as they change.
-- Avoid pervasive uppercase labels, exaggerated letter spacing, and tiny technical text.
+Analysis views are unlit and free of fog, decorative overlays, grove occlusion and water-surface occlusion. Numerical measurements accompany the scales. Changing interface styling or world overlays must not change these meanings or advance the solver.
 
-### Controls and states
+## 5. Acceptance checks and future work
 
-- Place a clear label and current value beside each slider; include units when relevant.
-- Use consistent shapes and spacing across buttons, selects, switches, and inputs.
-- Make hover, focus, selected, and disabled states distinguishable. Selection must not depend on color alone.
-- Support keyboard operation and visible focus. Maintain readable contrast and comfortable click targets even when the visual style is minimal.
-- Do not replace functional controls with decorative geometry that is difficult to identify or operate.
+Review the panel and scene independently. First identify water, coast/soil, vegetation and rock without touching a menu; then assess whether the panel feels coherent and easy to operate. If one fails, revise that part without sacrificing the other.
 
-### Motion
+Capture both stages in the learning record. Historical experiments stay visible but are labeled superseded or rejected where appropriate. The planned voxel tab should reuse the panel system while maintaining its own density, material and surface-normal semantics.
 
-- Use short, purposeful transitions that clarify changes.
-- Avoid scroll hijacking, cursor effects, and repeated entrance animations in the working interface.
-- Keep scene motion controllable. Honor reduced-motion preferences where applicable.
-- Parameter changes should feel responsive; transitions must not obscure the actual state.
-
-## World art direction
-
-- Use a limited, coordinated palette with readable differences between land, water, and other features.
-- Build depth using silhouette, overlap, value contrast, and atmospheric layering where useful.
-- Explore two lighting treatments: soft illustrative shadows, or a small number of toon-like light/shade bands. Choose after comparing the same geometry and camera.
-- Prefer coherent light direction and material behavior over adding more effects.
-- Outlines and flat facets are optional experiments, not mandatory stylistic features.
-- Keep world-art experiments separate from interface-only changes so their effects can be judged independently.
-
-## Provisional first-preview choices (superseded)
-
-> Kept for history. These were the first draft's hypotheses; the warm off-white surface and coral accent were tried and rejected (Changelog 001). Current tokens are in **Palette v1** above; current layout is in **Layout → Decided**.
-
-- **Interface surface:** warm off-white, with dark charcoal text.
-- **Interaction accent:** a restrained coral tone; compare against a cooler accent if it competes with the world.
-- **Scene palette:** cream or sand landforms, blue-violet shade, and a small amount of coral color.
-- **Control shape:** lightly rounded with subtle borders; avoid heavy pill styling on every element.
-- **Layout:** dominant canvas and a slim parameter panel.
-
-Exact color values, font family, corner radii, panel placement, and soft-versus-banded shadows remain open. Do not treat this palette as required just because it appears in the first draft.
-
-## Avoid
-
-- Dense instrument dashboards and an always-visible wall of parameters.
-- Neon cyberpunk styling, glowing borders, and glass effects everywhere.
-- Large generic cards, heavy UI shadows, and gratuitous gradients.
-- Excessive decorative labels, icons, badges, or animated effects.
-- Copying NLC's oversized marketing typography into the everyday controls.
-- Assuming a component library such as Tweakpane defines the app's design. Choose implementation tools after evaluating the intended interface.
-
-## Preview and revision workflow
-
-1. Capture the existing app before changing its style.
-2. Make an interface-only preview using the current working controls. Preserve scene behavior, parameter values, and functionality.
-3. Capture the same viewport and scene state afterward.
-4. Review scene prominence, readability, control discoverability, and overall mood with the owner.
-5. Record accepted choices as concrete design tokens in this guide.
-6. Explore world shading in a separate pass, holding geometry and camera fixed for comparison.
-
-### Prompt for the first implementation pass
-
-> Read STYLE-GUIDE.md and inspect the existing app. Create an interface-only style preview using the provisional choices, while preserving all working controls and scene behavior. Keep the canvas dominant and the controls calm and readable. Do not add new features, change the terrain algorithm, or introduce a UI library without explaining why it is needed. Capture before/after views at the same size and scene state. Explain which choices remain provisional so I can review them.
-
-## Review checklist
-
-- [ ] The world is the first thing I notice.
-- [ ] I can find and read the important controls immediately.
-- [ ] The interface feels spacious without wasting essential working space.
-- [ ] Color and shadows serve a clear visual purpose.
-- [ ] All existing controls still work with mouse and keyboard.
-- [ ] The narrow-screen layout remains usable.
-- [ ] Screenshots show a fair comparison rather than different camera states.
-- [ ] The owner has reviewed the preview before provisional choices become final.
-
-No preview or approval is recorded yet. Update this document after an actual review; do not mark the checklist complete in advance.
+See [tutorial 07](docs/tutorials/07%20-%20A%20Consistent%20Visual%20Language%20for%20Procedural%20Worlds.md) and the third experiment in the [September 17 log](docs/tutorials/2026-09-17%20-%20Progress%20Log.md).

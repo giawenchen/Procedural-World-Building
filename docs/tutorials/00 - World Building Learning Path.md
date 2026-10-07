@@ -31,18 +31,29 @@ Procedural world building = generating all three **with algorithms instead of by
 
 6. [[04 - Simulation Map and Hydraulic Erosion]] — shared noise, water flow, stepping, and visual comparisons
 
+7. [[05 - Stylized Landscapes and Procedural Detail]] — combine an illustrated world with height, slope, and placement rules
+
+8. [[06 - Assignment 1 - Voxel Terrain, CSG and Meshing]] — planned voxel tab, density shapes, sequential operations, meshing, and chunking
+
+9. [[07 - A Consistent Visual Language for Procedural Worlds]] — separate panel style from readable world materials; use optional overlays and stable data colors
+
 ### Ongoing records
 
+- [[2026-10-07 - Progress Log]] — current illustrated baseline, four fresh screenshots, and proposed spatial shader studies
+
+- [[2026-09-17 - Progress Log]] — a consistent atlas style across all tabs, with before/after captures and a verified 100-step trial
+- [[2026-09-16 - Progress Log]] — Assignment 1 explanation and implementation plan; voxel work is not implemented yet
 - [[Visual Changelog]] — screenshots of UI and scene changes
+- [[2026-09-10 - Progress Log]] — Lake / Neva style preview, contours, slope, and rule-based groves
 - [[2026-09-09 - Progress Log]] — today’s prompts, five saved screenshots, and the terrain playground
 
-### Progress so far (2026-09-09)
+### Progress so far (2026-10-07)
 
 - Geometry: UV sphere / icosphere comparison and wireframe exercise recorded.
-- Shaders: the original planet has a stylized low-poly shader; simulation terrain now uses smooth lighting and blended height colors.
+- Shaders: natural world materials are independent of interface accents; optional contours and stipple retain geographic colors. Diagnostic scales keep fixed meanings.
 - Noise: layered Perlin, Cellular, and Sine controls drive the laboratory previews and Simulation map. Migrating the original planet to this stack remains open.
 - Simulation: rainfall, erosion, deposition, batch stepping, and diagnostic views implemented. Five screenshots preserve one paused step-14 experiment.
-- Visual Changelog: entries 001–005; entry 005 links the terrain comparison views.
+- Visual Changelog: entries 001–010; entry 009 introduces the illustrated world and entry 010 records the October checkpoint.
 
 ### Topic connections
 

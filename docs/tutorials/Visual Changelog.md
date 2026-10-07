@@ -23,6 +23,74 @@ Repeatable capture command (dev server must be running):
 
 ---
 
+## 010 — Illustrated world checkpoint · 2026-10-07
+
+**Request, translated:** save the current visuals and progress before deciding how new course topics should affect the style.
+
+![Current illustrated coast](images/2026-10-07/02-illustrated-coast.jpg)
+
+This is a fresh capture of the retained design, not a new visual implementation. Four screenshots cover all three workspaces and both Simulation map perspectives. Build, lint and six regression tests passed. The proposed next study adds spatial cues while keeping readable material colors and the panel design.
+
+See the [October 7 progress log](2026-10-07%20-%20Progress%20Log.md) for capture settings, limitations and the proposed next experiment.
+
+---
+
+## 009 — Mountains, trees and water get distinct drawing cues · 2026-09-17
+
+**Request, translated:** try the supplied hand-drawn comic/cartographic reference because the material representations are still too weak.
+
+![Natural materials, same paused field](images/2026-09-17/20-natural-material-comparison.jpg)
+
+![Illustrated map, same field and camera](images/2026-09-17/21-illustrated-terrain.jpg)
+
+The new default uses stepped conifers, ochre ground, green land cover, indigo rock faces, pale high terrain and local pen lines. Blue water remains tied to its actual surface or simulated depth. The control-panel design stays separate. Both captures share the same viewport, field, camera and step zero; the baseline here is the retained Natural materials mode captured after implementation.
+
+**Status:** local preview awaiting owner review. Build, lint and six regression tests passed; style switching preserved the completed 100-step experiment. See Experiment 3 in the [September 17 log](2026-09-17%20-%20Progress%20Log.md) and section 7 of [tutorial 07](07%20-%20A%20Consistent%20Visual%20Language%20for%20Procedural%20Worlds.md).
+
+---
+
+## 008 — Readable world, quiet controls · 2026-09-17
+
+**Owner correction:** the reference applies to control-panel design. The world must first preserve the meaning of water, land, vegetation and mountains.
+
+![Before: material distinctions lost in the monochrome earth](images/2026-09-17/04-planet-after.jpg)
+
+![After: blue ocean, warm coasts, vegetation and rock](images/2026-09-17/13-earth-materials.jpg)
+
+Same default terrain and camera setup, frozen spin; slightly different viewport dimensions. Interface accent and scene rendering are now independent. Natural materials are the default, overlays retain their colors, and real hydraulic depth drives an additional water surface. The solver is unchanged.
+
+**Status:** corrected local preview awaiting review. Entry 007's monochrome world direction was rejected; its restrained interface informed the revision. See Experiment 2 in the [September 17 log](2026-09-17%20-%20Progress%20Log.md) and the revised [tutorial 07](07%20-%20A%20Consistent%20Visual%20Language%20for%20Procedural%20Worlds.md).
+
+---
+
+## 007 — A shared procedural atlas · 2026-09-17
+
+**Request, translated:** a refined, minimal style across all tabs, with coherent world colors and shaders that retain readable phenomena.
+
+![Before: illustrated terrain with a dark frame](images/2026-09-17/03-simulation-before.jpg)
+
+![After: warm paper and forest-ink contours](images/2026-09-17/06-simulation-after.jpg)
+
+All three workspaces now share a visual system, including global Forest ink / Graphite palettes and Relief / Contours / Stipple rendering. Diagnostic views retain fixed scales and exclude fog. Both images use the default field at step zero; the layout and camera framing changed, so this is not a pixel-aligned comparison.
+
+**Status:** implemented local preview, awaiting owner review. [September 17 log](2026-09-17%20-%20Progress%20Log.md) contains all three before/after pairs, actual checks and further trials. [Tutorial 07](07%20-%20A%20Consistent%20Visual%20Language%20for%20Procedural%20Worlds.md) explains the controls.
+
+---
+
+## 006 — Illustrated terrain, inspectable rules · 2026-09-10
+
+**Request, translated:** change the style toward Lake and Nomada Studio's journey game while retaining procedural detail. Neva is the provisional interpretation of the second reference.
+
+![Before: dark terrain study](images/2026-09-10/01-before.jpg)
+
+![After: Lakeside palette and rule-based groves](images/2026-09-10/02-lakeside-after.jpg)
+
+Same initial field and default camera, with a changed interface layout. Added two palettes, broad shader lighting bands, haze, terrain-filtered groves, slope diagnostics, and optional 2-unit height contours. The noise and erosion algorithms are unchanged.
+
+**Status:** first implemented preview; owner review is still pending. [Today's progress log](2026-09-10%20-%20Progress%20Log.md) contains eight screenshots, actual checks, and current limitations.
+
+---
+
 ## 005 — Noise and erosion playground · 2026-09-09
 
 **Prompt:** “Make it more playful and interesting,” following requests for a noise-driven simulation map and hydraulic erosion.

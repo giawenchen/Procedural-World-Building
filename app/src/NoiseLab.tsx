@@ -4,12 +4,14 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { coordinates, makeLayer, sample } from './noiseEngine'
 import type { Layer } from './noiseEngine'
 import './NoiseLab.css'
+import { createAtlasMaterial, applyAppearance, PAPER, elevationColor } from './worldStyle'
+import type { Appearance } from './worldStyle'
 
 function Range({label,value,min,max,step=.01,onChange}:{label:string;value:number;min:number;max:number;step?:number;onChange:(n:number)=>void}) {
  return <label className="lab-range"><span>{label}<output>{Number(value.toFixed(2))}</output></span><input aria-label={label} type="range" min={min} max={max} step={step} value={value} onChange={e=>onChange(+e.target.value)}/></label>
 }
 function Select({label,value,options,onChange}:{label:string;value:string;options:string[];onChange:(s:string)=>void}) {return <label className="lab-select">{label}<select value={value} onChange={e=>onChange(e.target.value)}>{options.map(o=><option key={o}>{o}</option>)}</select></label>}
-function Preview({layers,solo,planet,resolution,height,wireframe,mode}:{layers:Layer[];solo:number|null;planet:boolean;resolution:number;height:number;wireframe:boolean;mode:string}) {
+function Preview({layers,solo,planet,resolution,height,wireframe,mode,appearance}:{appearance:Appearance;layers:Layer[];solo:number|null;planet:boolean;resolution:number;height:number;wireframe:boolean;mode:string}) {
  const mount=useRef<HTMLDivElement>(null), map=useRef<HTMLCanvasElement>(null)
  const runtime=useRef<{mesh:THREE.Mesh;renderer:THREE.WebGLRenderer;scene:THREE.Scene;camera:THREE.PerspectiveCamera;controls:OrbitControls}|null>(null)
  const field=useMemo(()=>{
@@ -25,11 +27,11 @@ function Preview({layers,solo,planet,resolution,height,wireframe,mode}:{layers:L
  },[field,resolution,mode])
  useEffect(()=>{
   const el=mount.current;if(!el)return
-  const scene=new THREE.Scene();scene.background=new THREE.Color('#10121a')
+  const scene=new THREE.Scene();scene.background=new THREE.Color(PAPER)
   const camera=new THREE.PerspectiveCamera(45,1,.1,100);camera.position.set(6,5,7)
   const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));el.appendChild(renderer.domElement)
   const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true
-  const mesh=new THREE.Mesh(new THREE.BufferGeometry(),new THREE.MeshStandardMaterial({vertexColors:true,roughness:.85,side:THREE.DoubleSide}));scene.add(mesh)
+  const mesh=new THREE.Mesh(new THREE.BufferGeometry(),createAtlasMaterial());scene.add(mesh)
   scene.add(new THREE.HemisphereLight('#ffffff','#25263e',2));const light=new THREE.DirectionalLight('#ffffff',3);light.position.set(4,6,3);scene.add(light)
   const observer=new ResizeObserver(()=>{const w=el.clientWidth,h=Math.max(el.clientHeight,1);if(!w)return;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix()});observer.observe(el)
   let frame=0;const animate=()=>{frame=requestAnimationFrame(animate);if(el.clientWidth){controls.update();renderer.render(scene,camera)}};animate()
@@ -44,21 +46,21 @@ function Preview({layers,solo,planet,resolution,height,wireframe,mode}:{layers:L
    const n=field[i], displacement=n*height
    if(planet){const v=new THREE.Vector3().fromBufferAttribute(pos,i).normalize().multiplyScalar(2+displacement);pos.setXYZ(i,v.x,v.y,v.z)}
    else {const x=pos.getX(i),y=pos.getY(i);pos.setXYZ(i,x,displacement,-y)}
-   color.setHSL(.54-(n+1)*.15,.32,.24+(n+1)*.22);color.toArray(colors,i*3)
+   elevationColor((n+1)/2,color);color.toArray(colors,i*3)
   }
   geometry.setAttribute('color',new THREE.BufferAttribute(colors,3));geometry.computeVertexNormals();rt.mesh.geometry.dispose();rt.mesh.geometry=geometry
  },[field,planet,resolution,height])
- useEffect(()=>{const rt=runtime.current;if(rt)(rt.mesh.material as THREE.MeshStandardMaterial).wireframe=wireframe},[wireframe])
+ useEffect(()=>{const rt=runtime.current;if(!rt)return;const material=rt.mesh.material as THREE.ShaderMaterial;applyAppearance(material,appearance);material.wireframe=wireframe;material.uniforms.radius.value=planet?2:0;material.uniforms.interval.value=.1;material.uniforms.floorHeight.value=-height;material.uniforms.amplitude.value=height*2;material.uniforms.markScale.value=4},[wireframe,appearance,planet,height])
  return <div className={'lab-previews '+(mode==='Split'?'split':'')}>
  <section style={{display:mode==='3D only'?'none':undefined}}><h3>2D noise map · {planet?'spherical UV projection':'planar XY slice'}</h3><canvas className="noise-map" ref={map}/><p>Black −1 · gray 0 · white +1. Same samples as the mesh.</p></section>
- <section style={{display:mode==='2D only'?'none':undefined}}><h3>{planet?'3D planet':'3D terrain grid'} · drag to orbit / scroll to zoom</h3><div className="lab-render" ref={mount}/><p>{(resolution+1)**2} vertices · displacement = noise × height</p></section>
+ <section style={{display:mode==='2D only'?'none':undefined}}><h3>{planet?'3D planet':'3D terrain grid'} · drag to orbit / scroll to zoom</h3><div className="lab-render" ref={mount}/><div className="world-key"><span><i className="key-sand"/>Low</span><span><i className="key-green"/>Mid</span><span><i className="key-rock"/>High</span><small>Height study · no water surface or biome simulation</small></div><p>{(resolution+1)**2} vertices · displacement = noise × height · contours 0.1 u</p></section>
  </div>
 }
-export default function NoiseLab({layers,setLayers,solo,setSolo}:{layers:Layer[];setLayers:import('react').Dispatch<import('react').SetStateAction<Layer[]>>;solo:number|null;setSolo:import('react').Dispatch<import('react').SetStateAction<number|null>>}){
+export default function NoiseLab({layers,setLayers,solo,setSolo,appearance}:{appearance:Appearance;layers:Layer[];setLayers:import('react').Dispatch<import('react').SetStateAction<Layer[]>>;solo:number|null;setSolo:import('react').Dispatch<import('react').SetStateAction<number|null>>}){
  const next=useRef(2)
  const [planet,setPlanet]=useState(false),[resolution,setResolution]=useState(64),[height,setHeight]=useState(.8),[wireframe,setWireframe]=useState(false),[mode,setMode]=useState('Split')
  const update=(id:number,patch:Partial<Layer>)=>setLayers(ls=>ls.map(l=>l.id===id?{...l,...patch}:l))
- return <div className="noise-lab"><header className="lab-heading"><div><h1>Noise laboratory</h1><p>Equation → shaping → layer blend → surface. Everything here is separate from your original planet.</p></div><button onClick={()=>{const blob=new Blob([JSON.stringify({layers,planet,resolution,height,wireframe},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='noise-recipe.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}}>Export recipe</button></header>
+ return <div className="noise-lab"><header className="lab-heading"><div><span className="sim-eyebrow">02 / DENSITY STUDIES</span><h1>Noise laboratory</h1><p>Equation → shaping → layer blend → surface. Shared with Simulation map; separate from Original planet.</p></div><button onClick={()=>{const blob=new Blob([JSON.stringify({layers,planet,resolution,height,wireframe,appearance},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='noise-recipe.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}}>Export recipe</button></header>
  <div className="lab-layout"><aside className="lab-controls"><h2>Surface & sampling</h2>
  <Select label="Surface" value={planet?'Planet':'Plane'} options={['Plane','Planet']} onChange={v=>setPlanet(v==='Planet')}/>
  <Select label="View" value={mode} options={['Split','2D only','3D only']} onChange={setMode}/>
@@ -76,5 +78,5 @@ export default function NoiseLab({layers,setLayers,solo,setSolo}:{layers:Layer[]
  {l.modifier==='Turbulence'&&<p className="lab-hint">Absolute noise at each octave. Use Octaves and Persistence to control detail.</p>}
  <Select label="Blend mode" value={l.blend} options={['Add','Mix','Multiply','Max']} onChange={blend=>update(l.id,{blend})}/><Range label="Layer weight" value={l.weight} min={0} max={1} onChange={weight=>update(l.id,{weight})}/>
  </details>)}<button disabled={layers.length>=4} onClick={()=>{const layer=makeLayer(next.current++);setLayers(ls=>[...ls,layer])}}>+ Add noise layer</button>
- </aside><div className="lab-stage"><Preview {...{layers,solo,planet,resolution,height,wireframe,mode}}/><p className="lab-hint">Try: Perlin → Ridged → add a low-amplitude Cellular layer. Switch to Planet to sample a seamless 3D field on a sphere; its 2D projection changes accordingly. Recipes export settings; screenshots remain separate.</p></div></div></div>
+ </aside><div className="lab-stage"><Preview {...{layers,solo,planet,resolution,height,wireframe,mode,appearance}}/><p className="lab-hint">Try: Perlin → Ridged → add a low-amplitude Cellular layer. Switch to Planet to sample a seamless 3D field on a sphere; its 2D projection changes accordingly. Recipes export settings; screenshots remain separate.</p></div></div></div>
 }

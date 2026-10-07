@@ -24,3 +24,7 @@ This is a visual comparison, not a performance benchmark. The two settings do no
 - How much resolution do I need before the silhouette looks smooth?
 - Where do texture seams become visible?
 - Which changes affect geometry, and which only affect shading?
+
+## Current visual review
+
+- [October 7 — Visual depth and game shader references](2026-10-07%20-%20Visual%20Depth%20Review.md): retain the illustrated identity, test spatial cues, and connect future changes to course concepts.

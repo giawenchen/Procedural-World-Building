@@ -64,3 +64,83 @@ Try one prompt → inspect the result → capture a screenshot → write a short
 ## Latest update — 2026-09-09
 
 Shared noise and the erosion playground are implemented. Current screenshots document one retained step-14 experiment. For each future implemented idea, save real progress screenshots and a brief explanation in the dated learning log; update this backlog to distinguish completed work from open questions.
+
+## Illustrated landscape preview — 2026-09-10
+
+- [x] Add Lakeside morning and Storybook dusk palettes without resetting simulation state.
+- [x] Add broad lighting bands, slope-based rock color, and restrained atmospheric haze.
+- [x] Place deterministic groves using height, slope, and water thresholds.
+- [x] Add Slope view, 2-unit contours, and Horizon view while retaining water/change/wireframe inspection.
+- [x] Record eight real screenshots and an English learning tutorial.
+- [ ] Review the preview with the owner and confirm the Nomada reference.
+- [ ] Design a repeatable lake-basin and ridge noise recipe.
+- [ ] Refine vegetation silhouettes, clustering, and placement transitions.
+- [ ] Add coherent distant terrain layers with a clear simulated-area boundary.
+
+See the [September 10 progress log](../tutorials/2026-09-10%20-%20Progress%20Log.md). These style changes do not complete ecological simulation or physical calibration requirements.
+
+## Assignment 1 — Voxel Terrain (planned September 16)
+
+- [x] Prepare an English learning guide connecting the brief to the current height-field app.
+- [ ] Confirm whether “CS techniques” means CSG in the original brief.
+- [ ] Add a separate Voxel Terrain tab with a bounded sphere, density slice, and working mesher.
+- [ ] Explore box, capsule, terrain-volume, and 3D-noise fields.
+- [ ] Implement an ordered union/subtraction/intersection stack and demonstrate a meaningful reorder.
+- [ ] Compose a stylized lake-cliff arch and cave opening.
+- [ ] Measure generation, meshing, memory estimates, and edit latency across resolutions.
+- [ ] Explore equal-resolution chunking, localized rebuilds, and boundary correctness.
+- [ ] Document greedy meshing, Marching Tetrahedra, Surface Nets, and Dual Contouring alternatives.
+- [ ] Measure one voxel optimization and capture genuine before/after evidence.
+
+The [Assignment 1 tutorial](../tutorials/06%20-%20Assignment%201%20-%20Voxel%20Terrain,%20CSG%20and%20Meshing.md) is a plan, not implementation evidence. Keep the existing hydraulic solver in its height-field workspace.
+
+
+## Shared atlas style — 2026-09-17
+
+- [x] Apply a consistent warm-paper interface across all three workspaces.
+- [x] Share Forest ink / Graphite palettes and Relief / Contours / Stipple surface controls.
+- [x] Keep water, slope and ground-change legends stable; remove fog from analysis colors.
+- [x] Preserve active simulation measurements when changing appearance.
+- [x] Record before/after screenshots, a 100-step trial and narrow-layout checks in English.
+- [ ] Review the new visual direction with the owner; the September 10 palettes are superseded by this preview.
+- [ ] Reuse the design system in the planned Voxel Terrain workspace.
+- [ ] Compare the readability and motion stability of contour and stipple treatments.
+
+See the [September 17 log](../tutorials/2026-09-17%20-%20Progress%20Log.md). The new style does not complete voxel meshing, simulation persistence or physical calibration.
+
+
+## Owner correction — September 17, second iteration
+
+- [x] Separate interface accent state from world materials.
+- [x] Restore blue water, soil/coast, vegetation, rock and highland material distinctions.
+- [x] Default to Natural materials; keep colored contours/stipple optional.
+- [x] Add material legends and a hydraulic water-depth surface without changing the solver.
+- [x] Record the rejected monochrome direction and corrected screenshots in the same day's log.
+- [ ] Review scene recognizability separately from control-panel design.
+
+The first September 17 shared-palette world is superseded. Future tabs should follow the revised boundary in `STYLE-GUIDE.md`.
+
+
+## Illustrated world — September 17, third iteration
+
+- [x] Add an Illustrated map mode with height/slope material shapes, hatching and water marks across all three workspaces.
+- [x] Use conifer silhouettes without changing procedural tree placement.
+- [x] Preserve the panel system, diagnostic scales and active simulation on appearance changes.
+- [x] Capture a matched rendering comparison and record checks in English.
+- [ ] Review small-screen separation between indigo rock and blue water with the owner.
+- [ ] Assess whether irregular tree silhouettes and fewer, more selective pen marks improve the hand-drawn feel.
+
+This supersedes Natural materials as the default view; that rendering remains available for comparison. It does not add real snowfall, currents, glaciers, routes or landmarks.
+
+## October 7 checkpoint and proposed spatial studies
+
+- [x] Save four fresh screenshots covering the three existing workspaces.
+- [x] Document the retained illustrated style and run build, lint and six regression tests.
+- [x] Separate completed features from voxel, shader and vector-field plans.
+- [ ] Add a selectable Atmospheric illustration study with matched before/after captures.
+- [ ] Test coherent directional light, grounded tree shadows and real shader fog integration.
+- [ ] Test restrained view-dependent water highlights while preserving depth and shoreline meaning.
+- [ ] Add visible vector arrows and particles driven by the same wind field.
+- [ ] Measure frame time and resolve the existing large-bundle warning where practical.
+
+See the [October 7 log](../tutorials/2026-10-07%20-%20Progress%20Log.md) and [visual depth review](../analysis/2026-10-07%20-%20Visual%20Depth%20Review.md). These proposed effects have not been implemented.

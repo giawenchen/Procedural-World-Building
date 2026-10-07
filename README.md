@@ -8,25 +8,28 @@ I am learning to build a procedural planet in the browser using React, TypeScrip
 
 - [Planning and feature backlog](docs/planning/backlog.md)
 - [Tutorials and learning path](docs/tutorials/00%20-%20World%20Building%20Learning%20Path.md)
+- [Assignment 1: voxel terrain tutorial and plan](docs/tutorials/06%20-%20Assignment%201%20-%20Voxel%20Terrain,%20CSG%20and%20Meshing.md) — preparation only; the voxel tab is not implemented yet
 - [Inspiration gallery and reference library](docs/library/README.md)
 - [Analysis notes](docs/analysis/README.md)
 - [Application source](app/)
 
 ## Current progress
 
-**As of 2026-09-09**, the app has three workspaces:
+**As of 2026-10-07**, the app has three workspaces:
 
-- **Planet:** the original terrain controls, UV sphere / icosphere comparison, and stylized low-poly shader.
-- **Noise laboratory:** seeded Perlin, Cellular, and Sine layers with shaping, blending, and 2D/3D previews.
-- **Simulation map:** a height field driven by that shared stack, keyboard exploration, and a hydraulic erosion playground. Paint rain, trigger a storm, advance 100 steps, and inspect Water or Ground change alongside the original terrain.
+- **Original planet:** sine-based radial terrain, UV sphere / icosphere comparison, and smooth or faceted shading.
+- **Noise laboratory:** seeded Perlin, Cellular and Sine layers, shaping, blending, and linked 2D/3D previews.
+- **Simulation map:** a shared-noise height field, keyboard exploration, and simplified hydraulic erosion with rain painting, storms, batch steps and diagnostic views.
 
-[Today’s learning log](docs/tutorials/2026-09-09%20-%20Progress%20Log.md) records the prompts, explanations, and five real screenshots of a paused step-14 experiment. [Tutorial 04](docs/tutorials/04%20-%20Simulation%20Map%20and%20Hydraulic%20Erosion.md) walks through the controls. The [Visual Changelog](docs/tutorials/Visual%20Changelog.md) preserves earlier design decisions and the new comparison views.
+The revised **Fieldwork / Procedural atlas** separates a warm-paper control-panel style from the world display. Interface accents no longer recolor the earth. The default Illustrated map uses conifer silhouettes, indigo rock faces, pale summits and blue water with pen marks. Natural materials and optional colored contour/stipple overlays remain available. Material legends and fixed diagnostic scales explain each view.
 
-![Ground-change view in the simulation playground](docs/tutorials/images/2026-09-09/03-ground-change-step-14.jpg)
+![Illustrated land and sea with the quiet control-panel style](docs/tutorials/images/2026-10-07/02-illustrated-coast.jpg)
 
-The simulation terrain uses smooth lighting and blended elevation colors; the original planet keeps its low-poly style and earlier sine terrain. The hydraulic model is educational: its steps and units are not calibrated to real geological time.
+The [September 17 learning log](docs/tutorials/2026-09-17%20-%20Progress%20Log.md) includes before/after screenshots, a 100-step experiment and mobile checks. [Tutorial 07](docs/tutorials/07%20-%20A%20Consistent%20Visual%20Language%20for%20Procedural%20Worlds.md) explains how to change the art direction without hiding procedural phenomena. The [Visual Changelog](docs/tutorials/Visual%20Changelog.md) preserves earlier iterations.
 
-Next: save/restore evolving simulations, improve water-flow distribution, verify PNG export delivery, and connect the original planet to the shared noise stack. The [style guide](STYLE-GUIDE.md) continues to guide the dark interface and sand accent.
+The noise sampler and educational hydraulic solver are unchanged. Style changes preserve the active simulation, but leaving Simulation map still resets it. Groves illustrate placement rules rather than ecological growth; simulation steps are not real-world days. The voxel tab remains planned.
+
+The [October 7 checkpoint](docs/tutorials/2026-10-07%20-%20Progress%20Log.md) records four fresh screenshots, current checks, and the distinction between implemented features and future work. The [visual depth review](docs/analysis/2026-10-07%20-%20Visual%20Depth%20Review.md) proposes game-inspired shader studies; those changes are not implemented yet. Persistent simulation storage, improved flow distribution and verified PNG delivery remain open in the [backlog](docs/planning/backlog.md). Current visual rules live in the [style guide](STYLE-GUIDE.md).
 
 ## Run locally
 

@@ -5,11 +5,18 @@ status: implemented-first-pass
 
 # Simulation Map and Hydraulic Erosion
 
+> **September 17 interface update:** the app now separates interface accents from natural world materials, with optional colored contour/stipple overlays. Earlier screenshots and mood names below record the previous iteration. See [[07 - A Consistent Visual Language for Procedural Worlds]] for current controls and [[2026-09-17 - Progress Log]] for new screenshots.
+
+
 ## Prompt
 
 Add a simulation map driven by my noise stack, with start/stop, height-based materials, keyboard navigation, and a wireframe shortcut. Add hydraulic erosion as a new perspective.
 
-## Today’s progress record
+## September 10 style update
+
+The Simulation map now opens with an illustrated Lakeside palette, procedural groves, slope inspection, and optional contours. Mood changes preserve the experiment. See [tutorial 05](05%20-%20Stylized%20Landscapes%20and%20Procedural%20Detail.md) and the [September 10 log](2026-09-10%20-%20Progress%20Log.md). The hydraulic solver and its limits remain the same.
+
+## September 9 progress record
 
 Follow the [September 9 log](2026-09-09%20-%20Progress%20Log.md) for the prompt sequence, five screenshots, and the questions about low-poly shading and simulation time.
 
