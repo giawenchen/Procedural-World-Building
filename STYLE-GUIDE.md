@@ -1,8 +1,8 @@
 ---
 tags: [world-building, design, style-guide]
 status: revised-preview-awaiting-owner-review
-version: 0.5
-updated: 2026-09-17
+version: 0.6
+updated: 2026-10-07
 ---
 
 # Style Guide — A Quiet Instrument, a Readable World
@@ -15,17 +15,14 @@ Priority: **geographical meaning → readability → visual harmony**. Consisten
 
 ## 1. Control panels: reference, purpose and boundaries
 
-The control-panel reference is a printed Grand Canyon shuttle guide. Its cream information columns, compact headings, thin rules, aligned text and selective route colors provide an information-design reference. We borrow its hierarchy and restraint, not the printed map's faded reproduction quality, route data, icons or grain.
+The current reference is the owner's Cell Architecture Studio UI: a large study viewport, an illustrated study selector, and grouped inspector cards. The travel-app reference contributes softer colors and friendly controls. The earlier printed-guide style remains part of the visual history.
 
-Panels help someone operate the app and understand parameters. Use warm paper, dark readable type, quiet grouping and restrained accents across every tab.
-
-- Paper `#f1eee5`; panels `#f8f5ec`; text `#30382f`; secondary text `#646b5f`; rules `#c9cbbb`.
-- Forest ink `#234e3b` or Graphite `#454944` affects interface accents only.
-- System sans-serif labels and headings; sparse monospace study labels and numerical values.
-- Fine boundaries and nearly square panels; deliberate spacing rather than decorative shadows or artificial wear.
-- Desktop: world left, controls right. Narrow screens: world before controls.
-- Visible focus, readable units, real sliders and explicit selected states remain required.
-- All app and submission text is English.
+- Paper `#eeede3`; panels `#faf9f3`; text `#333b30`; secondary text `#717666`; rules `#dddfd0`.
+- Sage `#657747` or Graphite `#454944` affects interface accents only.
+- Georgia serif for the brand and main study/card headings; system sans-serif for controls; sparse monospace for labels and aligned values.
+- Rounded cards (8–14 px), subtle borders and low-opacity shadows. No decorative grain over text.
+- Desktop: study library on the left, the world in the center, inspector on the right. Navigation becomes a row below 1000 px; controls follow the scene below 760 px.
+- Visible focus, explicit selected states, real sliders, units, and English labels are required. Do not add decorative buttons without behavior.
 
 **Boundary:** changing Interface accent must not recolor the earth, trees, oceans or diagnostic data.
 
@@ -45,9 +42,22 @@ Coordinate the scene with the interface using restrained saturation, warm soil, 
 
 **Boundary:** the interface reference must not override the semantic roles of these colors. Do not create water, vegetation or snow data merely to make an attractive composition.
 
+### Natural illustration — October 7, current default
+
+The owner's farm illustration informs restrained color and grounded objects. The miniature island informs readable relief and coastlines. The flooded-house illustration is a reference for water response, not permission to flood the default landscape or add unimplemented buildings.
+
+- Water `#82b3c2`; shore `#ddd0a5`; meadow `#a2b77f`; forest `#648569`; rock `#a99b88`; pale summits `#f4f0df`.
+- Height and slope select materials. Coherent warm light and cooler shaded faces explain volume without covering every surface in pen marks.
+- Simulation map adds actual directional shadow mapping for terrain and instanced trees, plus gentle distance fog in the custom shader. Diagnostic colors remain unlit and unfogged.
+- Explore water uses the terrain samples to vary shallow/deep color and a narrow shore treatment. A grazing-angle highlight suggests reflection; it is not a scene reflection or fluid solver. Sparse ripple marks remain static.
+- Original planet and Noise laboratory share the material language. Their current scenes do not add the Simulation map's tree shadows or distance fog.
+- Vegetation controls alter density, clustering and scale over deterministic candidates. Keep the 650-instance limit and suitability checks. The count reports placed trees; hidden analysis modes must label them hidden. No lifecycle or reproduction is implied.
+
+The older Illustrated map treatment remains selectable for comparison. It preserves the earlier palette and pen language inside the new panel layout; the October checkpoint commit preserves the complete earlier app.
+
 ### Illustrated world treatment — September 17, third iteration
 
-The supplied Mont-Blanc poster informs world rendering only. Borrow distinct material shapes, conifer silhouettes, indigo rock faces, warm pale summits and local pen marks. Keep the printed-guide control panels unchanged.
+The supplied Mont-Blanc poster informs world rendering only. Borrow distinct material shapes, conifer silhouettes, indigo rock faces, warm pale summits and local pen marks. Its historical control-panel design is documented in the September log.
 
 - Low ground / shore: ochre `#e5cb7e`; meadow `#a1af69`; forest `#42684d`.
 - Rock faces: indigo `#565b99`, with directional shade and sparse hatching.
@@ -60,9 +70,9 @@ The style must not import fictional routes, buildings, labels or glaciers into t
 
 ## 3. Controls and rendering modes
 
-The toolbar has separate **Control panel / Accent** and **World display / Rendering** groups.
+The toolbar separates **World / Rendering** from **Panel accent**.
 
-Default: **Illustrated map**. **Natural materials** remains available for comparison. Optional **Materials + contours** and **Materials + stipple** add information or shading while retaining the material colors. Neither is a default monochrome replacement.
+Default: **Natural illustration**. **Illustrated map · archive** preserves the earlier drawing treatment. **Natural materials** remains available for comparison. Optional **Materials + contours** and **Materials + stipple** add information or shading while retaining the material colors. Neither is a default monochrome replacement.
 
 Contours follow actual height: 0.05 u radial on Original planet, 0.1 u in Noise laboratory, 2 u in Simulation map. Stipple is a screen-space shading overlay, not a point cloud or a particle system. Both preserve the current terrain and simulation.
 
@@ -87,3 +97,5 @@ Review the panel and scene independently. First identify water, coast/soil, vege
 Capture both stages in the learning record. Historical experiments stay visible but are labeled superseded or rejected where appropriate. The planned voxel tab should reuse the panel system while maintaining its own density, material and surface-normal semantics.
 
 See [tutorial 07](docs/tutorials/07%20-%20A%20Consistent%20Visual%20Language%20for%20Procedural%20Worlds.md) and the third experiment in the [September 17 log](docs/tutorials/2026-09-17%20-%20Progress%20Log.md).
+
+The October implementation and comparison method are explained in [tutorial 08](docs/tutorials/08%20-%20Nature%20Studio,%20Shadows%20and%20Tree%20Distribution.md).

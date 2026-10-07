@@ -137,10 +137,40 @@ This supersedes Natural materials as the default view; that rendering remains av
 - [x] Save four fresh screenshots covering the three existing workspaces.
 - [x] Document the retained illustrated style and run build, lint and six regression tests.
 - [x] Separate completed features from voxel, shader and vector-field plans.
-- [ ] Add a selectable Atmospheric illustration study with matched before/after captures.
-- [ ] Test coherent directional light, grounded tree shadows and real shader fog integration.
-- [ ] Test restrained view-dependent water highlights while preserving depth and shoreline meaning.
+- [x] Add a selectable Natural illustration study and documented before/after captures.
+- [x] Add coherent directional light, actual tree shadows and shader fog in Simulation map.
+- [x] Add restrained view-dependent water highlights and sample-based shore color in Explore mode.
 - [ ] Add visible vector arrows and particles driven by the same wind field.
 - [ ] Measure frame time and resolve the existing large-bundle warning where practical.
 
-See the [October 7 log](../tutorials/2026-10-07%20-%20Progress%20Log.md) and [visual depth review](../analysis/2026-10-07%20-%20Visual%20Depth%20Review.md). These proposed effects have not been implemented.
+See the [October 7 log](../tutorials/2026-10-07%20-%20Progress%20Log.md) and [visual depth review](../analysis/2026-10-07%20-%20Visual%20Depth%20Review.md). The implementation status below records the subsequent Nature Studio preview; wind-field particles remain planned.
+
+## Nature Studio preview — October 7, second experiment
+
+- [x] Share study navigation, serif headings and rounded inspector cards across three tabs.
+- [x] Keep the archived illustrated material option and independent panel accents.
+- [x] Add actual tree count, density, clustering and scale controls without resetting erosion.
+- [x] Verify a 100-step run and fixed diagnostic scales; save desktop and narrow-layout screenshots.
+- [x] Write tutorial 08 and append the English learning log.
+- [ ] Review the new visual direction and tree silhouettes with the owner.
+- [ ] Measure shadow-map frame time and test lower-cost settings if needed.
+- [ ] Compare sparse and clustered forests under the same paused field conditions.
+- [ ] Design explicit age/growth/reproduction rules before describing trees as a dynamic population.
+
+This iteration is a local preview. The previous checkpoint is on GitHub; the redesign has not been pushed in this iteration.
+
+
+## Course-aligned next work — October 7 checkpoint
+
+The [course progress report](../tutorials/2026-10-07%20-%20Nature%20Studio%20Course%20Progress.md) is the current mapping. Earlier local-preview statuses above are historical. This checkpoint packages the redesign for GitHub submission.
+
+- [x] Save and document a fixed-field density comparison: 25% → 62 trees; 75% → 174; restore 53% → 125.
+- [x] Write English tutorials for Sessions 5, 6 and 7 and cross-session learning insights in Obsidian.
+- [x] Map all five sessions to current/proposed parameters, evidence and implementation gaps.
+- [ ] Session 3: run frequency 1/2/4 and grid-resolution 32/64/128 comparisons with fixed seed and matched captures.
+- [ ] Session 4: record equal-step rainfall trials, then implement explicit moisture/temperature fields and biome classification.
+- [ ] Session 5: implement a bounded density sphere, slice and working mesh in a separate tab; then ordered cave CSG, chunk seams and measured local rebuilds.
+- [ ] Session 6: implement constant/swirl vector fields with arrows and fixed-step particle advection; validate distance, reset and pause. Treat a pressure-based fluid solver as a separate milestone.
+- [ ] Session 7: compare clustering with count recorded, implement an isolated bounded L-system tree, then add persistent plant state before growth/reproduction claims.
+
+Keep the Nature Studio visual system. Add diagnostic views and explanatory parameters per session, with real screenshots and measured results. Do not mark a topic complete because a tutorial exists.

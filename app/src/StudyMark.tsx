@@ -1,0 +1,6 @@
+// Small navigation illustrations, distinct from the generated study viewport.
+export default function StudyMark({ kind }: { kind: string }) {
+  return <svg viewBox="0 0 64 64" aria-hidden="true" className="study-mark">
+    {kind === 'planet' ? <><circle cx="32" cy="32" r="23" fill="#a8c4c9"/><path d="M14 19L29 13L38 22L33 33L20 32L13 40L10 31ZM39 36L53 31L51 44L42 50L36 45Z" fill="#8b9f6a"/><path d="M21 18L29 15L34 24L24 26Z" fill="#e1d5b0"/><path d="M48 16A23 23 0 0 1 18 50A23 23 0 0 0 48 16" fill="#526555" opacity=".18"/></> : kind === 'noise' ? <><path d="M5 43L24 21L36 32L47 13L60 42L37 54Z" fill="#c4bdab"/><path d="M5 43L24 21L20 42L37 54Z" fill="#8f9f75"/><path d="M36 32L47 13L50 42L37 54Z" fill="#717f68"/><path d="M41 24L47 13L52 25L47 22Z" fill="#fbf7e9"/><path d="M15 41L24 37L34 44M30 29L34 33M40 43L47 39" stroke="#faf7eb" fill="none" opacity=".8"/></> : <><path d="M4 39L31 24L60 37L34 55Z" fill="#b5c298"/><path d="M4 39L34 55L60 37L60 42L34 60L4 44Z" fill="#c0ac87"/><path d="M10 38Q29 31 36 41T53 39" stroke="#91bac5" strokeWidth="6" fill="none"/><path d="M15 32L27 12L39 34Z" fill="#afaa98"/><path d="M27 12L39 34L27 29Z" fill="#858c78"/><path d="M22 21L27 12L31 21L27 19Z" fill="#faf6e7"/><path d="M44 24L39 37H49Z" fill="#42694e"/><path d="M13 36L9 46H17Z" fill="#65845b"/></>}
+  </svg>
+}

@@ -23,6 +23,35 @@ Repeatable capture command (dev server must be running):
 
 ---
 
+## 012 — Course checkpoint and tree-density comparison · 2026-10-07
+
+**Request, translated:** save this version with screenshots and explanations, align the learning record with Sessions 3–7, and supplement the last three sessions' tutorials and insights.
+
+![Sparse placement: 25 percent density, 62 trees](images/2026-10-07/15-density-25-step0.jpg)
+![Denser placement: 75 percent density, 174 trees](images/2026-10-07/16-density-75-step0.jpg)
+
+Same default field, camera, viewport and step zero; clustering 30%, size 1.00×. Restoring density 53% reproduced 125 trees. No solver step advanced. This is a distribution experiment with the existing controls, not new growth functionality.
+
+The checkpoint includes the previously local Nature Studio redesign. The [new progress report](2026-10-07%20-%20Nature%20Studio%20Course%20Progress.md) connects each session to implemented features, parameters, experiments and explicit gaps. Tutorials 09–11 and a separate insights note were authored in the shared Obsidian folder. The earlier entry's local-only status records its state at that time.
+
+---
+
+## 011 — Nature Studio: a clearer instrument and a softer world · 2026-10-07
+
+**Request, paraphrased:** implement the agreed world and panel references while keeping procedural detail readable.
+
+![Before: illustrated atlas](images/2026-10-07/05-before-workbench.jpg)
+
+![After: natural illustration and study inspectors](images/2026-10-07/06-natural-workbench.jpg)
+
+The new shell groups study navigation, world display and controls. Natural illustration adds a restrained palette, actual Simulation map shadows and distance fog. Explore water gains depth-based coloring. The vegetation inspector exposes deterministic density, clustering, size and count. The previous drawing treatment remains selectable.
+
+Same default field and camera, paused at step zero; both captures are 1320 × 960, but the new layout changes viewport width. Seven tests, build and lint passed. A 100-step browser check preserved measurements across material, accent and tree-density changes.
+
+**Status:** local preview for owner review, not pushed in this iteration. See [tutorial 08](08%20-%20Nature%20Studio,%20Shadows%20and%20Tree%20Distribution.md) and Experiment 2 in the [October 7 log](2026-10-07%20-%20Progress%20Log.md).
+
+---
+
 ## 010 — Illustrated world checkpoint · 2026-10-07
 
 **Request, translated:** save the current visuals and progress before deciding how new course topics should affect the style.

@@ -61,7 +61,7 @@ export default function NoiseLab({layers,setLayers,solo,setSolo,appearance}:{app
  const [planet,setPlanet]=useState(false),[resolution,setResolution]=useState(64),[height,setHeight]=useState(.8),[wireframe,setWireframe]=useState(false),[mode,setMode]=useState('Split')
  const update=(id:number,patch:Partial<Layer>)=>setLayers(ls=>ls.map(l=>l.id===id?{...l,...patch}:l))
  return <div className="noise-lab"><header className="lab-heading"><div><span className="sim-eyebrow">02 / DENSITY STUDIES</span><h1>Noise laboratory</h1><p>Equation → shaping → layer blend → surface. Shared with Simulation map; separate from Original planet.</p></div><button onClick={()=>{const blob=new Blob([JSON.stringify({layers,planet,resolution,height,wireframe,appearance},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='noise-recipe.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}}>Export recipe</button></header>
- <div className="lab-layout"><aside className="lab-controls"><h2>Surface & sampling</h2>
+ <div className="lab-layout"><aside className="lab-controls"><div className="inspector-heading"><span className="atlas-label">NOISE INSPECTOR</span><span className="inspector-dot"/>Source & sampling</div><h2>Surface & sampling</h2>
  <Select label="Surface" value={planet?'Planet':'Plane'} options={['Plane','Planet']} onChange={v=>setPlanet(v==='Planet')}/>
  <Select label="View" value={mode} options={['Split','2D only','3D only']} onChange={setMode}/>
  <Range label="Grid segments" value={resolution} min={16} max={128} step={8} onChange={setResolution}/><Range label="Displacement height" value={height} min={0} max={1.5} onChange={setHeight}/>

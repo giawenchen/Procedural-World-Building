@@ -1,0 +1,107 @@
+/* A quiet instrument panel around an expressive, independently colored world. */
+.workbench {
+  --paper:#eeede3; --panel:#faf9f3; --ink:#333b30; --muted:#717666;
+  --accent:#657747; --line:#dddfd0; --wash:#ebefdf;
+  display:grid; grid-template-columns:216px minmax(0,1fr); grid-template-rows:auto auto 1fr;
+  gap:0 24px; padding:0 30px 30px; font-size:13px;
+}
+.workbench .atlas-masthead { grid-column:1/-1; padding:28px 0 25px; }
+.studio-wordmark { display:flex; align-items:center; gap:15px; }
+.studio-seal { display:grid; place-items:center; width:49px; height:49px; border-radius:50%; background:var(--panel); color:var(--accent); font-size:31px; box-shadow:0 3px 12px #414c2310; }
+.workbench .atlas-brand { font-family:Georgia,'Times New Roman',serif; font-size:31px; font-weight:400; letter-spacing:-.045em; }
+.workbench .atlas-brand span { color:var(--ink); font-weight:400; letter-spacing:-.045em; }
+.studio-wordmark p { margin:2px 0 0; font:italic 12px Georgia,serif; }
+.workbench .atlas-edition { text-align:right; line-height:2; font-size:9px; }
+.workbench .atlas-edition b { font-weight:400; letter-spacing:.06em; }
+.studio-library { grid-column:1; grid-row:2/4; align-self:start; position:sticky; top:22px; padding:18px 10px 14px; background:var(--panel); border:1px solid #e5e4d8; border-radius:14px; box-shadow:0 4px 16px #40492606; }
+.studio-library>.atlas-label { display:block; margin:0 10px 16px; font-size:9px; }
+.workbench .workspace-nav { display:flex; flex-direction:column; gap:7px; padding:0; border:0; z-index:auto; }
+.workbench .workspace-nav button { display:flex; align-items:center; gap:8px; text-align:left; padding:10px 6px; border:1px solid transparent; border-radius:9px; color:var(--ink); min-height:69px; }
+.workbench .workspace-nav button[aria-selected=true] { background:#e9ecda; border-color:#d9dec7; color:#394c2c; box-shadow:0 2px 5px #414c2310; }
+.study-mark { width:43px; height:48px; flex:none; }
+.workspace-nav strong { display:block; font-size:12px; font-weight:550; }
+.workspace-nav small { display:block; font-size:9px; margin-top:4px; }
+.workspace-nav i { margin-left:auto; align-self:start; font:9px ui-monospace,monospace; color:var(--muted); }
+.library-note { margin:25px 10px 0; padding-top:24px; border-top:1px solid var(--line); }
+.workbench .library-note h2 { font:21px/1.3 Georgia,serif; letter-spacing:-.04em; margin:12px 0; }
+.library-note p { font-size:11px; line-height:1.9; }
+.library-colors { display:flex; gap:7px; margin:22px 0; }
+.library-colors i { width:19px; height:19px; border-radius:50%; background:#a2b77f; }
+.library-colors i:nth-child(2) { background:#82b3c2; }.library-colors i:nth-child(3) { background:#ddd0a5; }.library-colors i:nth-child(4) { background:#a99b88; }
+.library-foot { margin:24px 10px 2px; color:var(--muted); font-size:9px; line-height:1.7; }
+.workbench .atlas-appearance { grid-column:2; grid-row:2; padding:12px 17px; background:#f5f4eb; border:1px solid #e0e2d5; border-radius:11px; gap:15px; align-self:start; }
+.workbench .atlas-appearance label { font-size:11px; }
+.workbench .appearance-domain+.appearance-domain { padding-left:17px; }
+.workbench .atlas-appearance-note { font:italic 11px Georgia,serif; }
+.studio-content { grid-column:2; grid-row:3; min-width:0; }
+.studio-content[hidden] { display:none; }
+.workbench .simulation,.workbench .noise-lab,.workbench .app-shell { padding:24px 0 0; min-height:0; }
+.workbench h1 { font:400 clamp(29px,2.5vw,40px)/1.15 Georgia,'Times New Roman',serif; letter-spacing:-.04em; margin:7px 0 9px; }
+.workbench .sim-eyebrow { font-size:9px; letter-spacing:.09em; }
+.workbench .sim-header,.workbench .lab-heading,.workbench .topbar { min-height:65px; margin-bottom:22px; }
+.workbench .sim-header p,.workbench .lab-heading p,.workbench .topbar-note { font-size:12px; line-height:1.7; }
+.workbench .sim-workspace,.workbench .lab-layout,.workbench .app-shell { grid-template-columns:minmax(0,1fr) 292px; gap:18px; }
+.workbench button,.workbench select { border-radius:8px; padding:8px 11px; font-size:12px; min-height:33px; }
+.workbench button:hover:not(:disabled) { background:#e9eddd; border-color:#aeb69a; }
+.workbench .sim-stage,.workbench .viewport,.workbench .lab-previews section { border:1px solid #dfdfd2; border-radius:13px; box-shadow:0 5px 18px #51542b07; overflow:hidden; background:#f5f3e9; }
+.workbench .sim-stage-tools { padding:11px 13px; border-bottom:0; }
+.workbench .sim-canvas { height:clamp(360px,49vh,640px); }
+.workbench .sim-art-direction { padding:7px 17px; border-bottom:1px solid #e9e8dc; font-size:9px; }
+.workbench .sim-camera-actions button,.workbench .sim-segment button { font-size:11px; }
+.workbench .sim-stage { top:18px; }
+.workbench .sim-status { min-width:87px; padding:9px 17px; background:#f7f6ed; border:1px solid var(--line); border-radius:11px; }
+.workbench .sim-status strong { font-family:Georgia,serif; font-size:30px; }
+.workbench .sim-controls { padding:0; border:0; background:transparent; border-radius:0; }
+.inspector-heading { display:flex; align-items:center; flex-wrap:wrap; column-gap:7px; row-gap:8px; font-size:10px; color:var(--muted); margin:0 0 12px; padding:0 3px; }
+.inspector-heading .atlas-label { flex-basis:100%; font-size:9px; }
+.inspector-dot { display:inline-block; width:5px; height:5px; border-radius:50%; background:#87995a; margin-right:3px; vertical-align:middle; }
+.workbench .sim-controls>.sim-field,.workbench .sim-experiment,.workbench .sim-lenses,.workbench .grove-card,.workbench .sim-map,.workbench .sim-calibration,.workbench .sim-controls>.sim-check { padding:17px; margin:0 0 12px; border:1px solid #e0e1d3; border-radius:11px; background:var(--panel); box-shadow:0 3px 12px #414c2305; }
+.workbench .sim-controls h2 { font:20px/1.25 Georgia,serif; letter-spacing:-.035em; margin:7px 0 10px; }
+.workbench .sim-controls p { font-size:11px; line-height:1.65; }
+.workbench .sim-storm { background:#e9edda; margin:14px 0; }
+.workbench .sim-storm span { font-size:9px; }
+.workbench .sim-metrics { gap:16px 10px; padding:8px 0; }
+.workbench .sim-metrics strong { font-size:21px; font-family:Georgia,serif; }
+.workbench .sim-metrics span { min-height:28px; margin-bottom:4px; }
+.workbench .sim-field output { display:inline-block; float:right; margin:0; font-size:10px; }
+.workbench .sim-field input { clear:both; }
+.grove-title { display:flex; align-items:center; justify-content:space-between; gap:10px; }.grove-title svg { width:58px; height:58px; }
+.grove-count { display:flex; align-items:center; gap:12px; margin:8px 0 16px; padding:11px 13px; border-radius:8px; background:#eef0e2; }
+.grove-count strong { font:30px Georgia,serif; }.grove-count span { font-size:11px; }.grove-count small { display:block; font-size:9px; margin-top:4px; }
+.grove-range { display:block; margin:12px 0; font-size:11px; }.grove-range>span { display:flex; justify-content:space-between; gap:10px; }
+.workbench .sim-transport { padding:12px; border-top:1px solid var(--line); gap:7px; }
+.workbench .sim-primary { min-width:92px; background:#61784d; color:#fffdf6; border-color:#61784d; }
+.workbench .sim-primary:hover:not(:disabled) { background:#4a6338; }
+.workbench .world-key { background:#faf8ef; padding:12px 16px; gap:8px 14px; font-size:10px; border-color:#e4e4d6; }
+.workbench .world-key i { border-radius:50%; width:9px; height:9px; border:0; }.workbench .world-key small { font-size:10px; }
+.workbench .sim-reading { padding:8px 12px; }
+.workbench .sim-view-caption { font-size:9px; background:#f2f2e7; }
+.workbench .sim-footer { font-size:10px; border-color:#dcdfcd; }
+.workbench .sim-map canvas { width:70px; height:70px; border-radius:5px; }.workbench .sim-map figcaption { font-size:10px; }
+.workbench .lab-controls,.workbench .control-panel { padding:18px; border:1px solid #e0e1d3; border-radius:12px; background:var(--panel); }
+.workbench .control-panel { gap:20px; }.workbench .group h2 { font-size:11px; color:var(--accent); letter-spacing:.03em; }
+.workbench .row { font-size:12px; }.workbench .choice { padding:6px; font-size:10px; }.workbench .row-index { color:var(--muted); }
+.workbench .planet-canvas { height:clamp(400px,56vh,700px); }
+.workbench .viewport:before,.workbench .viewport:after { display:none; }
+.workbench .planet-key { border-radius:0 0 12px 12px; }.workbench .viewport { border-radius:12px 12px 0 0; }
+.workbench .lab-previews.split { grid-template-columns:minmax(150px,.65fr) minmax(0,1.35fr); gap:12px; }
+.workbench .lab-previews section { padding:14px; }.workbench .lab-previews h3 { font-size:10px; line-height:1.6; }
+.workbench .lab-render,.workbench .noise-map { height:clamp(270px,45vh,550px); }.workbench .noise-map { border-radius:6px; }
+.workbench .noise-lab details { margin:14px 0; padding:15px 0; border-color:var(--line); }.workbench .lab-hint { font-size:11px; line-height:1.8; }
+.workbench[data-surface="studio"] .key-water { background:#82b3c2; }.workbench[data-surface="studio"] .key-sand { background:#ddd0a5; }
+.workbench[data-surface="studio"] .key-green { background:#648569; }.workbench[data-surface="studio"] .key-rock { background:#a99b88; }.workbench[data-surface="studio"] .key-snow { background:#f4f0df; }
+.workbench[data-surface="studio"] .sim-legend-scale.landscape { background:linear-gradient(90deg,#ddd0a5,#a2b77f,#648569,#a99b88,#f4f0df); }
+@media(min-width:1750px) { .workbench { grid-template-columns:238px minmax(0,1fr); gap:0 28px; padding:0 40px 32px; }.workbench .sim-workspace,.workbench .lab-layout,.workbench .app-shell { grid-template-columns:minmax(0,1fr) 320px; gap:24px; }.workbench .workspace-nav strong { font-size:13px; } }
+@media(max-width:1250px) { .workbench { grid-template-columns:170px minmax(0,1fr); gap:0 15px; padding:0 20px 24px; }.workbench .study-mark { width:31px; }.workbench .workspace-nav strong { font-size:11px; }.workspace-nav i { display:none; }.workbench .sim-workspace,.workbench .lab-layout,.workbench .app-shell { grid-template-columns:minmax(0,1fr) 260px; gap:14px; }.workbench .atlas-appearance-note { display:none; }.workbench .lab-previews.split { grid-template-columns:1fr; }.workbench .noise-map { height:170px; }.workbench .lab-stage { position:static; } }
+@media(max-width:1000px) { .workbench { grid-template-columns:minmax(0,1fr); padding:0 20px 24px; }.workbench .atlas-masthead { grid-column:1; padding:22px 0; }.studio-library { position:static; grid-column:1; grid-row:2; padding:7px; margin-bottom:15px; }.studio-library>.atlas-label,.library-note,.library-foot { display:none; }.workbench .workspace-nav { flex-direction:row; }.workbench .workspace-nav button { flex:1; min-width:0; justify-content:center; min-height:55px; }.workbench .study-mark { width:34px; }.workbench .workspace-nav strong { font-size:12px; }.workbench .atlas-appearance { grid-column:1; grid-row:3; }.studio-content { grid-column:1; grid-row:4; } }
+@media(max-width:760px) { .workbench .sim-workspace,.workbench .lab-layout,.workbench .app-shell { grid-template-columns:minmax(0,1fr); }.workbench .lab-controls { grid-column:1; grid-row:2; }.workbench .lab-stage { grid-column:1; grid-row:1; }.workbench .control-panel { grid-column:1; grid-row:5; }.workbench .sim-stage { position:static; }.workbench .planet-key { margin-top:-14px; }.workbench .sim-controls { display:grid; grid-template-columns:1fr 1fr; gap:12px; }.workbench .sim-controls>* { margin:0; }.workbench .inspector-heading,.workbench .sim-calibration { grid-column:1/-1; }.workbench .sim-canvas { height:410px; }.workbench .planet-canvas { height:440px; }.workbench .sim-header { align-items:start; }.workbench .atlas-brand { font-size:27px; }.workbench .atlas-edition { display:none; } }
+@media(max-width:500px) { .workbench { padding:0 12px 20px; }.workbench .atlas-brand { font-size:24px; }.studio-seal { width:37px; height:37px; font-size:25px; }.studio-wordmark { gap:10px; }.workbench .workspace-nav button { flex-direction:column; gap:3px; padding:7px 3px; }.workbench .workspace-nav strong { font-size:10px; }.workspace-nav small { display:none; }.workbench .study-mark { width:30px; height:32px; }.workbench .atlas-appearance { padding:11px; }.workbench .appearance-domain { flex-basis:100%; }.workbench .appearance-domain+.appearance-domain { padding:8px 0 0; }.workbench .sim-controls { display:block; }.workbench .sim-controls>* { margin-bottom:12px; }.workbench h1 { font-size:28px; }.workbench .sim-header p { font-size:11px; }.workbench .sim-status { padding:8px; min-width:70px; }.workbench .sim-canvas { height:320px; }.workbench .sim-stage-tools { padding:9px; gap:10px; }.workbench .sim-camera-actions { flex-wrap:wrap; }.workbench .sim-camera-actions button,.workbench .sim-segment button { font-size:10px; padding:7px; }.workbench .sim-transport button { font-size:11px; }.workbench .sim-view-caption { font-size:8px; }.workbench .sim-footer>span { text-align:left; }.workbench .lab-heading { flex-wrap:wrap; } }
+@media(prefers-reduced-motion:reduce) { .workbench * { scroll-behavior:auto!important; transition:none!important; } }
+
+/* Keep the intermediate desktop layout independent of the earlier atlas breakpoints. */
+@media(min-width:761px) {
+  .workbench .control-panel { grid-column:2; grid-row:2/5; }
+  .workbench .lab-controls { grid-column:2; grid-row:1; }
+  .workbench .lab-stage { grid-column:1; grid-row:1; }
+  .workbench .planet-key { grid-column:1; grid-row:3; margin-top:0; }
+}

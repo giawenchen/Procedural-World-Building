@@ -1,9 +1,10 @@
 import * as THREE from 'three'
 
 export type Palette = 'forest' | 'graphite'
-export type Surface = 'relief' | 'contours' | 'stipple' | 'illustrated'
+export type Surface = 'relief' | 'contours' | 'stipple' | 'illustrated' | 'studio'
 export type Appearance = { surface: Surface }
-export const PAPER = '#f4f3ee'
+export const PAPER = '#f5f3e9'
+export const STUDIO = { water: '#82b3c2', sand: '#ddd0a5', meadow: '#a2b77f', forest: '#648569', rock: '#a99b88', snow: '#f4f0df' } as const
 // These colors describe materials, independently of the interface accent.
 export const WORLD = {
   water: '#327b9d', sand: '#c8ac72', soil: '#96734e',
@@ -23,8 +24,13 @@ export const ILLUSTRATED = { water: '#79afd0', sand: '#e5cb7e', meadow: '#a1af69
 // Appearance uniforms do not modify geometry, density samples or simulation state.
 export function createAtlasMaterial(vertexColors = true) {
   return new THREE.ShaderMaterial({
-    vertexColors, side: THREE.DoubleSide,
+    vertexColors, side: THREE.DoubleSide, lights: true, fog: true,
     uniforms: {
+      ...THREE.UniformsUtils.clone(THREE.UniformsLib.lights),
+      ...THREE.UniformsUtils.clone(THREE.UniformsLib.fog),
+      sunDirection: { value: new THREE.Vector3(-.6, 1, .7).normalize() },
+      groundMap: { value: null }, groundExtent: { value: 22 }, gridSpan: { value: 192 },
+      hasGroundMap: { value: false },
       water: { value: new THREE.Color(WORLD.water) },
       sand: { value: new THREE.Color(WORLD.sand) }, meadow: { value: new THREE.Color(WORLD.meadow) },
       forest: { value: new THREE.Color(WORLD.forest) }, rock: { value: new THREE.Color(WORLD.rock) },
@@ -37,7 +43,10 @@ export function createAtlasMaterial(vertexColors = true) {
       hard: { value: false }, useSamples: { value: vertexColors },
     },
     vertexShader: `
-      varying vec3 worldPosition;
+      #include <common>
+      #include <shadowmap_pars_vertex>
+      #include <fog_pars_vertex>
+      varying vec3 vWorldPosition;
       varying vec3 worldNormal;
       varying vec3 sampleColor;
       varying float altitude;
@@ -45,7 +54,7 @@ export function createAtlasMaterial(vertexColors = true) {
       uniform float radius;
       void main() {
         vec4 world = modelMatrix * vec4(position, 1.0);
-        worldPosition = world.xyz;
+        vWorldPosition = world.xyz;
         localPosition = position;
         radialUp = normalize(mat3(modelMatrix) * normalize(position));
         worldNormal = normalize(mat3(modelMatrix) * normal);
@@ -54,10 +63,25 @@ export function createAtlasMaterial(vertexColors = true) {
         #ifdef USE_COLOR
           sampleColor = color;
         #endif
-        gl_Position = projectionMatrix * viewMatrix * world;
+        vec4 mvPosition = viewMatrix * world;
+        vec4 worldPosition = world;
+        vec3 transformedNormal = normalMatrix * normal;
+        gl_Position = projectionMatrix * mvPosition;
+        #include <shadowmap_vertex>
+        #include <fog_vertex>
       }
     `,
     fragmentShader: `
+      #include <common>
+      #include <packing>
+      #include <lights_pars_begin>
+      #include <shadowmap_pars_fragment>
+      #include <shadowmask_pars_fragment>
+      #include <fog_pars_fragment>
+      uniform vec3 sunDirection;
+      uniform sampler2D groundMap;
+      uniform float groundExtent, gridSpan;
+      uniform bool hasGroundMap;
       uniform vec3 water, sand, meadow, forest, rock, snow, ink;
       uniform float surface, interval, amplitude, floorHeight, markScale, radius;
       uniform vec2 fieldOrigin;
@@ -68,12 +92,12 @@ export function createAtlasMaterial(vertexColors = true) {
         return 1.0 - smoothstep(width, width + aa, d);
       }
       uniform bool ocean, flatShading, hard, useSamples;
-      varying vec3 worldPosition, worldNormal, sampleColor;
+      varying vec3 vWorldPosition, worldNormal, sampleColor;
       varying float altitude;
       void main() {
         vec3 normal = normalize(worldNormal);
-        if(flatShading) normal = normalize(cross(dFdx(worldPosition), dFdy(worldPosition)));
-        float light = clamp(dot(normal, normalize(vec3(-0.6, 1.0, 0.7))) * 0.5 + 0.5, 0.0, 1.0);
+        if(flatShading) normal = normalize(cross(dFdx(vWorldPosition), dFdy(vWorldPosition)));
+        float light = clamp(dot(normal, sunDirection) * 0.5 + 0.5, 0.0, 1.0);
         if(hard) light = floor(light * 3.0) / 3.0;
         float t = max(altitude, 0.0) / max(amplitude, 0.001);
         vec3 land = mix(sand, meadow, smoothstep(0.07, 0.20, t));
@@ -83,7 +107,38 @@ export function createAtlasMaterial(vertexColors = true) {
         vec3 base = useSamples ? sampleColor : land;
         if(ocean) base = water;
         vec3 paint = base * (0.55 + light * 0.45);
-        if(surface > 2.5) {
+        if(surface > 3.5) {
+          vec3 up = radius > 0.0 ? normalize(radialUp) : vec3(0.0, 1.0, 0.0);
+          float slope = 1.0 - clamp(dot(normalize(worldNormal), up), 0.0, 1.0);
+          float h = (altitude - floorHeight) / max(amplitude, 0.001);
+          vec3 p = (localPosition + vec3(fieldOrigin.x, 0.0, fieldOrigin.y)) * markScale;
+          float patches = sin(p.x * .8 + sin(p.z * .6)) * .5 + .5;
+          paint = mix(sand, meadow, smoothstep(.08, .16, h));
+          paint = mix(paint, forest, smoothstep(.24, .36, h) * (.28 + patches * .28));
+          float exposed = max(smoothstep(.12, .36, slope) * smoothstep(.25, .46, h), smoothstep(.55, .68, h));
+          paint = mix(paint, rock, exposed);
+          paint = mix(paint, snow, smoothstep(.75, .89, h) * (1.0 - smoothstep(.2, .4, slope)));
+          float facing = dot(normal, sunDirection);
+          float sunlight = smoothstep(-.1, .65, facing);
+          float shade = (1.0 - sunlight) * .85 + (1.0 - getShadowMask()) * .52;
+          vec3 coolShadow = paint * vec3(.48, .59, .65);
+          paint = mix(paint, coolShadow, clamp(shade, 0.0, .85));
+          paint = mix(paint, paint * vec3(1.05, 1.02, .94), sunlight * .4);
+          if(ocean) {
+            float depth = 6.0;
+            if(hasGroundMap && radius < .01) {
+              float ground = (texture2D(groundMap, localPosition.xz / gridSpan + .5).r * 2.0 - 1.0) * groundExtent;
+              depth = max(floorHeight - ground, 0.0);
+            }
+            paint = mix(mix(water, snow, .25), water * .84, smoothstep(0.0, 12.0, depth));
+            float fresnel = pow(1.0 - max(dot(normal, normalize(cameraPosition - vWorldPosition)), 0.0), 3.0);
+            paint = mix(paint, snow, fresnel * .3);
+            float shore = 1.0 - smoothstep(.1, 1.1, depth);
+            paint = mix(paint, snow, shore * .5);
+            float ripple = pen(p.z * 2.4 + sin(p.x * .9) * .12, .015);
+            paint = mix(paint, snow, ripple * .08);
+          }
+        } else if(surface > 2.5) {
           // Fixed height thresholds and slope masks: no geometry or field changes.
           vec3 up = radius > 0.0 ? normalize(radialUp) : vec3(0.0, 1.0, 0.0);
           float slope = 1.0 - clamp(dot(normalize(worldNormal), up), 0.0, 1.0);
@@ -103,7 +158,7 @@ export function createAtlasMaterial(vertexColors = true) {
           float hatch = pen((p.x + p.z * 0.6 + p.y * 0.35) * 3.0, 0.045);
           float hatchMask = max(mountain, face) * shade * (1.0 - snowMask * 0.6);
           paint = mix(paint, ink, hatch * hatchMask * 0.5);
-          float rim = 1.0 - smoothstep(0.035, 0.10, abs(dot(normalize(worldNormal), normalize(cameraPosition - worldPosition))));
+          float rim = 1.0 - smoothstep(0.035, 0.10, abs(dot(normalize(worldNormal), normalize(cameraPosition - vWorldPosition))));
           paint = mix(paint, ink, rim * 0.7);
           if(ocean) {
             // Static drawn wave marks are a material cue, not a flow simulation.
@@ -125,12 +180,15 @@ export function createAtlasMaterial(vertexColors = true) {
         }
         gl_FragColor = vec4(paint, 1.0);
         #include <colorspace_fragment>
+        if(surface > 3.5) {
+          #include <fog_fragment>
+        }
       }
     `,
   })
 }
 export function applyAppearance(material: THREE.ShaderMaterial, appearance: Appearance) {
-  const colors = appearance.surface === 'illustrated' ? ILLUSTRATED : WORLD
+  const colors = appearance.surface === 'studio' ? STUDIO : appearance.surface === 'illustrated' ? ILLUSTRATED : WORLD
   for (const key of ['water', 'sand', 'meadow', 'forest', 'rock', 'snow'] as const) material.uniforms[key].value.set(colors[key])
-  material.uniforms.surface.value = ['relief', 'contours', 'stipple', 'illustrated'].indexOf(appearance.surface)
+  material.uniforms.surface.value = ['relief', 'contours', 'stipple', 'illustrated', 'studio'].indexOf(appearance.surface)
 }

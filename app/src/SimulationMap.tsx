@@ -7,9 +7,9 @@ import { erode } from './hydraulic'
 import { measureField, rainAt } from './simulationField'
 import type { FieldStats } from './simulationField'
 import './SimulationMap.css'
-import { createGrove, createLandscapeMaterial, MOODS, slopeAt } from './landscapeStyle'
+import { createGrove, createLandscapeMaterial, MOODS, slopeAt, DEFAULT_GROVE } from './landscapeStyle'
 import type { Mood } from './landscapeStyle'
-import { applyAppearance, createAtlasMaterial, PAPER } from './worldStyle'
+import { applyAppearance, createAtlasMaterial, PAPER, STUDIO } from './worldStyle'
 import type { Appearance } from './worldStyle'
 
 type Mode = 'explore' | 'erosion'
@@ -22,25 +22,27 @@ const EMPTY:FieldStats={cut:0,fill:0,changed:0,water:0}
 export default function SimulationMap({layers,solo,appearance}:{appearance:Appearance;layers:Layer[];solo:number|null}) {
  const mood: Mood = 'lakeside'
  const [groves,setGroves]=useState(true)
+ const [groveSettings,setGroveSettings]=useState(DEFAULT_GROVE)
  const [running,setRunning]=useState(false),[wire,setWire]=useState(false)
  const [resolution,setResolution]=useState(96),[height,setHeight]=useState(22),[sea,setSea]=useState(-4),[speed,setSpeed]=useState(12)
  const [mode,setMode]=useState<Mode>('erosion'),[rain,setRain]=useState(.015),[reset,setReset]=useState(0)
  const [view,setView]=useState<View>('landscape'),[tool,setTool]=useState<Tool>('orbit'),[before,setBefore]=useState(false)
- const [hud,setHud]=useState({steps:0,x:0,z:0,storm:0,...EMPTY})
+ const [hud,setHud]=useState({steps:0,x:0,z:0,storm:0,trees:0,...EMPTY})
  const [message,setMessage]=useState('Try a storm. Then inspect where the ground moved.')
  const mount=useRef<HTMLDivElement>(null),map=useRef<HTMLCanvasElement>(null),commands=useRef<Command|null>(null)
- const live=useRef({running,wire,speed,rain,view,tool,before,mood,groves,appearance})
- useEffect(()=>{live.current={running,wire,speed,rain,view,tool,before,mood,groves,appearance}},[running,wire,speed,rain,view,tool,before,mood,groves,appearance])
+ const live=useRef({running,wire,speed,rain,view,tool,before,mood,groves,groveSettings,appearance})
+ useEffect(()=>{live.current={running,wire,speed,rain,view,tool,before,mood,groves,groveSettings,appearance}},[running,wire,speed,rain,view,tool,before,mood,groves,groveSettings,appearance])
  const active=layers.filter(l=>l.enabled&&(solo===null||solo===l.id))
  const spacing=SPAN/resolution
  const shortest=active.length?64/Math.max(...active.map(l=>l.frequency*2**(l.octaves-1))):Infinity
- const restart=()=>{setRunning(false);setBefore(false);setHud({steps:0,x:0,z:0,storm:0,...EMPTY});setReset(v=>v+1);setMessage('Fresh terrain. Same noise stack, a new experiment.')}
+ const restart=()=>{setRunning(false);setBefore(false);setHud({steps:0,x:0,z:0,storm:0,trees:0,...EMPTY});setReset(v=>v+1);setMessage('Fresh terrain. Same noise stack, a new experiment.')}
  const compare=()=>{setRunning(false);setBefore(v=>!v)}
  useEffect(()=>{
   const el=mount.current;if(!el)return
-  const scene=new THREE.Scene();scene.background=new THREE.Color(MOODS.lakeside.sky);scene.fog=new THREE.Fog(MOODS.lakeside.mist,180,380)
+  const scene=new THREE.Scene();scene.background=new THREE.Color(MOODS.lakeside.sky);scene.fog=new THREE.Fog(PAPER,270,720)
   const camera=new THREE.PerspectiveCamera(43,1,.5,600);camera.position.set(154,171,198)
   const renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));el.appendChild(renderer.domElement)
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;renderer.shadowMap.autoUpdate=false
   renderer.domElement.tabIndex=0;renderer.domElement.setAttribute('aria-label','Terrain viewport. Drag to orbit. Use F for wireframe and Space to pause.');renderer.domElement.setAttribute('role','img')
   const controls=new OrbitControls(camera,renderer.domElement);controls.minDistance=30;controls.maxDistance=350;controls.maxPolarAngle=Math.PI*.47;controls.enablePan=false
   const geometry=new THREE.PlaneGeometry(SPAN,SPAN,resolution,resolution);geometry.rotateX(-Math.PI/2)
@@ -84,7 +86,17 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
   const waterMaterial=createAtlasMaterial(false);waterMaterial.uniforms.ocean.value=true;waterMaterial.uniforms.markScale.value=.15
   const water=new THREE.Mesh(waterGeometry,waterMaterial);water.position.y=sea;scene.add(water)
   scene.add(new THREE.HemisphereLight('#ffffff','#909887',1.25))
-  const sun=new THREE.DirectionalLight('#ffffff',1.0);sun.position.set(-40,90,25);scene.add(sun)
+  const sun=new THREE.DirectionalLight('#fff4dc',1.5);sun.position.set(-110,110,90);scene.add(sun)
+  sun.castShadow=true;sun.shadow.mapSize.set(2048,2048)
+  Object.assign(sun.shadow.camera,{left:-150,right:150,top:150,bottom:-150,near:1,far:420})
+  sun.shadow.normalBias=.18;sun.shadow.bias=-.0001;sun.shadow.camera.updateProjectionMatrix()
+  material.uniforms.sunDirection.value.copy(sun.position).normalize()
+  const groundPixels=new Uint8Array(positions.count*4)
+  const groundTexture=new THREE.DataTexture(groundPixels,resolution+1,resolution+1,THREE.RGBAFormat)
+  groundTexture.minFilter=groundTexture.magFilter=THREE.LinearFilter
+  waterMaterial.uniforms.groundMap.value=groundTexture;waterMaterial.uniforms.hasGroundMap.value=true
+  waterMaterial.uniforms.groundExtent.value=height;waterMaterial.uniforms.floorHeight.value=sea
+  terrain.receiveShadow=true
   const boundaryPlane=new THREE.PlaneGeometry(SPAN,SPAN)
   const outlineGeometry=new THREE.EdgesGeometry(boundaryPlane);boundaryPlane.dispose();outlineGeometry.rotateX(-Math.PI/2)
   const outlineMaterial=new THREE.LineBasicMaterial({color:'#234e3b',transparent:true,opacity:.24})
@@ -98,6 +110,7 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
   const ctx=map.current?.getContext('2d');if(map.current){map.current.width=resolution+1;map.current.height=resolution+1}
   const ground=new Float32Array(positions.count),baseline=new Float32Array(positions.count),waterField=new Float32Array(positions.count),sediment=new Float32Array(positions.count)
   let iteration=0,storm=0,batchEnd=Infinity,x=0,z=0,centerX=Infinity,centerZ=Infinity,last=0,lastTick=0,lastHud=0,frame=0,dirty=true,geometryDirty=true,shownBefore=false,shownView:View='landscape',ringUntil=0,shownMood:Mood='lakeside'
+  let treeCount=0,shownGroveSettings=live.current.groveSettings,shownGroves=live.current.groves,shownSurface=''
   const keys=new Set<string>()
   function generate(){
    centerX=Math.round(x/spacing)*spacing;centerZ=Math.round(z/spacing)*spacing
@@ -115,6 +128,8 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
    for(let i=0;i<ground.length;i++){
     const y=showBefore?baseline[i]:ground[i],delta=showBefore?0:ground[i]-baseline[i],wet=showBefore?0:waterField[i]
     positions.setY(i,y)
+    const encoded=Math.max(0,Math.min(255,Math.round((height?y/height:0)*127.5+127.5)))
+    groundPixels.set([encoded,encoded,encoded,255],i*4)
     flowGeometry.getAttribute('position').setY(i,y+wet);flowDepth[i]=wet
     if(currentView==='slope')color.copy(gentle).lerp(steep,Math.min(Math.atan(slopeAt(field,resolution+1,spacing,i))/(Math.PI/3),1))
     else if(mode==='erosion'&&currentView==='change')color.copy(neutral).lerp(delta<0?cutColor:fillColor,Math.min(Math.abs(delta)/.5,1))
@@ -133,10 +148,12 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
    positions.needsUpdate=true;geometry.getAttribute('color').needsUpdate=true
    if(geometryDirty||shownBefore!==showBefore){geometry.computeVertexNormals();geometry.computeBoundingSphere()}
    if(image)ctx?.putImageData(image,0,0)
-   grove.update(field,waterField,resolution+1,SPAN,sea,centerX,centerZ,showBefore)
+   treeCount=grove.update(field,waterField,resolution+1,SPAN,sea,centerX,centerZ,showBefore,live.current.groveSettings)
+   shownGroveSettings=live.current.groveSettings
+   groundTexture.needsUpdate=true;renderer.shadowMap.needsUpdate=true
    geometryDirty=false;dirty=false;shownBefore=showBefore;shownView=currentView
   }
-  function publish(){setHud({steps:iteration,x,z,storm,...measureField(ground,baseline,waterField)})}
+  function publish(){setHud({steps:iteration,x,z,storm,trees:treeCount,...measureField(ground,baseline,waterField)})}
   function tick(){
    erode(ground,waterField,sediment,resolution+1,spacing,live.current.rain+(storm>0?.06:0))
    iteration++;if(storm>0){storm--;if(storm===0)setMessage('Storm passed. Switch to Ground change to find its footprint.')}
@@ -190,21 +207,24 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
    }
    if(mode==='explore'&&now-lastTick>100&&(Math.round(x/spacing)*spacing!==centerX||Math.round(z/spacing)*spacing!==centerZ)){generate();lastTick=now}
    if(shownMood!==live.current.mood){shownMood=live.current.mood;dirty=true}
-   const art=MOODS[live.current.mood],illustrated=live.current.view==='landscape'&&!live.current.wire
+   const illustrated=live.current.view==='landscape'&&!live.current.wire
+   if(shownGroveSettings!==live.current.groveSettings)dirty=true
+   if(shownGroves!==live.current.groves||shownSurface!==live.current.appearance.surface){renderer.shadowMap.needsUpdate=true;shownGroves=live.current.groves;shownSurface=live.current.appearance.surface}
    if(dirty||shownBefore!==live.current.before||shownView!==live.current.view)updateSurface()
    ;(scene.background as THREE.Color).set(PAPER)
-   ;(scene.fog as THREE.Fog).color.set(art.mist)
+   ;(scene.fog as THREE.Fog).color.set(PAPER)
    applyAppearance(material,live.current.appearance)
    material.uniforms.fieldOrigin.value.set(centerX,centerZ)
    waterMaterial.uniforms.fieldOrigin.value.set(centerX,centerZ)
    flowMaterial.uniforms.fieldOrigin.value.set(centerX,centerZ)
    terrain.material=illustrated?material:diagnosticMaterial
    diagnosticMaterial.wireframe=live.current.wire
-   grove.group.visible=illustrated&&live.current.groves;grove.recolor(live.current.mood,live.current.appearance.surface==='illustrated')
+   grove.group.visible=illustrated&&live.current.groves;grove.recolor(live.current.mood,live.current.appearance.surface==='illustrated',live.current.appearance.surface==='studio')
+   terrain.castShadow=live.current.appearance.surface==='studio'
    grove.group.position.set(centerX-x,0,centerZ-z)
    applyAppearance(waterMaterial,live.current.appearance)
    const comic=live.current.appearance.surface==='illustrated'
-   flowMaterial.uniforms.comic.value=comic;flowMaterial.uniforms.waterColor.value.set(comic?'#79afd0':'#327b9d')
+   flowMaterial.uniforms.comic.value=comic;flowMaterial.uniforms.waterColor.value.set(live.current.appearance.surface==='studio'?STUDIO.water:comic?'#79afd0':'#327b9d')
    flow.position.set(centerX-x,0,centerZ-z);flow.visible=illustrated&&mode==='erosion'&&!live.current.before
    terrain.position.set(centerX-x,0,centerZ-z);water.position.set(centerX-x,sea,centerZ-z);outline.position.set(centerX-x,-height-2,centerZ-z)
    material.wireframe=live.current.wire;water.visible=illustrated&&mode==='explore';ring.visible=now<ringUntil&&!live.current.before
@@ -212,7 +232,7 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
    if(now-lastHud>200){publish();lastHud=now}frame=requestAnimationFrame(animate)
   };frame=requestAnimationFrame(animate)
   return()=>{
-   commands.current=null;cancelAnimationFrame(frame);ro.disconnect();controls.dispose();geometry.dispose();material.dispose();flowGeometry.dispose();flowMaterial.dispose();diagnosticMaterial.dispose();grove.dispose();waterGeometry.dispose();waterMaterial.dispose();outlineGeometry.dispose();outlineMaterial.dispose();ringGeometry.dispose();ringMaterial.dispose();renderer.dispose();el.removeChild(renderer.domElement)
+   commands.current=null;cancelAnimationFrame(frame);ro.disconnect();controls.dispose();geometry.dispose();material.dispose();flowGeometry.dispose();flowMaterial.dispose();diagnosticMaterial.dispose();grove.dispose();groundTexture.dispose();sun.shadow.dispose();waterGeometry.dispose();waterMaterial.dispose();outlineGeometry.dispose();outlineMaterial.dispose();ringGeometry.dispose();ringMaterial.dispose();renderer.dispose();el.removeChild(renderer.domElement)
    window.removeEventListener('keydown',down);window.removeEventListener('keyup',up);window.removeEventListener('blur',clear);document.removeEventListener('visibilitychange',clear)
   }
  },[layers,solo,resolution,height,sea,reset,spacing,mode])
@@ -235,7 +255,7 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
  }
  const erosion=mode==='erosion'
  return <main className="simulation">
-  <header className="sim-header"><div><span className="sim-eyebrow">03 / SURFACE PROCESSES</span><h1>{erosion?'Water shapes the land.':'Beyond the horizon.'}</h1><p>{erosion?'A living landscape to shape, observe, and understand.':'Explore a continuous landscape made from your noise stack.'}</p></div><div className="sim-status"><span className={running?'sim-state running':'sim-state'}>{before?'Original preview':running?'Running':'Paused'}</span><strong>{hud.steps.toLocaleString()}</strong><span>simulation steps</span></div></header>
+  <header className="sim-header"><div><span className="sim-eyebrow">FIELD STUDY 03 · LANDSCAPE & WATER</span><h1>{erosion?'A landscape in motion.':'Beyond the shoreline.'}</h1><p>{erosion?'A living landscape to shape, observe, and understand.':'Explore a continuous landscape made from your noise stack.'}</p></div><div className="sim-status"><span className={running?'sim-state running':'sim-state'}>{before?'Original preview':running?'Running':'Paused'}</span><strong>{hud.steps.toLocaleString()}</strong><span>simulation steps</span></div></header>
   <div className="sim-workspace">
    <section className="sim-stage" aria-label="Terrain playground">
     <div className="sim-stage-tools"><div className="sim-segment" aria-label="Terrain tools">{(['orbit','rain'] as Tool[]).filter(t=>erosion||t==='orbit').map(t=><button key={t} aria-pressed={tool===t} disabled={before&&t==='rain'} onClick={()=>setTool(t)}>{t==='orbit'?'Orbit':'Paint rain'}</button>)}</div><div className="sim-camera-actions"><button onClick={()=>commands.current?.horizon()}>Horizon view</button><button onClick={()=>commands.current?.home()}>Reset camera</button><button onClick={capture}>Save frame</button></div></div>
@@ -246,11 +266,11 @@ export default function SimulationMap({layers,solo,appearance}:{appearance:Appea
     <div className="sim-view-caption">{before?'ORIGINAL · step 0':erosion?`LIVE TERRAIN · step ${hud.steps}`:'WORLD-SPACE TERRAIN'}<span><i className={`sim-legend-scale ${view}`} aria-hidden="true"/>{view==='slope'?'Pale → forest: 0–60° slope':view==='water'&&erosion?'Pale → blue: 0–1+ units of water':view==='change'&&erosion?'Ochre: erosion · teal: deposition · full color at ±0.5 units':'Earth / vegetation / rock by height + slope · overlays retain material colors'}</span></div>
     <div className="sim-transport"><button className="sim-primary" disabled={before} onClick={()=>setRunning(v=>!v)}>{running?'Pause':'Start'}</button>{erosion&&<><button disabled={before} onClick={()=>commands.current?.step()}>+1 step</button><button disabled={before} onClick={()=>commands.current?.runBatch()}>Run 100 steps</button><button className={before?'selected':''} aria-pressed={before} onClick={compare}>{before?'Back to current':'Compare original'} <kbd>B</kbd></button></>}<button onClick={restart}>Reset {erosion?'terrain':'position'}</button></div>
    </section>
-   <aside className="sim-controls" aria-label="Simulation controls">
+   <aside className="sim-controls" aria-label="Simulation controls"><div className="inspector-heading"><span className="atlas-label">FIELD INSPECTOR</span><span className="inspector-dot"/>Live parameters</div>
     <label className="sim-field">Perspective<select value={mode} onChange={e=>{setMode(e.target.value as Mode);setView('landscape');setTool('orbit');restart()}}><option value="erosion">Hydraulic erosion</option><option value="explore">Explore infinite field</option></select></label>
     {erosion&&<section className="sim-experiment"><span className="sim-eyebrow">TRY THIS</span><h2>Send a storm over the hills.</h2><p>Guess where water will gather. Add rain, then switch to Ground change to check your prediction.</p><button className="sim-storm" disabled={before} onClick={()=>commands.current?.storm()}>{hud.storm>0?`Storm · ${hud.storm} steps left`:'Make it rain'}<span>50-step downpour</span></button><label className="sim-field">Weather<output>{rain===0?'Dry':`${rain.toFixed(3)} units / step`}</output><input aria-label="Rainfall" type="range" min={0} max={.08} step={.005} value={rain} onChange={e=>setRain(+e.target.value)}/></label><p className="sim-small">Set rain to zero to watch existing water drain and evaporate. Weather changes keep your progress.</p></section>}
     {erosion&&<section className="sim-lenses"><h2>Read the changes</h2><div className="sim-metrics"><div><span>Deepest cut</span><strong>{hud.cut.toFixed(3)} <small>u</small></strong></div><div><span>Largest deposit</span><strong>{hud.fill.toFixed(3)} <small>u</small></strong></div><div><span>Ground changed &gt;0.01 u</span><strong>{hud.changed.toFixed(1)}<small>%</small></strong></div><div><span>Mean surface water</span><strong>{hud.water.toFixed(3)} <small>u</small></strong></div></div><p className="sim-small">Measurements describe the current field, even when previewing the original.</p></section>}
-    <p className="sim-small">Groves follow height, slope and surface water. They illustrate a placement rule, not ecological growth. Analysis views hide them; appearance changes keep the same terrain and simulation.</p>
+    <section className="grove-card"><div className="grove-title"><div><span className="atlas-label">VEGETATION STUDY</span><h2>A place to grow.</h2></div><svg viewBox="0 0 60 60" aria-hidden="true"><ellipse cx="31" cy="51" rx="24" ry="6" fill="#e3e7d5"/><path d="M17 50V24M41 50V31" stroke="#736953" strokeWidth="3"/><path d="M17 6L6 39H28Z" fill="#527452"/><ellipse cx="41" cy="30" rx="10" ry="15" fill="#9dac79"/></svg></div><div className="grove-count"><strong>{hud.trees}</strong><span>trees placed <small>{groves&&view==='landscape'&&!wire?'visible in landscape':'hidden in this view'}</small></span></div>{([{key:'density',label:'Tree density',min:0,max:1,step:.01},{key:'clustering',label:'Clustering',min:0,max:.5,step:.01},{key:'size',label:'Tree size',min:.5,max:1.4,step:.05}] as const).map(c=><label key={c.key} className="grove-range"><span>{c.label}<output>{c.key==='size'?`${groveSettings[c.key].toFixed(2)}×`:`${Math.round(groveSettings[c.key]*100)}%`}</output></span><input aria-label={c.label} type="range" min={c.min} max={c.max} step={c.step} value={groveSettings[c.key]} onChange={e=>setGroveSettings(v=>({...v,[c.key]:+e.target.value}))}/></label>)}<p>Groves favor gentle, dry ground. Controls redistribute existing candidates without resetting erosion. Placement only; no growth or reproduction.</p></section>
     <figure className="sim-map"><canvas ref={map} aria-label="Height map of the visible terrain window"/><figcaption>Height field / north up<span>Dark = low · light = high<br/>Same samples as the mesh</span></figcaption></figure>
     <label className="sim-check"><input type="checkbox" checked={wire} onChange={e=>setWire(e.target.checked)}/>Wireframe <kbd>F</kbd></label>
     <details className="sim-calibration"><summary>Terrain & calibration</summary><label className="sim-field">Resolution<select value={resolution} onChange={e=>{setResolution(+e.target.value);restart()}}><option value={64}>64 × 64 · draft</option><option value={96}>96 × 96 · balanced</option><option value={128}>128 × 128 · fine</option></select></label>{([{label:'Relief height',value:height,min:0,max:45,set:setHeight},{label:'Sea level',value:sea,min:-20,max:15,set:setSea},{label:'Travel speed',value:speed,min:2,max:30,set:setSpeed}]).filter(c=>!erosion||c.label==='Relief height').map(c=><label className="sim-field" key={c.label}>{c.label}<output>{c.value} {c.label==='Travel speed'?'u/s':'u'}</output><input aria-label={c.label} type="range" min={c.min} max={c.max} step={1} value={c.value} onChange={e=>{c.set(+e.target.value);if(c.label!=='Travel speed')restart()}}/></label>)}<p>{active.length} active layers · {2*resolution*resolution} triangles · {spacing.toFixed(2)} units/sample.</p><p>{shortest/spacing<4?'Fine noise is undersampled: reduce frequency/octaves or use a finer grid.':'Nominal detail has at least four samples per feature scale.'} Shaping can add smaller details.</p><p>Calibration changes reset the experiment. Fixed 192-unit erosion window; closed edges; approximate educational model. Steps are not real-world days. Leaving this workspace resets its progress.</p></details>
