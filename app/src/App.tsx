@@ -1,3 +1,4 @@
+import './Exhibition.css'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
@@ -362,7 +363,7 @@ function App() {
     { id: 'fields', name: 'Fluid laboratory', subtitle: 'Wind & transported dye', number: '06' },
   ]
   return <div className="atlas workbench" data-palette={interfacePalette} data-surface={appearance.surface}>
-    <header className="atlas-masthead"><div className="studio-wordmark"><span className="studio-seal" aria-hidden="true">✳</span><div><span className="atlas-brand">Fieldwork <span>Nature Studio</span></span><p>A small world, a closer look.</p></div></div><span className="atlas-edition">PROCEDURAL WORLD BUILDING<br/><b>OBSERVE · EXPERIMENT · UNDERSTAND</b></span></header>
+    <header className="atlas-masthead"><div className="studio-wordmark"><span className="studio-seal" aria-hidden="true">✳</span><div><span className="atlas-brand">Fieldwork <span>Nature Studio</span></span><p>A small world, a closer look.</p></div></div><a className="exhibition-entry" href="?exhibition=1" target="_blank" rel="noreferrer">Open exhibition ↗</a><span className="atlas-edition">PROCEDURAL WORLD BUILDING<br/><b>OBSERVE · EXPERIMENT · UNDERSTAND</b></span></header>
     <aside className="studio-library"><span className="atlas-label">YOUR FIELD STUDIES</span><nav className="workspace-nav" role="tablist" aria-label="Workspace" aria-orientation="vertical">
       {studies.map(study=><button key={study.id} role="tab" id={`tab-${study.id}`} aria-controls={`study-${study.id}`} aria-selected={tab===study.id} tabIndex={tab===study.id?0:-1} onKeyDown={event=>{
         const keys=['ArrowDown','ArrowRight','ArrowUp','ArrowLeft','Home','End']

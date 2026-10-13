@@ -13,6 +13,12 @@ I am learning to build a procedural planet in the browser using React, TypeScrip
 - [Analysis notes](docs/analysis/README.md)
 - [Application source](app/)
 
+## Midterm exhibition — October 13
+
+Open **Open exhibition** in the running app, or visit `http://127.0.0.1:5173/?exhibition=1`. Three resettable demonstrations isolate tides, voxel carving and forest growth. Detailed controls remain behind **Show rules**.
+
+[Exhibition films: music and silent versions](docs/exhibition/README.md) · [Tutorial 13](docs/tutorials/13%20-%20From%20Research%20Studio%20to%20Public%20Exhibition.md) · [October 13 progress log](docs/tutorials/2026-10-13%20-%20Progress%20Log.md)
+
 ## Current progress
 
 **As of 2026-10-07**, the app has six workspaces:

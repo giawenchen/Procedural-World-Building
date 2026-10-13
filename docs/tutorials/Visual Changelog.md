@@ -23,6 +23,19 @@ Repeatable capture command (dev server must be running):
 
 ---
 
+## 014 — A public entrance and a repeatable film · 2026-10-13
+
+**Request, translated:** improve the exhibition experience before recording: a larger world view, simpler controls and three resettable demonstrations. Produce an English-captioned film with gentle ambient electronic music.
+
+![Before: the research studio](images/2026-10-13/01-before-exhibition.jpg)
+![After: the forest exhibition study](images/2026-10-13/07-exhibition-forest.jpg)
+
+The exhibition is a separate entry point. It keeps the existing world materials and exposes tide, voxel carving and forest growth through short action sequences. Detailed rules remain available. The views above use different presentation modes and cameras; this is an interface comparison, not a controlled shader comparison.
+
+The [new tutorial](13%20-%20From%20Research%20Studio%20to%20Public%20Exhibition.md) records presets and model boundaries. The [progress log](2026-10-13%20-%20Progress%20Log.md) records checks. A [78-second film](../exhibition/README.md) captures the real renderers with English captions; music and silent MP4 exports are available.
+
+---
+
 ## 013 — Connected worlds and detailed woodland · 2026-10-07
 
 **Request, translated:** make trails, reefs, biomes, tides, currents and the missing course systems demonstrable; add richer woodland and shader detail.

@@ -6,6 +6,14 @@ tags: [planning, world-building]
 
 My next goal is to understand each change before adding another feature. These are plans, not completed work.
 
+## Exhibition readiness — October 13
+
+- [x] Separate exhibition entrance with a large viewport and three resettable studies.
+- [x] Reproducible tide, CSG and forest presets with optional detailed controls.
+- [x] Actual-renderer recording with English captions and a repeatable cue script.
+- [x] Original ambient music and silent MP4 backup files.
+- [ ] Test comprehension with a visitor and test playback on the exhibition display.
+
 ## Connected-world implementation — October 7 update
 
 - [x] A* trail with water exclusions, slope cost and flooded-route feedback.
