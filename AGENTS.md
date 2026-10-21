@@ -14,3 +14,5 @@ These instructions apply to work throughout this course repository.
 - Tutorials are the shared Obsidian files: the user's vault Tutorials folder links to `docs/tutorials`. Keep one canonical copy; open updated notes in Obsidian when available and verify images there.
 - If capture or verification is blocked, document exactly what is missing instead of claiming completion.
 - Run checks appropriate to the changes. Commit/push when the user authorizes it; documentation and screenshots are included in that commit.
+
+- Keep the desktop research studio and mobile Pocket Island as independent experiences. Phone gestures affect only that visitor's island; do not synchronize them with the desktop world. Desktop may provide a QR invitation.

@@ -6,11 +6,13 @@ import type { VoxelSettings } from './voxelEngine'
 import { disposeScene } from './natureRendering'
 import { FieldCard,FieldRange } from './FieldControls'
 import './FieldStudies.css'
+import type { FilmLink } from './exhibitionFilm'
 import type { ExhibitCommand } from './exhibitionScript'
 
-export default function VoxelLab({active,exhibit=false,command}:{active:boolean;exhibit?:boolean;command?:ExhibitCommand}){
+export default function VoxelLab({active,exhibit=false,command,film}:{active:boolean;exhibit?:boolean;command?:ExhibitCommand;film?:{current:FilmLink}}){
  const [settings,setSettings]=useState(VOXEL_DEFAULT),[cells,setCells]=useState(48),[chunk,setChunk]=useState(16),[slice,setSlice]=useState(0),[wire,setWire]=useState(false),[bounds,setBounds]=useState(false)
  const [stats,setStats]=useState({triangles:0,samples:0,ms:0,chunks:0,rebuilt:0}),mount=useRef<HTMLDivElement>(null),sliceRef=useRef<HTMLCanvasElement>(null)
+ const filmRef=useRef(film);useEffect(()=>{filmRef.current=film},[film])
  const runtime=useRef<{build:(s:VoxelSettings,c:number,k:number)=>void;home:()=>void;save:()=>void}|null>(null),live=useRef({active,wire,bounds,slice,exhibit});useEffect(()=>{live.current={active,wire,bounds,slice,exhibit}},[active,wire,bounds,slice,exhibit])
  useEffect(()=>{
   const el=mount.current;if(!el)return
@@ -22,6 +24,7 @@ export default function VoxelLab({active,exhibit=false,command}:{active:boolean;
   const material=new THREE.MeshStandardMaterial({color:'#bb9a78',roughness:.95,side:THREE.DoubleSide,vertexColors:true}),chunks=new THREE.Group(),boxes=new THREE.Group();scene.add(chunks,boxes)
   const section=new THREE.Mesh(new THREE.PlaneGeometry(48,48),new THREE.MeshBasicMaterial({color:'#8ba69e',transparent:true,opacity:.13,side:THREE.DoubleSide,depthWrite:false}));scene.add(section)
   const grid=new THREE.GridHelper(48,12,'#aaa993','#cfccba');grid.position.y=-24;scene.add(grid)
+  let filmKey='',meshStats={triangles:0,chunks:0,rebuilt:0}
   let previous:VoxelSettings|null=null,previousCells=0,previousChunk=0;const meshes=new Map<string,THREE.Mesh>()
   runtime.current={build(s,c,k){const startTime=performance.now(),local=previous&&previousCells===c&&previousChunk===k&&JSON.stringify({...previous,cut:null})===JSON.stringify({...s,cut:null});let rebuilt=0
    if(!local){meshes.forEach(m=>m.geometry.dispose());meshes.clear();chunks.clear();boxes.children.forEach(o=>{if(o instanceof THREE.LineSegments){o.geometry.dispose();(o.material as THREE.Material).dispose()}});boxes.clear()}
@@ -31,16 +34,26 @@ export default function VoxelLab({active,exhibit=false,command}:{active:boolean;
     const old=meshes.get(key);if(old){old.geometry.dispose();chunks.remove(old)}const mesh=new THREE.Mesh(geometry,material);chunks.add(mesh);meshes.set(key,mesh);rebuilt++
     if(!local){const lo=new THREE.Vector3(...origin.map(v=>-24+v*48/c)),hi=lo.clone().addScalar(k*48/c);boxes.add(new THREE.Box3Helper(new THREE.Box3(lo,hi),'#8a9778'))}
    }
-   setStats({triangles:[...meshes.values()].reduce((sum,m)=>sum+m.geometry.getAttribute('position').count/3,0),samples:meshes.size*(k+1)**3,ms:performance.now()-startTime,chunks:meshes.size,rebuilt});previous=s;previousCells=c;previousChunk=k
+   meshStats={triangles:[...meshes.values()].reduce((sum,m)=>sum+m.geometry.getAttribute('position').count/3,0),chunks:meshes.size,rebuilt};setStats({triangles:[...meshes.values()].reduce((sum,m)=>sum+m.geometry.getAttribute('position').count/3,0),samples:meshes.size*(k+1)**3,ms:performance.now()-startTime,chunks:meshes.size,rebuilt});previous=s;previousCells=c;previousChunk=k
   },home(){if(live.current.exhibit)camera.position.set(18,12,72);else camera.position.set(64,38,66);controls.target.set(0,0,0)},save(){const a=document.createElement('a');a.href=renderer.domElement.toDataURL('image/png');a.download='voxel-terrain.png';a.click()}}
   const ro=new ResizeObserver(()=>{if(el.clientWidth&&el.clientHeight){renderer.setSize(el.clientWidth,el.clientHeight);camera.aspect=el.clientWidth/el.clientHeight;camera.updateProjectionMatrix()}});ro.observe(el)
-  let frame=0;function animate(){frame=requestAnimationFrame(animate);if(!live.current.active||document.hidden)return;material.wireframe=live.current.wire;boxes.visible=live.current.bounds;section.position.z=live.current.slice;section.visible=!live.current.exhibit||live.current.bounds;controls.update();renderer.render(scene,camera)}animate()
+  let frame=0;function animate(){frame=requestAnimationFrame(animate);if(!live.current.active||document.hidden)return
+   const link=filmRef.current,shot=link?.current.request,filming=shot?.story==='cave'
+   if(filming){const key=[shot.caveRadius,shot.pillar,shot.pocket].join(':');if(key!==filmKey){runtime.current?.build({...VOXEL_DEFAULT,cave:shot.caveRadius,order:shot.pillar?'add-last':'cut-last',cut:shot.pocket?{x:8,y:6,z:12,r:4}:null},48,16);filmKey=key}
+    const angle=Math.atan2(14,72)+shot.orbit;camera.position.set(Math.sin(angle)*74,10,Math.cos(angle)*74);controls.target.set(0,0,0)}
+   controls.enabled=!filming;material.wireframe=live.current.wire;boxes.visible=filming?shot.pocket:live.current.bounds;section.position.z=live.current.slice;section.visible=filming?false:!live.current.exhibit||live.current.bounds;controls.update();renderer.render(scene,camera)
+   if(filming&&link)link.current.rendered={request:shot,canvas:renderer.domElement,time:0,sea:0,trees:0,births:0,deaths:0,route:0,exposed:0,radius:shot.caveRadius,...meshStats}
+  }animate()
   return()=>{cancelAnimationFrame(frame);ro.disconnect();controls.dispose();disposeScene(scene);renderer.dispose();el.removeChild(renderer.domElement);runtime.current=null}
  },[])
- useEffect(()=>{runtime.current?.build(settings,cells,chunk)},[settings,cells,chunk])
+ useEffect(()=>{
+  // The film owns the field during capture. A default build after mount must
+  // not replace its initial solid reference with the inspector's cave preset.
+  if(film?.current.request?.story!=='cave')runtime.current?.build(settings,cells,chunk)
+ },[settings,cells,chunk,film])
  useEffect(()=>{const canvas=sliceRef.current,c=canvas?.getContext('2d');if(!canvas||!c)return;canvas.width=160;canvas.height=160;const image=c.createImageData(160,160);for(let y=0;y<160;y++)for(let x=0;x<160;x++){const d=density(x/159*48-24,24-y/159*48,slice,settings),solid=d<0;image.data.set(solid?[111,136,108,255]:[245,236,216,255],(y*160+x)*4)}c.putImageData(image,0,0)},[settings,slice])
  useEffect(()=>{
-  if(!exhibit||!command||command.name==='continue')return
+  if(!exhibit||!command||!command.name.startsWith('cave-'))return
   const name=command.name
   // External exhibition commands intentionally restore a reproducible experiment.
   // oxlint-disable-next-line react/set-state-in-effect

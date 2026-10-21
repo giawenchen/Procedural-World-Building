@@ -6,6 +6,33 @@ tags: [planning, world-building]
 
 My next goal is to understand each change before adding another feature. These are plans, not completed work.
 
+## October 20 — observable rules, local review
+
+- [x] Add eleven interactive A/B studies with matched cameras, repeatable starting conditions, reset and applied values.
+- [x] Make dry/cold desktop seeds wait; require two continuous suitable model seconds before rooting.
+- [x] Preserve seed identity, current plants and elapsed time when desktop climate changes.
+- [x] Expose a germination habitat map and local seed thresholds.
+- [x] Keep real parent IDs for offspring; prevent flooded adult growth and reproduction.
+- [x] Capture browser evidence and document the same-seed dry-to-wet test in Obsidian.
+- [ ] Compare two tracked desktop seed flights at equal duration with no keyboard steering.
+- [ ] Add seed viability/expiry rather than indefinite waiting, if useful for the research question.
+- [ ] Couple erosion or soil-water transport to desktop habitat only after defining and testing that connection.
+- [ ] Owner review and public desktop deployment; no new push or deployment in this update.
+
+## Current coverage checkpoint — October 13, revision 2
+
+See the [course coverage audit](../tutorials/14%20-%20Midterm%20Coverage%20Audit.md) for the current implementation/evidence distinction. Historical unchecked items below may have been implemented later; the connected-world inventory identifies those features. No topic is complete merely because a tutorial exists.
+
+- [x] Build and record a comparison film with parameter animations, camera orbits and state-driven captions.
+- [x] Audit Sessions 1–7 and the supplied Assignment 1 checklist against code and existing evidence.
+- [ ] Owner review of the revised local film before publishing this revision.
+- [ ] Capture fixed-seed noise frequency/resolution comparisons.
+- [ ] Capture equal-step rainfall and fixed-terrain climate/biome comparisons.
+- [ ] Repeat voxel resolution/chunk timing trials rather than relying on one measurement.
+- [ ] Capture pressure iterations 0 vs 40 and constant/reversed wind trials.
+- [ ] Compare isolated branch angle/depth and equal-time population rules.
+- [ ] Verify a public hosted URL and playback on the exhibition display.
+
 ## Exhibition readiness — October 13
 
 - [x] Separate exhibition entrance with a large viewport and three resettable studies.
@@ -198,3 +225,83 @@ The [course progress report](../tutorials/2026-10-07%20-%20Nature%20Studio%20Cou
 - [ ] Session 7: compare clustering with count recorded, implement an isolated bounded L-system tree, then add persistent plant state before growth/reproduction claims.
 
 Keep the Nature Studio visual system. Add diagnostic views and explanatory parameters per session, with real screenshots and measured results. Do not mark a topic complete because a tutorial exists.
+
+
+## October 13 — full course film evidence (revision 3)
+
+This supersedes earlier pending comparison lists for the experiments named below; it does not turn the wider roadmap into completed work.
+
+- [x] Fixed-seed frequency, fixed-world grid resolution and shader-threshold comparisons.
+- [x] Equal-step low/high rainfall and fixed-temperature moisture/biome comparison.
+- [x] Density shapes/slices, CSG order, local chunk edits and three-trial resolution/chunk-size measurements.
+- [x] Meshing-alternatives comparison in the film; Marching Cubes remains the implemented method.
+- [x] Matched wind-direction/displacement and 0/40 pressure-iteration fluid trials.
+- [x] Isolated grammar/angle, growth-only, reproduction and crowding trials at matched times.
+- [x] Rotating procedural globe finale driven by common noise, relief, sea level, climate and habitat parameters, with labeled separate study insets.
+- [x] English tutorial, progress screenshots, raw experiment results, captions, music and silent film previews.
+- [ ] Owner review of the 5:28 film, then commit/push the approved revision.
+- [ ] Test playback on the actual exhibition display and verify the public hosted app URL.
+- [ ] Longer crowding/mortality study; generic CSG stacks, workers/LOD/streaming and 3D cave fluids remain separate future work.
+
+[Experiments and evidence](../tutorials/15%20-%20Controlled%20Experiments%20and%20the%20Planet%20Finale.md). No claim of full weather physics, spherical cave flow or later-course agents.
+
+
+## October 13 — readable-world art direction (local review)
+
+- [x] Replace interpolated planet colors with per-pixel land/water thresholds, clear blue oceans and restrained relief.
+- [x] Add functional sea-level, moisture and temperature controls to the new planet style.
+- [x] Replace leaf cutouts with broadleaf crown volumes and a distinct layered fir silhouette; retain L-system inspection and population rules.
+- [x] Apply cream, indigo and brass to research controls without changing diagnostic color semantics.
+- [x] Add an app-only first-person map opening with six linked studies, parameter trials, skip/reopen actions and keyboard support.
+- [ ] Owner review of globe, canopy silhouettes and opening; then finalize the next film render and publication.
+- [ ] Art-direct close-range foliage, richer terrain cliffs and a less regular opening forest in a later detail pass.
+
+[Preview evidence](../tutorials/16%20-%20A%20Readable%20World%20and%20an%20Unfolding%20Map.md). The opening is not added to the video.
+
+
+## October 13 — The Fieldwork Express (local narrated preview)
+
+- [x] An animated railway story with a seed passenger, moving camera, rolling wheels, steam, birds and rain. The initial raised terrain and growing decorative trees were superseded by the printed-map treatment below.
+- [x] Archive the original 2:51 introduction and 5:28 studies; replace the default journey with a 14-second introduction and a 2:56 total cut.
+- [x] One audio clock for animation, narration and 64 English subtitle cues; pause, seek, chapter jump and restart.
+- [x] Original synthesized ambience with independent volume and quiet levels under narration.
+- [x] Live parameter meters, matching A/B views, model boundaries and links back to the relevant studio.
+- [x] English notes and real progress captures; static-map checkpoint retained.
+- [x] Generate one 34-second elderly storyteller audition and add independent playback, transcript and mutual pause behavior to the app.
+- [x] Restore the preferred folded-map visual language with numbered indigo stops, blue wave marks and a separate field-note card.
+- [x] Keep geography and tree symbols flat; add passing 3D woodland behind the map and a small dimensional train.
+- [x] Make map stickers selectable chapter destinations with semantic buttons and a route transition; pause the scenery with the story.
+- [x] Save desktop/phone hybrid-map evidence; check all 29 chapters, keyboard controls, reduced motion, pause, automatic transition and the ending. Fix the clipped phone card action. Previous folded-map captures remain historical checkpoints.
+- [x] Restore close layered woodland framing, replace the rejected audition with a warmer 21-second sample, and export the full 8:19 local review film with captions and quiet audio.
+- [x] Rewrite and generate the complete short narration using the warmer elderly voice; synchronize it with the compact experiment timeline.
+- [x] Add continuous roadside tree parallax while preserving the old layered crowns and flat paper map.
+- [ ] Review the new short narration with the owner; refine delivery if needed.
+- [ ] Review the full story on the exhibition speaker/display; improve character acting and close-up scenic detail after review.
+- [ ] Commit/push after owner review. The owner subsequently requested a full video; a 2:56 short MP4 is now available for local review.
+
+## October 14 — independent Pocket Island
+
+- [x] Separate mobile entry point and public HTTPS QR destination.
+- [x] Gesture wind, delayed current, airborne seeds, rain/moisture and habitat-gated planting.
+- [x] Touch alternatives, pause, repeatable reset and neutral tilt calibration.
+- [x] Seven additional model tests; 37 tests total passed.
+- [ ] Confirm motion permission and gentle shake/tilt on a physical iPhone and Android phone.
+- [ ] Observe whether first-time visitors understand why a seed fails to grow.
+
+Desktop and mobile remain independent. No cross-device control or synchronized ecology.
+
+
+## October 20 — seed perspective and course alignment
+
+- [x] Desktop seed first-person view and independent keyboard observer camera.
+- [x] Real tracked-seed transport, landing validation, one population birth and growth-linked viewpoint.
+- [x] Actual screenshots, English Obsidian tutorial and explicit course-coverage audit.
+- [ ] Complete reset-matched wind direction, fixed-location moisture and population competition trials with recorded metrics.
+- [ ] Refine close-range foliage visibility and walking collisions after evaluating the research interactions.
+- [ ] Session 9: implement the assigned evolutionary solver after confirming its objective; categorical species colors do not count as evolution.
+- [ ] Session 10: needs-driven autonomous agent, explicit state transitions and schedules.
+- [ ] Session 11: settlement or shared-practice rules that produce procedural culture.
+- [ ] Sessions 12–13: measured performance budgets, LOD/streaming where justified, and persistent world saves.
+- [ ] Verify the latest independent mobile tracked-seed revision on the public host and physical devices.
+
+The new viewpoint does not complete the future-course topics. Existing instancing, population caps and local chunk rebuilding are partial optimization work. No explicit light-competition model is implemented. [Tutorial and model boundaries](../tutorials/20%20-%20A%20Seed%20Finds%20a%20Home.md). No new push or public deployment.

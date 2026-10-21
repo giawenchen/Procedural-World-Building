@@ -30,7 +30,7 @@ export function velocityAt(x:number,z:number,time:number,speed:number,direction:
  return [speed*(Math.cos(a)-swirl*z*.035*falloff+Math.sin(z*.06+time*.1)*.13*swirl),speed*(Math.sin(a)+swirl*x*.035*falloff+Math.cos(x*.05+time*.1)*.13*swirl)]
 }
 export function reefSuitable(depth:number,temp:number,slope:number){return depth>.4&&depth<6&&temp>.48&&slope<.8}
-export type Plant={id:number;x:number;z:number;age:number;size:number;health:number;species:number;lastSeed:number}
+export type Plant={id:number;x:number;z:number;age:number;size:number;health:number;species:number;lastSeed:number;parentId?:number|null}
 export type Ecology={plants:Plant[];time:number;births:number;deaths:number;nextId:number;seed:number}
 export type Habitat=(x:number,z:number)=>{height:number;slope:number;moisture:number;temperature:number}
 export function seedEcology(habitat:Habitat,seed=17,density=.65):Ecology {
@@ -51,15 +51,15 @@ export function stepEcology(state:Ecology,habitat:Habitat,dt:number,sea:number,g
   const c=habitat(p.x,p.z),neighbors=state.plants.filter(q=>q.id!==p.id&&Math.hypot(q.x-p.x,q.z-p.z)<competition).length
   const suitable=c.height>sea+.3&&c.temperature>.15&&c.moisture>.2&&c.slope<1.1
   p.health=clamp(p.health+dt*(suitable?.025-neighbors*.012:-.18))
-  p.size=clamp(p.size+growth*dt*.04*p.health/(1+neighbors*.3),.08,1.3)
+  if(suitable)p.size=clamp(p.size+growth*dt*.04*p.health/(1+neighbors*.3),.08,1.3)
   if(p.age>75)p.health-=dt*.03
-  if(reproduction>0&&p.size>.7&&p.health>.65&&state.time-p.lastSeed>8/reproduction&&state.plants.length+born.length<300){
+  if(suitable&&reproduction>0&&p.size>.7&&p.health>.65&&state.time-p.lastSeed>8/reproduction&&state.plants.length+born.length<300){
    p.lastSeed=state.time
    const rng=random(state.seed+p.id*719+Math.floor(state.time)*97),a=rng()*Math.PI*2,r=2+rng()*dispersal
    const x=p.x+Math.cos(a)*r,z=p.z+Math.sin(a)*r,candidate=habitat(x,z)
-   if(Math.abs(x)>73||Math.abs(z)>73||candidate.height<sea+1.3||candidate.slope>.85||candidate.moisture<.24)continue
+   if(Math.abs(x)>73||Math.abs(z)>73||candidate.height<sea+1.3||candidate.slope>.85||candidate.moisture<.24||candidate.temperature<=.15)continue
    if([...state.plants,...born].some(q=>Math.hypot(q.x-x,q.z-z)<2.5))continue
-   born.push({id:state.nextId++,x,z,age:0,size:.12,health:1,species:p.species,lastSeed:state.time})
+   born.push({id:state.nextId++,x,z,age:0,size:.12,health:1,species:p.species,lastSeed:state.time,parentId:p.id})
   }
  }
  const survivors=state.plants.filter(p=>p.health>0)

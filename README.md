@@ -4,6 +4,22 @@ Student project for Cornell Tech **Procedural World Building**.
 
 I am learning to build a procedural planet in the browser using React, TypeScript, and Three.js. My notes record the prompts I try, the changes I observe, and screenshots of each experiment.
 
+## Pocket Island — independent phone experience
+
+[Open Pocket Island](https://fieldwork-pocket-island.jc3785.chatgpt.site/) · [Scan the QR code](docs/tutorials/images/2026-10-14/06-pocket-island-qr.png) · [Gesture tutorial](docs/tutorials/19%20-%20A%20World%20in%20Your%20Hands.md)
+
+Gentle shaking adds wind, tilting steers it, rain changes soil moisture, and seeds establish only in suitable habitat. Touch controls provide the same experiments. This is a separate mobile build with independent visitor state; it does not control the desktop. Browser checks passed; physical phone sensor testing remains pending.
+
+## Desktop experiments — published October 21
+
+[Open the latest desktop demo](https://fieldwork-procedural-atlas.jc3785.chatgpt.site/?experiments=1) · [Living coast studio](https://fieldwork-procedural-atlas.jc3785.chatgpt.site/?workspace=living&spin=0) · [Exhibition](https://fieldwork-procedural-atlas.jc3785.chatgpt.site/?exhibition=1)
+
+The published desktop demo includes eleven controlled comparisons. Rain, Wind and Forest provide a short presentation route; additional studies cover terrain, grid resolution, shaders, biomes, caves, branching, growth and crowding. Matched views, fixed conditions and optional rule explanations make the results inspectable.
+
+Living coast now preserves its population and clock when climate inputs change. Seeds can wait, germinate and continue growing. **Show rules** exposes establishment conditions. These changes are now published and remain separate from the phone build.
+
+[Experiment tutorial and presentation steps](docs/tutorials/21%20-%20One%20Change,%20Two%20Possibilities.md) · [Verified progress and screenshots](docs/tutorials/2026-10-20%20-%20Progress%20Log.md)
+
 ## Explore the project
 
 - [Planning and feature backlog](docs/planning/backlog.md)
@@ -13,11 +29,15 @@ I am learning to build a procedural planet in the browser using React, TypeScrip
 - [Analysis notes](docs/analysis/README.md)
 - [Application source](app/)
 
-## Midterm exhibition — October 13
+## Midterm exhibition — October 13 development checkpoint
+
+Revision 3 adds a 5:28 full course film with controlled experiments, measured comparisons, camera orbits and a 32-second rotating procedural planet finale. Local preview pending owner review. [Course coverage audit](docs/tutorials/14%20-%20Midterm%20Coverage%20Audit.md) separates implemented features, recorded evidence and remaining experiments.
+
+Open `http://127.0.0.1:5173/?atlasfilm=1` for the full course film and chapter navigation. [Tutorial 15: experiments and measured results](docs/tutorials/15%20-%20Controlled%20Experiments%20and%20the%20Planet%20Finale.md) documents the comparison conditions.
 
 Open **Open exhibition** in the running app, or visit `http://127.0.0.1:5173/?exhibition=1`. Three resettable demonstrations isolate tides, voxel carving and forest growth. Detailed controls remain behind **Show rules**.
 
-[Exhibition films: music and silent versions](docs/exhibition/README.md) · [Tutorial 13](docs/tutorials/13%20-%20From%20Research%20Studio%20to%20Public%20Exhibition.md) · [October 13 progress log](docs/tutorials/2026-10-13%20-%20Progress%20Log.md)
+[Exhibition film previews: music and silent versions](docs/exhibition/README.md) · [Tutorial 13](docs/tutorials/13%20-%20From%20Research%20Studio%20to%20Public%20Exhibition.md) · [October 13 progress log](docs/tutorials/2026-10-13%20-%20Progress%20Log.md)
 
 ## Current progress
 
@@ -53,6 +73,23 @@ Tab navigation now retains mounted study state and pauses hidden studies. Reload
 - [Session 7: L-systems, Growth and Ecosystems](docs/tutorials/11%20-%20Session%207%20-%20L-systems,%20Growth%20and%20Ecosystems.md)
 
 The earlier report preserves the pre-implementation checkpoint. [Tutorial 12](docs/tutorials/12%20-%20Connected%20Worlds%20-%20Coast,%20Caves%20and%20Living%20Forests.md) is the current implementation record: Sessions 5–7 now have working volume, vector-field and vegetation models, with explicit limitations and measured trials.
+
+## The Fieldwork Express — October 13 development checkpoint
+
+Open `?intro=1&workspace=planet&spin=0` on the running app, or choose **Ride the Fieldwork Express**. The current edit lasts **2:56**, including a **14-second opening**. A little seed links land, water, habitat and life, then the film moves into parameter experiments from Sessions 3–7 and ends on a rotating procedural planet.
+
+The flat illustrated map and small 3D train sit in front of the preferred layered green/ochre tree crowns. Trees pass along two depth lanes with perspective parallax, suggesting forward travel. Pause holds the train, trees and narration together; reduced motion holds the decorative scenery. Map stickers now jump directly to their experiments.
+
+The full short cut uses the warmer synthetic elderly narrator, English captions, restrained original music and nature ambience. Live parameter meters, matching A/B views and the independent-model boundary remain visible. Owner listening and exhibition-device review are pending. The [2:56 review film](docs/exhibition/fieldwork-express-v5-review.mp4) supersedes the [8:19 archive](docs/exhibition/fieldwork-express-v4-review.mp4). Detailed experiments remain available in the studio and the longer course-film view. See [the editing notes](docs/tutorials/18%20-%20A%20Three-Minute%20World%20-%20Editing%20for%20Clarity.md). This revision is included in the October 21 publication. The listening-review limits above still apply.
+
+- [Story, synchronization and progress screenshots](docs/tutorials/17%20-%20The%20Fieldwork%20Express%20-%20A%20Narrated%20Journey.md)
+- [Earlier globe and tree art-direction checkpoint](docs/tutorials/16%20-%20A%20Readable%20World%20and%20an%20Unfolding%20Map.md)
+
+## October 20 — a seed's viewpoint
+
+Living coast now offers **Be a seed** and **Walk the forest**. WASD nudges airborne drift or moves the observer; arrows/drag look around, Space pauses the world, and Esc returns to the overview. Successful settlement adds a real population member, and the camera rises with growth. Desktop and Pocket Island remain independent.
+
+[Tutorial and course-alignment audit](docs/tutorials/20%20-%20A%20Seed%20Finds%20a%20Home.md) · [Progress evidence](docs/tutorials/2026-10-20%20-%20Progress%20Log.md). This is included in the October 21 desktop publication. Evolutionary solvers, autonomous scheduled agents, procedural cultures and saved ecology across reloads remain future work. The next priority is controlled transport, habitat and competition experiments.
 
 ## Run locally
 

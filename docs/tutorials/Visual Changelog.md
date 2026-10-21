@@ -4,9 +4,90 @@ course: Procedural World Building (Cornell Tech)
 created: 2026-09-08
 ---
 
+
+## 026 — One change, two possibilities
+
+**2026-10-20 · Desktop local review.** Eleven controlled comparisons now expose fixed conditions, applied values and model boundaries. Living coast adds a germination map and local seed checks. A dry seed waits; climate edits keep its identity and clock; rooting leads to continued growth and possible offspring.
+
+![Before the rule controls](images/2026-10-20/06-before-rule-experiments.jpg)
+
+![Matched rainfall comparison](images/2026-10-20/11-rain-desktop.jpg)
+
+![Same seed after improving moisture](images/2026-10-20/10-same-seed-growing.jpg)
+
+The overview baseline and seed close-up use different cameras. Only the two panels within the rainfall image are a matched A/B comparison. Full tests: 51 passed. Build passed; lint has one existing PocketIsland warning. Actual browser outcomes and the drought-to-germination sequence are recorded in [[2026-10-20 - Progress Log]]. See [[21 - One Change, Two Possibilities]] for presentation steps. Phone unchanged; no push or deployment.
+
+## 023 — A woodland backdrop and collected discoveries
+
+**2026-10-14 · Local review.** The opening keeps its paper island and now frames it with softly blurred, left-scrolling 2D woodland. Four animated postcards arrive with the narration: ground rises, rain follows the slopes, moisture creates habitat, and a seed becomes a forest. Pins and threads connect the pictures to their locations.
+
+![The updated woodland and four collected postcards](images/2026-10-14/01-forest-postcard-opening.jpg)
+
+These are explanatory illustrations, not screenshots of the simulations. The introduction remains 14 seconds and the complete journey remains 2:56. The existing MP4 has not been regenerated. Build, lint and all 30 simulation tests passed; playback, seeking and the transition into experiments were checked. No push. See [[2026-10-14 - Progress Log]] for the before/after images and learning notes.
+
 # Visual Changelog
 
 Every visual change to Planet Studio gets an entry here: a before/after pair, what changed, and why. Newest entries on top. Design direction lives in [STYLE-GUIDE](../../STYLE-GUIDE.md); this file is the evidence that we're actually moving toward it.
+
+## 022 — A short journey through passing woodland
+
+**2026-10-13 · Local review.** The default journey is 2:56 with a 14-second introduction, superseding the 8:19 edit. A concise seed story, continuous roadside parallax using the preferred layered crowns, rewritten warm synthetic narration, English captions and actual parameter comparisons lead to the rotating planet.
+
+![Fourteen-second opening](images/2026-10-13/48-short-journey-opening.jpg)
+
+The earlier framing is preserved in screenshot 47; screenshots 49 and 50 record the new scenery at two points in time. This is a presentation change, not a change to the underlying world models. Build, lint and 30 tests passed. Owner review remains pending; no push.
+
+[Film and editing insights](18%20-%20A%20Three-Minute%20World%20-%20Editing%20for%20Clarity.md).
+
+## 021 — Close woodland, complete evidence and a review film / October 13, 2026
+
+**Owner requests, translated:** Keep the earlier large tree background, finish screenshots and checks, make the video, and soften the frightening grandfather audition. No push.
+
+![Before: hybrid map and sparse foreground trees](images/2026-10-13/40-hybrid-map-life-final.jpg)
+
+![After: layered close crowns around the printed map](images/2026-10-13/47-woodland-final-life.jpg)
+
+Both show the Life stop at 1:36. The later view changes tree framing and lighting; the map and procedural-study rules remain separate. The mobile card now uses a continuous vertical flow, with its study button fully visible. All 29 chapter entries, keyboard navigation, pause, reduced motion, story-to-study transition and final stop were checked. These are targeted checks, not a full exhibition screening.
+
+The 8:19 [local film](../exhibition/fieldwork-express-v4-review.mp4) includes the story, measured experiments, captions, quiet music and nature ambience. It retains the complete Daniel narration. A warmer 21-second audition replaces the rejected sample in the app; approval of the new voice is pending. See [[17 - The Fieldwork Express - A Narrated Journey]] for screenshots and verification limits.
+
+## 020 — A sticker map in passing woodland / October 13, 2026
+
+The new direction keeps the island as a flat paper illustration, with a dimensional seed train and larger 3D trees passing behind the sheet. Clickable station stickers lead to narrated chapters. Pausing holds the scenery and voice together.
+
+A desktop interaction and visual spot check passed, followed by build, lint and 28 tests. The browser interruption initially left the after screenshot and mobile/keyboard checks pending. Entry 021 below resolves those items; images under entry 019 remain earlier raised-map checkpoints.
+
+The 34-second elderly narrator audition remains available. The complete track still uses the previous voice. Local preview only; no commit or push.
+
+See [[17 - The Fieldwork Express - A Narrated Journey]] for the layer choices and verification boundaries.
+
+## 019 — Folded paper map and storyteller audition / October 13, 2026
+
+**Owner request, translated and paraphrased:** Keep the earlier map illustration, preserve depth, and hear a short gentle elderly storyteller before replacing the whole voice.
+
+The cream folded sheet, blue wave marks, irregular coast, indigo numbered stops and separate note card return. Raised mountains, firs and the train retain depth. The before frame is paused at 0:00 and the after frame at 0:28. Composition and camera also differ; these are interface checkpoints, not a controlled terrain trial.
+
+![Before: railway diorama](images/2026-10-13/32-before-paper-map.jpg)
+
+![After: raised folded field map](images/2026-10-13/33-folded-paper-map.jpg)
+
+A new 34.08-second AI-generated elderly narrator audition is available in the app. The full narration still uses the previous voice; owner listening review is pending. Build, lint and 28 tests passed, with browser audio and responsive checks. Local preview only.
+
+See [[17 - The Fieldwork Express - A Narrated Journey]] for the script, listening link, limits and next experiment.
+
+## 018 — The Fieldwork Express / October 13, 2026
+
+**Request, translated and paraphrased:** Turn the map into a narrated train story that continues into the detailed experiments.
+
+Before: the visitor selected a static marker. After: a seed rides a small train through an animated map, then the player continues into real studies with changing parameter meters, A/B views and English narration/captions. Warm parchment, muted turquoise, eucalyptus and terracotta connect the story and the studio.
+
+![Before: static opening map](images/2026-10-13/28-before-train-story.jpg)
+
+![After: narrated railway story](images/2026-10-13/29-train-highlands.jpg)
+
+These are interface checkpoints with different framing, not a controlled terrain comparison. Build/lint and 28 tests passed; browser checks covered playback, seeking, transition and studio handoff. The local male narrator is a synthetic preview; the requested expressive elderly voice is still a future quality pass. Existing MP4s remain unchanged. No push.
+
+Details: [[17 - The Fieldwork Express - A Narrated Journey]].
 
 ## How to add an entry
 
@@ -20,6 +101,33 @@ Repeatable capture command (dev server must be running):
 ```bash
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu --enable-unsafe-swiftshader --screenshot="$HOME/Documents/GitHub/Procedural-World-Building/docs/tutorials/images/ui-style/NAME.png" --window-size=1456,827 --hide-scrollbars --virtual-time-budget=20000 http://localhost:5173
 ```
+
+---
+
+## 016 — Full course experiments and a planetary closing shot · 2026-10-13
+
+**Request, translated:** fill the missing controlled experiments and course topics; finish with a rotating planet and flowing parameters.
+
+![Before: the three-study exhibition](images/2026-10-13/12-before-course-film.jpg)
+![After: recorded equal-step rainfall comparison](images/2026-10-13/13-v3-rain.jpg)
+![After: linked visual planet finale](images/2026-10-13/19-v3-planet.jpg)
+
+Revision 3 expands the film to 5:28 with 21 chapters, actual parameter values, matched comparisons, model measurements, camera orbits and a continuous 32-second globe ending. These screenshots compare presentation formats; each A/B study controls its own conditions. The globe uses shared seeded noise, radial ocean level, climate coloring and habitat points. Erosion, density and vector-field insets are labeled independent studies.
+
+[Experiment tutorial and results](15%20-%20Controlled%20Experiments%20and%20the%20Planet%20Finale.md) · [Films](../exhibition/README.md). English documentation and local preview; owner review precedes publishing.
+
+---
+
+## 015 — Visible parameters and matched comparisons · 2026-10-13
+
+**Request, translated:** show how the sliders change the world, rotate each step, and synchronize explanations with visible outcomes.
+
+![Previous exhibition interface](images/2026-10-13/08-before-film-revision.jpg)
+![Revised capture with tide comparison and live parameters](images/2026-10-13/09-film-v2-tide.jpg)
+
+The comparison film adds animated parameter readouts, camera orbits, same-camera before/after frames and state-driven captions. These images compare presentation formats; the controlled state comparison is inside the film. The world materials remain unchanged.
+
+[Updated tutorial](13%20-%20From%20Research%20Studio%20to%20Public%20Exhibition.md) · [Course coverage audit](14%20-%20Midterm%20Coverage%20Audit.md) · [Video preview files](../exhibition/README.md). Local preview awaiting owner review.
 
 ---
 
@@ -279,3 +387,40 @@ Same camera, same seed, spin frozen (`&spin=0`) so the three are comparable.
 - Next visual entry must be scene-side: stylized shading first, panel second.
 
 The rejected CSS is kept at `docs/analysis/rejected/panel-editorial-v1.css` for reference.
+
+## 017 — Readable geography and an unfolding field map
+
+**2026-10-13 · Local preview.** Crisp per-pixel coastlines replace the soft planet color field. Volumetric broadleaf and fir crowns replace leaf-card noise. Cream/indigo/brass controls frame the semantic world colors. The app-only opening introduces Sessions 3–7 through six linked studies; it is labeled as an illustrated guide, not a live terrain map.
+
+![Illustrated globe](images/2026-10-13/24-illustrated-planet.jpg)
+
+![Unfolding map and field-study notes](images/2026-10-13/21-field-map-intro.jpg)
+
+[Changes, trials and limitations](16%20-%20A%20Readable%20World%20and%20an%20Unfolding%20Map.md). Existing videos preserved; publication awaits review.
+
+
+## 024 — Pocket Island / October 14, 2026
+
+An independent phone experience replaces the large research controls with three gestures: Breeze, Rain and Plant. The quiet paper header and muted coastal palette retain Fieldwork’s visual language. Actual wind, moisture and seed state connect interaction to learning. Desktop remains separate and offers only a QR invitation.
+
+![Phone scene after breeze and rain, cropped above the controls](images/2026-10-14/04-pocket-island-phone.jpg)
+
+[Live phone site](https://fieldwork-pocket-island.jc3785.chatgpt.site/) · [[19 - A World in Your Hands]] · [[2026-10-14 - Progress Log]]
+
+Published with owner authorization. Browser, build and 37 model checks passed; physical sensor testing remains pending. GitHub was not pushed.
+
+
+## 025 — A seed becomes an observer of its world
+
+**October 20, 2026 · Local desktop preview.** Living coast adds Be a seed and Walk the forest. WASD changes airborne drift or walking, arrows/drag look around, Space pauses and Esc leaves. A successful tracked landing adds one actual plant; its viewpoint rises with growth. The phone remains independent.
+
+![First-person seed flight](images/2026-10-20/02-seed-first-person.jpg)
+
+![A rooted plant at 50 model seconds](images/2026-10-20/06-seed-grown-view.jpg)
+
+The test run recorded one birth with background reproduction disabled. Water caused failure in a separate windy trial. These are development observations, not matched A/B comparisons. Close-range foliage and physical walking collisions still need refinement. Build and 45 tests passed; lint has one existing PocketIsland ref warning. The new [tutorial and course audit](20%20-%20A%20Seed%20Finds%20a%20Home.md) distinguishes working rules from future evolution, agents, culture and persistence. [Dated evidence](2026-10-20%20-%20Progress%20Log.md). No push or new deployment.
+
+
+## October 21 — public midterm checkpoint
+
+The latest desktop studies, seed lifecycle and documented experiments are now published independently of Pocket Island. [Publication checks and screenshot](2026-10-21%20-%20Progress%20Log.md). Rain A/B results were verified on the public page; no new disaster simulation is claimed.

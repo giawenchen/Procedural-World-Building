@@ -21,10 +21,27 @@ export function treeSkeleton(iterations:number,angle:number){
  }
  tips.push(position.clone());return {segments,tips}
 }
-export function buildTree(iterations:number,angle:number){
+export function buildTree(iterations:number,angle:number,shape:'broadleaf'|'fir'='broadleaf'){
  const {segments,tips}=treeSkeleton(iterations,angle),pieces:THREE.BufferGeometry[]=[],leaves:THREE.BufferGeometry[]=[]
  for(const s of segments){const g=new THREE.CylinderGeometry(s.radius*.63,s.radius,s.a.distanceTo(s.b),6);g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,1,0),s.b.clone().sub(s.a).normalize()));g.translate(...s.a.clone().add(s.b).multiplyScalar(.5).toArray());pieces.push(g)}
- tips.forEach((tip,i)=>{for(let j=0;j<3;j++){const g=new THREE.PlaneGeometry(1.55,1.25);g.rotateY(j*Math.PI/3+i*.8);g.rotateX(.25*Math.sin(i));g.translate(tip.x,tip.y+.15,tip.z);leaves.push(g)}})
+ // Crown volumes follow real branch tips. A bounded number of large lobes
+ // reads as foliage at a distance without hiding the grammar in a noisy cutout.
+ const top=Math.max(...tips.map(p=>p.y)),selected=tips.filter(p=>p.y>top*.6)
+ if(shape==='fir'){
+  for(let i=0;i<5;i++){
+   const g=new THREE.ConeGeometry(1.25*(1-i*.16),1.55-i*.12,10,2)
+   g.translate(0,top*.38+i*top*.145,0);leaves.push(g)
+  }
+ }else{
+  const box=new THREE.Box3().setFromPoints(selected.length?selected:tips),center=box.getCenter(new THREE.Vector3()),size=box.getSize(new THREE.Vector3())
+  const scale=new THREE.Vector3(Math.max(1.15,size.x*.5+.5),Math.max(1.,size.y*.5+.45),Math.max(1.05,size.z*.5+.45))
+  for(let i=0;i<6;i++){
+   const g=new THREE.IcosahedronGeometry(1,2),a=i*2.39996,lobe=i===0?1:.64
+   g.scale(scale.x*lobe,scale.y*lobe,scale.z*lobe)
+   g.translate(center.x+(i?Math.cos(a)*scale.x*.58:0),center.y+(i?Math.sin(i*1.7)*scale.y*.35:0),center.z+(i?Math.sin(a)*scale.z*.58:0));leaves.push(g)
+  }
+ }
+ if(!leaves.length){const g=new THREE.IcosahedronGeometry(.8,2);g.translate(0,top,0);leaves.push(g)}
  const branches=mergeGeometries(pieces),foliage=mergeGeometries(leaves)
  pieces.forEach(g=>g.dispose());leaves.forEach(g=>g.dispose())
  return {branches,foliage,segments:segments.length}
@@ -62,3 +79,11 @@ export function coastalWater(map:THREE.DataTexture){return new THREE.ShaderMater
  #include <colorspace_fragment>
  }`})}
 export function disposeScene(scene:THREE.Scene){const geometries=new Set<THREE.BufferGeometry>(),materials=new Set<THREE.Material>();scene.traverse(obj=>{if(obj instanceof THREE.Mesh||obj instanceof THREE.Line||obj instanceof THREE.Points){geometries.add(obj.geometry);for(const m of Array.isArray(obj.material)?obj.material:[obj.material])materials.add(m)}});geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose())}
+
+/** Toon ramps preserve actual scene shadows and per-instance species colors. */
+export function foliageMaterial(){
+ const ramp=new THREE.DataTexture(new Uint8Array([90,90,90,255,165,165,165,255,230,230,230,255]),3,1)
+ ramp.minFilter=ramp.magFilter=THREE.NearestFilter;ramp.needsUpdate=true
+ const material=new THREE.MeshToonMaterial({gradientMap:ramp})
+ material.addEventListener('dispose',()=>ramp.dispose());return material
+}

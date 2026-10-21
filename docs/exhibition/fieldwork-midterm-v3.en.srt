@@ -1,0 +1,111 @@
+1
+00:00:00,000 --> 00:00:08,017
+Begin with a question. Hold conditions fixed. Change a rule and look again.
+
+2
+00:00:08,017 --> 00:00:26,007
+Higher frequency makes smaller terrain features. The seed, amplitude and three octaves stay fixed.
+
+3
+00:00:26,007 --> 00:00:40,008
+A finer grid samples the same field more densely. It adds triangles, not a new terrain rule.
+
+4
+00:00:40,008 --> 00:00:52,008
+Moving the shader threshold changes the snow-colored band. The mesh and its height field stay identical.
+
+5
+00:00:52,008 --> 00:01:14,016
+Run the same terrain for the same number of steps. Different rain produces different ground and sediment changes.
+
+6
+00:01:14,016 --> 00:01:32,016
+More moisture changes dry scrub into meadow, forest and wetland where the other conditions allow it.
+
+7
+00:01:32,016 --> 00:01:48,008
+Sphere, box and spatial noise are different density functions. Marching Cubes extracts each zero surface.
+
+8
+00:01:48,008 --> 00:02:00,849
+Increase the cutter radius from zero to five. Empty space now passes through solid ground.
+
+9
+00:02:00,849 --> 00:02:08,007
+Carve first, then add the pillar: operation order restores solid inside the tunnel.
+
+10
+00:02:08,007 --> 00:02:20,016
+Only chunks intersecting the pocket and its sampling margin need rebuilding. Distant chunks keep their meshes.
+
+11
+00:02:20,016 --> 00:02:34,007
+Increase volume resolution while holding the density rule fixed. Compare triangles and measured CPU meshing time.
+
+12
+00:02:34,007 --> 00:02:38,674
+The same pocket touches 8 of 27 chunks. Smaller chunks increase total bookkeeping.
+
+13
+00:02:38,674 --> 00:02:46,015
+The same pocket touches 12 of 216 chunks. Smaller chunks increase total bookkeeping.
+
+14
+00:02:46,015 --> 00:02:54,007
+Choose the mesher for the representation. This project extracts smooth density with Marching Cubes; the alternatives are a documented comparison.
+
+15
+00:02:54,007 --> 00:03:12,023
+Rotate the velocity direction by 90 degrees. At equal speed and time, both sets travel the same distance.
+
+16
+00:03:12,023 --> 00:03:32,007
+Both grids transport dye. Pressure projection reduces divergence; the readout measures what the picture cannot show.
+
+17
+00:03:32,007 --> 00:03:50,007
+Parallel rewriting gives 5, 25 and 125 segments. Grammar depth changes structure; it is not elapsed age.
+
+18
+00:03:50,007 --> 00:03:58,007
+At the same grammar depth, a larger turn angle spreads the branches. Segment count stays fixed.
+
+19
+00:03:58,007 --> 00:04:06,023
+With reproduction off, the population stays at 104. Growth changes the size of existing plants.
+
+20
+00:04:06,023 --> 00:04:15,423
+Both stands grow existing trees. Only the right-hand trial is allowed to produce seeds.
+
+21
+00:04:15,423 --> 00:04:28,015
+With reproduction enabled, new seedlings join the stand. Both trials have the same growth rate and elapsed time.
+
+22
+00:04:28,015 --> 00:04:36,015
+Crowding lowers health before it necessarily kills a tree. At this short duration, use health as evidence, not a claim of forest collapse.
+
+23
+00:04:36,015 --> 00:04:45,905
+Change tide amplitude, then advance its phase. The same landscape gains and loses dry ground.
+
+24
+00:04:45,905 --> 00:04:49,555
+High water disconnects the dry route. The trail responds to terrain and sea level.
+
+25
+00:04:49,555 --> 00:04:56,023
+The tide retreats and the dry connection returns. The forest has been held fixed.
+
+26
+00:04:56,023 --> 00:05:08,148
+Ground, water, climate and habitat change together on a rotating procedural planet.
+
+27
+00:05:08,148 --> 00:05:19,055
+The surrounding studies keep their own domains. A shared visual atlas makes the rules legible.
+
+28
+00:05:19,055 --> 00:05:28,000
+From numbers to landscapes, from fields to life. A world to keep exploring.

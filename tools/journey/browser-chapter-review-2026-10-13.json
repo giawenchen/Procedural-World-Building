@@ -1,0 +1,537 @@
+{
+  "kind": "Chapter navigation spot check, not full real-time playback",
+  "viewport": {
+    "width": 1439,
+    "height": 960
+  },
+  "chapters": [
+    {
+      "id": "depart",
+      "error": null,
+      "meters": [],
+      "phase": "journey-stage story-stage",
+      "time": 0,
+      "title": "A seed. A ticket. A whole world."
+    },
+    {
+      "id": "ground",
+      "error": null,
+      "meters": [],
+      "phase": "journey-stage story-stage",
+      "time": 16,
+      "title": "First, somewhere to stand."
+    },
+    {
+      "id": "water",
+      "error": null,
+      "meters": [],
+      "phase": "journey-stage story-stage",
+      "time": 38,
+      "title": "The rain remembers."
+    },
+    {
+      "id": "habitat",
+      "error": null,
+      "meters": [],
+      "phase": "journey-stage story-stage",
+      "time": 62,
+      "title": "Not every place feels like home."
+    },
+    {
+      "id": "life",
+      "error": null,
+      "meters": [],
+      "phase": "journey-stage story-stage",
+      "time": 82,
+      "title": "One seed becomes a story."
+    },
+    {
+      "id": "beneath",
+      "error": null,
+      "meters": [],
+      "phase": "journey-stage story-stage",
+      "time": 106,
+      "title": "There is a world beneath the world."
+    },
+    {
+      "id": "invisible",
+      "error": null,
+      "meters": [],
+      "phase": "journey-stage story-stage",
+      "time": 129,
+      "title": "You cannot see the wind. Until…"
+    },
+    {
+      "id": "arrive",
+      "error": null,
+      "meters": [],
+      "phase": "journey-stage story-stage",
+      "time": 151,
+      "title": "Now, let us look a little closer."
+    },
+    {
+      "id": "intro",
+      "error": null,
+      "meters": [
+        {
+          "max": 4,
+          "min": 1,
+          "value": 2
+        },
+        {
+          "max": 0.5,
+          "min": 0,
+          "value": 0.23
+        },
+        {
+          "max": 0.1,
+          "min": -0.1,
+          "value": 0.015
+        },
+        {
+          "max": 1,
+          "min": 0,
+          "value": 0.55
+        },
+        {
+          "max": 1,
+          "min": 0,
+          "value": 0.66
+        },
+        {
+          "max": 3,
+          "min": 0,
+          "value": 1.5
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 171,
+      "title": "From a story to an experiment"
+    },
+    {
+      "id": "noise",
+      "error": null,
+      "meters": [
+        {
+          "max": 4,
+          "min": 1,
+          "value": 1
+        },
+        {
+          "max": 6,
+          "min": 1,
+          "value": 3
+        },
+        {
+          "max": 40,
+          "min": 0,
+          "value": 22
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 179,
+      "title": "The size of a hill"
+    },
+    {
+      "id": "resolution",
+      "error": null,
+      "meters": [
+        {
+          "max": 96,
+          "min": 24,
+          "value": 24
+        },
+        {
+          "max": 4,
+          "min": 1,
+          "value": 4
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 197,
+      "title": "A field is not its mesh"
+    },
+    {
+      "id": "shader",
+      "error": null,
+      "meters": [
+        {
+          "max": 16,
+          "min": 6,
+          "value": 6
+        },
+        {
+          "max": 40,
+          "min": 0,
+          "value": 22
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 211,
+      "title": "The mountain changes its coat"
+    },
+    {
+      "id": "erosion",
+      "error": null,
+      "meters": [
+        {
+          "max": 0.06,
+          "min": 0,
+          "value": 0.005
+        },
+        {
+          "max": 0.06,
+          "min": 0,
+          "value": 0.05
+        },
+        {
+          "max": 100,
+          "min": 0,
+          "value": 0
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 223,
+      "title": "Two rains, one beginning"
+    },
+    {
+      "id": "climate",
+      "error": null,
+      "meters": [
+        {
+          "max": 1,
+          "min": 0,
+          "value": 0.25
+        },
+        {
+          "max": 1,
+          "min": 0,
+          "value": 0.75
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 245,
+      "title": "Where could the seed settle?"
+    },
+    {
+      "id": "density",
+      "error": null,
+      "meters": [
+        {
+          "max": 3,
+          "min": 1,
+          "value": 1
+        },
+        {
+          "max": 18,
+          "min": 6,
+          "value": 13
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 263,
+      "title": "The inside of a mountain"
+    },
+    {
+      "id": "cave",
+      "error": null,
+      "meters": [
+        {
+          "max": 9,
+          "min": 0,
+          "value": 0
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 279,
+      "title": "An opening, and a surprise"
+    },
+    {
+      "id": "pocket",
+      "error": null,
+      "meters": [
+        {
+          "max": 6,
+          "min": 0,
+          "value": 0
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 299,
+      "title": "A small edit stays small"
+    },
+    {
+      "id": "voxel-resolution",
+      "error": null,
+      "meters": [
+        {
+          "max": 64,
+          "min": 32,
+          "value": 32
+        },
+        {
+          "max": 16,
+          "min": 8,
+          "value": 16
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 311,
+      "title": "The price of detail"
+    },
+    {
+      "id": "chunks",
+      "error": null,
+      "meters": [
+        {
+          "max": 64,
+          "min": 32,
+          "value": 48
+        },
+        {
+          "max": 16,
+          "min": 8,
+          "value": 16
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 325,
+      "title": "Small pieces, more bookkeeping"
+    },
+    {
+      "id": "meshing",
+      "error": null,
+      "meters": [
+        {
+          "max": 1,
+          "min": 0,
+          "value": 1
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 337,
+      "title": "Many ways to find a surface"
+    },
+    {
+      "id": "wind",
+      "error": null,
+      "meters": [
+        {
+          "max": 360,
+          "min": 0,
+          "value": 0
+        },
+        {
+          "max": 360,
+          "min": 0,
+          "value": 90
+        },
+        {
+          "max": 8,
+          "min": 0,
+          "value": 0
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 345,
+      "title": "A direction becomes a journey"
+    },
+    {
+      "id": "fluid",
+      "error": null,
+      "meters": [
+        {
+          "max": 100,
+          "min": 0,
+          "value": 0
+        },
+        {
+          "max": 100,
+          "min": 0,
+          "value": 40
+        },
+        {
+          "max": 8,
+          "min": 0,
+          "value": 0
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 363,
+      "title": "Flow needs a little balance"
+    },
+    {
+      "id": "grammar",
+      "error": null,
+      "meters": [
+        {
+          "max": 3,
+          "min": 1,
+          "value": 1
+        },
+        {
+          "max": 45,
+          "min": 15,
+          "value": 30
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 383,
+      "title": "A tree, written as a rule"
+    },
+    {
+      "id": "angle",
+      "error": null,
+      "meters": [
+        {
+          "max": 3,
+          "min": 1,
+          "value": 3
+        },
+        {
+          "max": 45,
+          "min": 15,
+          "value": 15
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 401,
+      "title": "Open the branches"
+    },
+    {
+      "id": "growth",
+      "error": null,
+      "meters": [
+        {
+          "max": 3,
+          "min": 0,
+          "value": 0
+        },
+        {
+          "max": 3,
+          "min": 0,
+          "value": 2
+        },
+        {
+          "max": 18,
+          "min": 0,
+          "value": 0
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 409,
+      "title": "Larger does not mean more"
+    },
+    {
+      "id": "population",
+      "error": null,
+      "meters": [
+        {
+          "max": 3,
+          "min": 0,
+          "value": 2
+        },
+        {
+          "max": 3,
+          "min": 0,
+          "value": 1
+        },
+        {
+          "max": 18,
+          "min": 0,
+          "value": 0
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 417,
+      "title": "A forest has a history"
+    },
+    {
+      "id": "competition",
+      "error": null,
+      "meters": [
+        {
+          "max": 8,
+          "min": 0,
+          "value": 0
+        },
+        {
+          "max": 8,
+          "min": 0,
+          "value": 5
+        },
+        {
+          "max": 18,
+          "min": 0,
+          "value": 0
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 439,
+      "title": "Room to grow"
+    },
+    {
+      "id": "tide",
+      "error": null,
+      "meters": [
+        {
+          "max": 4,
+          "min": 0,
+          "value": 2
+        },
+        {
+          "max": 60,
+          "min": 8,
+          "value": 24
+        },
+        {
+          "max": 42,
+          "min": 18,
+          "value": 18
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 447,
+      "title": "The path that comes and goes"
+    },
+    {
+      "id": "planet",
+      "error": null,
+      "meters": [
+        {
+          "max": 4,
+          "min": 1,
+          "value": 2
+        },
+        {
+          "max": 0.5,
+          "min": 0,
+          "value": 0.23
+        },
+        {
+          "max": 0.1,
+          "min": -0.1,
+          "value": 0.015
+        },
+        {
+          "max": 1,
+          "min": 0,
+          "value": 0.55
+        },
+        {
+          "max": 1,
+          "min": 0,
+          "value": 0.66
+        },
+        {
+          "max": 3,
+          "min": 0,
+          "value": 1.5
+        }
+      ],
+      "phase": "journey-stage study-stage",
+      "time": 467,
+      "title": "A whole world of questions"
+    }
+  ]
+}

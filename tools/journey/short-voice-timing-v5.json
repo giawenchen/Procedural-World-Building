@@ -1,0 +1,149 @@
+[
+  {
+    "id": "depart",
+    "start": 0.65,
+    "end": 10.28,
+    "speed": 1,
+    "words": 23
+  },
+  {
+    "id": "noise",
+    "start": 14.25,
+    "end": 22.06,
+    "speed": 1,
+    "words": 15
+  },
+  {
+    "id": "resolution",
+    "start": 24.25,
+    "end": 28.49,
+    "speed": 1,
+    "words": 9
+  },
+  {
+    "id": "shader",
+    "start": 30.25,
+    "end": 35.45,
+    "speed": 1,
+    "words": 13
+  },
+  {
+    "id": "erosion",
+    "start": 38.25,
+    "end": 46.38,
+    "speed": 1,
+    "words": 17
+  },
+  {
+    "id": "climate",
+    "start": 50.25,
+    "end": 57.17,
+    "speed": 1,
+    "words": 15
+  },
+  {
+    "id": "density",
+    "start": 58.25,
+    "end": 63.01,
+    "speed": 1,
+    "words": 10
+  },
+  {
+    "id": "cave",
+    "start": 65.25,
+    "end": 73.34,
+    "speed": 1,
+    "words": 17
+  },
+  {
+    "id": "pocket",
+    "start": 77.25,
+    "end": 84.45,
+    "speed": 1,
+    "words": 14
+  },
+  {
+    "id": "voxel-resolution",
+    "start": 87.25,
+    "end": 89.34,
+    "speed": 1,
+    "words": 5
+  },
+  {
+    "id": "chunks",
+    "start": 91.25,
+    "end": 93.81453125,
+    "speed": 1.098,
+    "words": 5
+  },
+  {
+    "id": "meshing",
+    "start": 94.25,
+    "end": 96.76,
+    "speed": 1,
+    "words": 5
+  },
+  {
+    "id": "wind",
+    "start": 97.25,
+    "end": 104.0,
+    "speed": 1,
+    "words": 15
+  },
+  {
+    "id": "fluid",
+    "start": 105.25,
+    "end": 115.4,
+    "speed": 1,
+    "words": 19
+  },
+  {
+    "id": "grammar",
+    "start": 117.25,
+    "end": 124.33,
+    "speed": 1,
+    "words": 15
+  },
+  {
+    "id": "angle",
+    "start": 125.25,
+    "end": 127.64,
+    "speed": 1,
+    "words": 6
+  },
+  {
+    "id": "growth",
+    "start": 129.25,
+    "end": 133.57,
+    "speed": 1,
+    "words": 10
+  },
+  {
+    "id": "population",
+    "start": 135.25,
+    "end": 142.06,
+    "speed": 1,
+    "words": 12
+  },
+  {
+    "id": "competition",
+    "start": 143.25,
+    "end": 145.22,
+    "speed": 1,
+    "words": 5
+  },
+  {
+    "id": "tide",
+    "start": 147.25,
+    "end": 157.6,
+    "speed": 1,
+    "words": 25
+  },
+  {
+    "id": "planet",
+    "start": 162.25,
+    "end": 175.80128125,
+    "speed": 1.0185,
+    "words": 25
+  }
+]

@@ -1,0 +1,64 @@
+WEBVTT
+
+00:00:00.650 --> 00:00:13.900
+Come along, little seed. Hills catch the rain. Water shapes a home. And one day, a forest grows. Let us follow the clues.
+
+00:00:14.250 --> 00:00:23.900
+First, raise the noise frequency. Broad hills become smaller ridges. The seed stays the same.
+
+00:00:24.250 --> 00:00:29.900
+More samples reveal the same landscape in finer detail.
+
+00:00:30.250 --> 00:00:37.900
+Now raise the snow line. The mountain stays still; only its coat changes.
+
+00:00:38.250 --> 00:00:49.900
+Give the same hills more rain. Water carries soil downhill, cutting some slopes and leaving sediment below.
+
+00:00:50.250 --> 00:00:57.900
+Add moisture to the same land. The habitat map changes, opening different homes for life.
+
+00:00:58.250 --> 00:01:04.900
+Inside the mountain, density tells us where solid ground exists.
+
+00:01:05.250 --> 00:01:16.900
+Widen the tunnel. A cave opens. Then add a pillar after cutting: the order changes what remains.
+
+00:01:17.250 --> 00:01:26.900
+Carve one small pocket. Only nearby chunks need rebuilding; the distant landscape stays cached.
+
+00:01:27.250 --> 00:01:30.900
+Finer voxels cost more work.
+
+00:01:31.250 --> 00:01:33.900
+Smaller chunks change that tradeoff.
+
+00:01:34.250 --> 00:01:36.900
+Marching Cubes finds the surface.
+
+00:01:37.250 --> 00:01:44.900
+Turn the vector field. The same particles follow a new direction, revealing the invisible wind.
+
+00:01:45.250 --> 00:01:56.900
+In this fluid study, dye follows the flow. Pressure correction reduces divergence. Watch the two versions side by side.
+
+00:01:57.250 --> 00:02:04.900
+Repeat a branching rule. A simple line becomes a tree, one generation at a time.
+
+00:02:05.250 --> 00:02:08.900
+Open the angle; spread the crown.
+
+00:02:09.250 --> 00:02:14.900
+With births switched off, trees grow larger, not more numerous.
+
+00:02:15.250 --> 00:02:22.900
+Now allow new seeds. The same starting forest becomes a growing population.
+
+00:02:23.250 --> 00:02:26.900
+Crowding changes who can thrive.
+
+00:02:27.250 --> 00:02:41.900
+Here comes the tide. Follow the waterline as it climbs. A low path floods, and the route must change. As water retreats, the shore returns.
+
+00:02:42.250 --> 00:02:55.900
+A little world, shaped by connected questions. Land, water, and life. These studies remain separate models. The next story begins with the rule you choose.

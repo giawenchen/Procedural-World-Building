@@ -1,0 +1,786 @@
+{
+  "voice": "Local synthetic preview \u00b7 Daniel",
+  "duration": 499.0,
+  "introDuration": 171,
+  "sections": [
+    {
+      "id": "depart",
+      "title": "A seed. A ticket. A whole world.",
+      "phase": "story",
+      "duration": 16,
+      "station": 0,
+      "workspace": "planet",
+      "session": "PROLOGUE",
+      "rule": "A little seed is looking for a place to belong.",
+      "ambience": "forest",
+      "lines": [
+        "Come along, little seed. There is a whole world waiting beyond this station.",
+        "But where could you make a home? Let us follow the clues."
+      ],
+      "at": 0.0,
+      "end": 16.0
+    },
+    {
+      "id": "ground",
+      "title": "First, somewhere to stand.",
+      "phase": "story",
+      "duration": 22,
+      "station": 1,
+      "workspace": "noise",
+      "session": "SESSION 3 \u00b7 MAPS & SHADERS",
+      "rule": "Noise \u2192 height \u2192 a readable surface",
+      "ambience": "wind",
+      "lines": [
+        "Before a forest, before a river, we need a little ground.",
+        "Layers of noise lift the hills. Frequency changes their size; resolution reveals their shape.",
+        "A shader gives snow, stone, and shore their own voice."
+      ],
+      "at": 16.0,
+      "end": 38.0
+    },
+    {
+      "id": "water",
+      "title": "The rain remembers.",
+      "phase": "story",
+      "duration": 24,
+      "station": 2,
+      "workspace": "simulation",
+      "session": "SESSION 4 \u00b7 EROSION",
+      "rule": "Rain \u2192 downhill flow \u2192 erosion & deposition",
+      "ambience": "rain",
+      "lines": [
+        "Listen. Here comes the rain. Each drop begins a small journey downhill.",
+        "Together, the drops carry soil away, then leave it somewhere new.",
+        "Near the coast, tides cover the low ground. Even a familiar path can disappear."
+      ],
+      "at": 38.0,
+      "end": 62.0
+    },
+    {
+      "id": "habitat",
+      "title": "Not every place feels like home.",
+      "phase": "story",
+      "duration": 20,
+      "station": 3,
+      "workspace": "living",
+      "session": "SESSION 4 \u00b7 BIOMES",
+      "rule": "Height + slope + warmth + moisture \u2192 habitat",
+      "ambience": "forest",
+      "lines": [
+        "Our little seed has found land. But land alone is not enough.",
+        "Too steep? Too dry? Warmth and moisture turn a map into a patchwork of possible homes."
+      ],
+      "at": 62.0,
+      "end": 82.0
+    },
+    {
+      "id": "life",
+      "title": "One seed becomes a story.",
+      "phase": "story",
+      "duration": 24,
+      "station": 4,
+      "workspace": "living",
+      "session": "SESSION 7 \u00b7 VEGETATION",
+      "rule": "Branch rules \u2192 growth \u2192 seeds \u2192 competition",
+      "ambience": "forest",
+      "lines": [
+        "Ah, this sheltered patch will do. A branch grows, then branches again.",
+        "A tree becomes larger. A forest becomes more crowded. Those are two different stories.",
+        "Growth, new seeds, and competition decide which story comes next."
+      ],
+      "at": 82.0,
+      "end": 106.0
+    },
+    {
+      "id": "beneath",
+      "title": "There is a world beneath the world.",
+      "phase": "story",
+      "duration": 23,
+      "station": 5,
+      "workspace": "voxels",
+      "session": "SESSION 5 \u00b7 VOXELS",
+      "rule": "Density \u2192 carve space \u2192 mesh in chunks",
+      "ambience": "water",
+      "lines": [
+        "But wait. What if our world has an inside?",
+        "Density tells us where solid ground exists. Subtract a shape, and a cave appears.",
+        "Meshing reveals its surface. Chunks let us change one piece without rebuilding the whole world."
+      ],
+      "at": 106.0,
+      "end": 129.0
+    },
+    {
+      "id": "invisible",
+      "title": "You cannot see the wind. Until\u2026",
+      "phase": "story",
+      "duration": 22,
+      "station": 6,
+      "workspace": "fields",
+      "session": "SESSION 6 \u00b7 VECTOR FIELDS",
+      "rule": "Direction + speed \u2192 transport \u2192 visible motion",
+      "ambience": "wind",
+      "lines": [
+        "A breeze catches another seed. The invisible has left a visible trail.",
+        "A vector gives each place a direction and a speed. Particles show us the journey.",
+        "A fluid needs another step: pressure correction keeps its flow more consistent."
+      ],
+      "at": 129.0,
+      "end": 151.0
+    },
+    {
+      "id": "arrive",
+      "title": "Now, let us look a little closer.",
+      "phase": "story",
+      "duration": 20,
+      "station": 0,
+      "workspace": "planet",
+      "session": "THE CONNECTION",
+      "rule": "Shape \u2192 water \u2192 habitat \u2192 life \u00b7 volume & motion",
+      "ambience": "forest",
+      "lines": [
+        "So a world is a conversation: between shape, water, climate, and life.",
+        "Our map joins the ideas. The experiments remain separate, so we can see what each rule really does.",
+        "Now, let us change one thing at a time."
+      ],
+      "at": 151.0,
+      "end": 171.0
+    },
+    {
+      "id": "intro",
+      "title": "From a story to an experiment",
+      "phase": "study",
+      "duration": 8,
+      "workspace": "noise",
+      "session": "THE LABORATORY",
+      "ambience": "forest",
+      "lines": [
+        "Keep the seed. Keep the camera. Change one rule, and watch."
+      ],
+      "at": 171.0,
+      "end": 179.0
+    },
+    {
+      "id": "noise",
+      "title": "The size of a hill",
+      "phase": "study",
+      "duration": 18,
+      "workspace": "noise",
+      "session": "SESSION 3 \u00b7 MAPS",
+      "ambience": "wind",
+      "lines": [
+        "Watch the frequency slider move. Broad hills become smaller, more closely spaced hills.",
+        "The seed stays the same. We are changing the pattern, not rolling a new world."
+      ],
+      "at": 179.0,
+      "end": 197.0
+    },
+    {
+      "id": "resolution",
+      "title": "A field is not its mesh",
+      "phase": "study",
+      "duration": 14,
+      "workspace": "noise",
+      "session": "SESSION 3 \u00b7 SAMPLING",
+      "ambience": "wind",
+      "lines": [
+        "Now keep the field, and change how many points we sample.",
+        "More cells reveal detail. They also cost more work."
+      ],
+      "at": 197.0,
+      "end": 211.0
+    },
+    {
+      "id": "shader",
+      "title": "The mountain changes its coat",
+      "phase": "study",
+      "duration": 12,
+      "workspace": "noise",
+      "session": "SESSION 3 \u00b7 SHADERS",
+      "ambience": "wind",
+      "lines": [
+        "Only the snow threshold moves. The mountain itself stays still.",
+        "A material can explain height without changing geometry."
+      ],
+      "at": 211.0,
+      "end": 223.0
+    },
+    {
+      "id": "erosion",
+      "title": "Two rains, one beginning",
+      "phase": "study",
+      "duration": 22,
+      "workspace": "simulation",
+      "session": "SESSION 4 \u00b7 EROSION",
+      "ambience": "rain",
+      "lines": [
+        "Both landscapes begin alike. Both receive the same number of simulation steps.",
+        "One gets more rain. Ochre shows removed ground; teal shows deposited sediment.",
+        "The measurements help us notice changes that a pretty image might hide."
+      ],
+      "at": 223.0,
+      "end": 245.0
+    },
+    {
+      "id": "climate",
+      "title": "Where could the seed settle?",
+      "phase": "study",
+      "duration": 18,
+      "workspace": "living",
+      "session": "SESSION 4 \u00b7 BIOMES",
+      "ambience": "forest",
+      "lines": [
+        "Hold the terrain and temperature still. Let moisture increase.",
+        "The habitat labels change. This is a climate classification, not a weather forecast."
+      ],
+      "at": 245.0,
+      "end": 263.0
+    },
+    {
+      "id": "density",
+      "title": "The inside of a mountain",
+      "phase": "study",
+      "duration": 16,
+      "workspace": "voxels",
+      "session": "SESSION 5 \u00b7 DENSITY",
+      "ambience": "water",
+      "lines": [
+        "A sphere, a box, and a noisy volume begin with different density rules.",
+        "The slice reveals solid and empty space. Marching cubes follows their boundary."
+      ],
+      "at": 263.0,
+      "end": 279.0
+    },
+    {
+      "id": "cave",
+      "title": "An opening, and a surprise",
+      "phase": "study",
+      "duration": 20,
+      "workspace": "voxels",
+      "session": "SESSION 5 \u00b7 SEQUENTIAL CSG",
+      "ambience": "water",
+      "lines": [
+        "Watch the cave radius. A small cutter opens a tunnel through the mountain.",
+        "Now change the order. Carve first, add a pillar afterward, and solid returns inside the opening."
+      ],
+      "at": 279.0,
+      "end": 299.0
+    },
+    {
+      "id": "pocket",
+      "title": "A small edit stays small",
+      "phase": "study",
+      "duration": 12,
+      "workspace": "voxels",
+      "session": "SESSION 5 \u00b7 CHUNKING",
+      "ambience": "water",
+      "lines": [
+        "One pocket touches nearby chunks. Their meshes rebuild; distant meshes remain.",
+        "Local work saves unnecessary work."
+      ],
+      "at": 299.0,
+      "end": 311.0
+    },
+    {
+      "id": "voxel-resolution",
+      "title": "The price of detail",
+      "phase": "study",
+      "duration": 14,
+      "workspace": "voxels",
+      "session": "SESSION 5 \u00b7 PERFORMANCE",
+      "ambience": "water",
+      "lines": [
+        "Increase the voxel resolution. The same rule now produces more triangles.",
+        "Compare measured meshing time, not just how smooth the surface looks."
+      ],
+      "at": 311.0,
+      "end": 325.0
+    },
+    {
+      "id": "chunks",
+      "title": "Small pieces, more bookkeeping",
+      "phase": "study",
+      "duration": 12,
+      "workspace": "voxels",
+      "session": "SESSION 5 \u00b7 OPTIMIZATION",
+      "ambience": "water",
+      "lines": [
+        "Smaller chunks can limit an edit, but there are more pieces to manage.",
+        "The counters reveal the tradeoff."
+      ],
+      "at": 325.0,
+      "end": 337.0
+    },
+    {
+      "id": "meshing",
+      "title": "Many ways to find a surface",
+      "phase": "study",
+      "duration": 8,
+      "workspace": "voxels",
+      "session": "SESSION 5 \u00b7 MESHING ALTERNATIVES",
+      "ambience": "water",
+      "lines": [
+        "Compare the alternatives here. This project implements marching cubes."
+      ],
+      "at": 337.0,
+      "end": 345.0
+    },
+    {
+      "id": "wind",
+      "title": "A direction becomes a journey",
+      "phase": "study",
+      "duration": 18,
+      "workspace": "fields",
+      "session": "SESSION 6 \u00b7 VECTOR FIELDS",
+      "ambience": "wind",
+      "lines": [
+        "Two particle groups travel for the same time, at the same speed.",
+        "Turn one field by ninety degrees. Its direction changes; the travel distance does not."
+      ],
+      "at": 345.0,
+      "end": 363.0
+    },
+    {
+      "id": "fluid",
+      "title": "Flow needs a little balance",
+      "phase": "study",
+      "duration": 20,
+      "workspace": "fields",
+      "session": "SESSION 6 \u00b7 ADVECTION & PRESSURE",
+      "ambience": "water",
+      "lines": [
+        "Both grids carry dye. The right grid also corrects its pressure.",
+        "Watch the divergence measurement fall. Dye makes motion visible, but it is not water height."
+      ],
+      "at": 363.0,
+      "end": 383.0
+    },
+    {
+      "id": "grammar",
+      "title": "A tree, written as a rule",
+      "phase": "study",
+      "duration": 18,
+      "workspace": "living",
+      "session": "SESSION 7 \u00b7 L-SYSTEMS",
+      "ambience": "forest",
+      "lines": [
+        "Replace each forward instruction with the same little branching sentence.",
+        "Five segments become twenty-five, then one hundred and twenty-five. Grammar depth builds structure; it is not age."
+      ],
+      "at": 383.0,
+      "end": 401.0
+    },
+    {
+      "id": "angle",
+      "title": "Open the branches",
+      "phase": "study",
+      "duration": 8,
+      "workspace": "living",
+      "session": "SESSION 7 \u00b7 PLANT FORM",
+      "ambience": "forest",
+      "lines": [
+        "Keep the same branches. A wider turn angle opens the crown."
+      ],
+      "at": 401.0,
+      "end": 409.0
+    },
+    {
+      "id": "growth",
+      "title": "Larger does not mean more",
+      "phase": "study",
+      "duration": 8,
+      "workspace": "living",
+      "session": "SESSION 7 \u00b7 GROWTH",
+      "ambience": "forest",
+      "lines": [
+        "Reproduction is off. Growth changes size, while the population stays fixed."
+      ],
+      "at": 409.0,
+      "end": 417.0
+    },
+    {
+      "id": "population",
+      "title": "A forest has a history",
+      "phase": "study",
+      "duration": 22,
+      "workspace": "living",
+      "session": "SESSION 7 \u00b7 ECOSYSTEMS",
+      "ambience": "forest",
+      "lines": [
+        "Now allow the right forest to make new seeds.",
+        "Both stands can grow, but only one can welcome new seedlings.",
+        "Watch births, deaths, and total population. A forest is more than a collection of tree shapes."
+      ],
+      "at": 417.0,
+      "end": 439.0
+    },
+    {
+      "id": "competition",
+      "title": "Room to grow",
+      "phase": "study",
+      "duration": 8,
+      "workspace": "living",
+      "session": "SESSION 7 \u00b7 COMPETITION",
+      "ambience": "forest",
+      "lines": [
+        "Crowding can lower health before trees die. Watch the health measurement."
+      ],
+      "at": 439.0,
+      "end": 447.0
+    },
+    {
+      "id": "tide",
+      "title": "The path that comes and goes",
+      "phase": "study",
+      "duration": 20,
+      "workspace": "living",
+      "session": "CONNECTED STUDY \u00b7 TIDE & PATH",
+      "ambience": "water",
+      "lines": [
+        "The forest holds still while the tide rises. Low ground disappears beneath the water.",
+        "The path search must find dry ground, or admit there is no route.",
+        "As the tide retreats, a connection can return."
+      ],
+      "at": 447.0,
+      "end": 467.0
+    },
+    {
+      "id": "planet",
+      "title": "A whole world of questions",
+      "phase": "study",
+      "duration": 32,
+      "workspace": "planet",
+      "session": "EPILOGUE \u00b7 YOUR TURN",
+      "ambience": "forest",
+      "lines": [
+        "And here we are again, with a whole world in front of us.",
+        "The turning planet brings the ideas together. Its controls do not run one giant physical simulation.",
+        "Our seed has taught us how to ask better questions: what changed, what stayed fixed, and why?",
+        "Now it is your turn. Which little rule will you change first?"
+      ],
+      "at": 467.0,
+      "end": 499.0
+    }
+  ],
+  "captions": [
+    {
+      "start": 0.55,
+      "end": 5.4548,
+      "text": "Come along, little seed. There is a whole world waiting beyond this station."
+    },
+    {
+      "start": 8.7486,
+      "end": 12.2562,
+      "text": "But where could you make a home? Let us follow the clues."
+    },
+    {
+      "start": 16.55,
+      "end": 20.6615,
+      "text": "Before a forest, before a river, we need a little ground."
+    },
+    {
+      "start": 22.8067,
+      "end": 29.3215,
+      "text": "Layers of noise lift the hills. Frequency changes their size; resolution reveals their shape."
+    },
+    {
+      "start": 31.4668,
+      "end": 35.4048,
+      "text": "A shader gives snow, stone, and shore their own voice."
+    },
+    {
+      "start": 38.55,
+      "end": 43.5904,
+      "text": "Listen. Here comes the rain. Each drop begins a small journey downhill."
+    },
+    {
+      "start": 46.2444,
+      "end": 50.6674,
+      "text": "Together, the drops carry soil away, then leave it somewhere new."
+    },
+    {
+      "start": 53.3214,
+      "end": 58.8961,
+      "text": "Near the coast, tides cover the low ground. Even a familiar path can disappear."
+    },
+    {
+      "start": 62.55,
+      "end": 66.697,
+      "text": "Our little seed has found land. But land alone is not enough."
+    },
+    {
+      "start": 71.0142,
+      "end": 77.2328,
+      "text": "Too steep? Too dry? Warmth and moisture turn a map into a patchwork of possible homes."
+    },
+    {
+      "start": 82.55,
+      "end": 88.0733,
+      "text": "Ah, this sheltered patch will do. A branch grows, then branches again."
+    },
+    {
+      "start": 90.0934,
+      "end": 96.0399,
+      "text": "A tree becomes larger. A forest becomes more crowded. Those are two different stories."
+    },
+    {
+      "start": 98.0601,
+      "end": 103.5299,
+      "text": "Growth, new seeds, and competition decide which story comes next."
+    },
+    {
+      "start": 106.55,
+      "end": 109.4421,
+      "text": "But wait. What if our world has an inside?"
+    },
+    {
+      "start": 111.7391,
+      "end": 117.8242,
+      "text": "Density tells us where solid ground exists. Subtract a shape, and a cave appears."
+    },
+    {
+      "start": 120.1212,
+      "end": 126.253,
+      "text": "Meshing reveals its surface. Chunks let us change one piece without rebuilding the whole world."
+    },
+    {
+      "start": 129.55,
+      "end": 134.2891,
+      "text": "A breeze catches another seed. The invisible has left a visible trail."
+    },
+    {
+      "start": 136.372,
+      "end": 141.3665,
+      "text": "A vector gives each place a direction and a speed. Particles show us the journey."
+    },
+    {
+      "start": 143.4494,
+      "end": 148.4671,
+      "text": "A fluid needs another step: pressure correction keeps its flow more consistent."
+    },
+    {
+      "start": 151.55,
+      "end": 157.4235,
+      "text": "So a world is a conversation: between shape, water, climate, and life."
+    },
+    {
+      "start": 158.4023,
+      "end": 165.5562,
+      "text": "Our map joins the ideas. The experiments remain separate, so we can see what each rule really does."
+    },
+    {
+      "start": 166.535,
+      "end": 169.5712,
+      "text": "Now, let us change one thing at a time."
+    },
+    {
+      "start": 171.55,
+      "end": 176.2108,
+      "text": "Keep the seed. Keep the camera. Change one rule, and watch."
+    },
+    {
+      "start": 179.55,
+      "end": 185.6581,
+      "text": "Watch the frequency slider move. Broad hills become smaller, more closely spaced hills."
+    },
+    {
+      "start": 188.4923,
+      "end": 193.7158,
+      "text": "The seed stays the same. We are changing the pattern, not rolling a new world."
+    },
+    {
+      "start": 197.55,
+      "end": 201.5109,
+      "text": "Now keep the field, and change how many points we sample."
+    },
+    {
+      "start": 204.1604,
+      "end": 207.9005,
+      "text": "More cells reveal detail. They also cost more work."
+    },
+    {
+      "start": 211.55,
+      "end": 215.7782,
+      "text": "Only the snow threshold moves. The mountain itself stays still."
+    },
+    {
+      "start": 217.346,
+      "end": 220.9822,
+      "text": "A material can explain height without changing geometry."
+    },
+    {
+      "start": 223.55,
+      "end": 228.9384,
+      "text": "Both landscapes begin alike. Both receive the same number of simulation steps."
+    },
+    {
+      "start": 230.907,
+      "end": 236.632,
+      "text": "One gets more rain. Ochre shows removed ground; teal shows deposited sediment."
+    },
+    {
+      "start": 238.6006,
+      "end": 242.5814,
+      "text": "The measurements help us notice changes that a pretty image might hide."
+    },
+    {
+      "start": 245.55,
+      "end": 249.5068,
+      "text": "Hold the terrain and temperature still. Let moisture increase."
+    },
+    {
+      "start": 252.7912,
+      "end": 259.2657,
+      "text": "The habitat labels change. This is a climate classification, not a weather forecast."
+    },
+    {
+      "start": 263.55,
+      "end": 268.7767,
+      "text": "A sphere, a box, and a noisy volume begin with different density rules."
+    },
+    {
+      "start": 271.1852,
+      "end": 276.1415,
+      "text": "The slice reveals solid and empty space. Marching cubes follows their boundary."
+    },
+    {
+      "start": 279.55,
+      "end": 284.2301,
+      "text": "Watch the cave radius. A small cutter opens a tunnel through the mountain."
+    },
+    {
+      "start": 287.9931,
+      "end": 294.787,
+      "text": "Now change the order. Carve first, add a pillar afterward, and solid returns inside the opening."
+    },
+    {
+      "start": 299.55,
+      "end": 305.4142,
+      "text": "One pocket touches nearby chunks. Their meshes rebuild; distant meshes remain."
+    },
+    {
+      "start": 306.6809,
+      "end": 309.2833,
+      "text": "Local work saves unnecessary work."
+    },
+    {
+      "start": 311.55,
+      "end": 316.8928,
+      "text": "Increase the voxel resolution. The same rule now produces more triangles."
+    },
+    {
+      "start": 318.3909,
+      "end": 323.0519,
+      "text": "Compare measured meshing time, not just how smooth the surface looks."
+    },
+    {
+      "start": 325.55,
+      "end": 329.9026,
+      "text": "Smaller chunks can limit an edit, but there are more pieces to manage."
+    },
+    {
+      "start": 332.2517,
+      "end": 334.2009,
+      "text": "The counters reveal the tradeoff."
+    },
+    {
+      "start": 337.55,
+      "end": 342.3387,
+      "text": "Compare the alternatives here. This project implements marching cubes."
+    },
+    {
+      "start": 345.55,
+      "end": 349.8994,
+      "text": "Two particle groups travel for the same time, at the same speed."
+    },
+    {
+      "start": 353.0518,
+      "end": 359.3977,
+      "text": "Turn one field by ninety degrees. Its direction changes; the travel distance does not."
+    },
+    {
+      "start": 363.55,
+      "end": 367.7658,
+      "text": "Both grids carry dye. The right grid also corrects its pressure."
+    },
+    {
+      "start": 372.191,
+      "end": 378.1248,
+      "text": "Watch the divergence measurement fall. Dye makes motion visible, but it is not water height."
+    },
+    {
+      "start": 383.55,
+      "end": 388.1843,
+      "text": "Replace each forward instruction with the same little branching sentence."
+    },
+    {
+      "start": 390.3694,
+      "end": 398.3648,
+      "text": "Five segments become twenty-five, then one hundred and twenty-five. Grammar depth builds structure; it is not age."
+    },
+    {
+      "start": 401.55,
+      "end": 405.8624,
+      "text": "Keep the same branches. A wider turn angle opens the crown."
+    },
+    {
+      "start": 409.55,
+      "end": 415.2641,
+      "text": "Reproduction is off. Growth changes size, while the population stays fixed."
+    },
+    {
+      "start": 417.55,
+      "end": 420.4776,
+      "text": "Now allow the right forest to make new seeds."
+    },
+    {
+      "start": 422.7586,
+      "end": 427.1485,
+      "text": "Both stands can grow, but only one can welcome new seedlings."
+    },
+    {
+      "start": 429.4296,
+      "end": 436.269,
+      "text": "Watch births, deaths, and total population. A forest is more than a collection of tree shapes."
+    },
+    {
+      "start": 439.55,
+      "end": 443.851,
+      "text": "Crowding can lower health before trees die. Watch the health measurement."
+    },
+    {
+      "start": 447.55,
+      "end": 453.0287,
+      "text": "The forest holds still while the tide rises. Low ground disappears beneath the water."
+    },
+    {
+      "start": 454.9619,
+      "end": 459.3376,
+      "text": "The path search must find dry ground, or admit there is no route."
+    },
+    {
+      "start": 461.2709,
+      "end": 464.6168,
+      "text": "As the tide retreats, a connection can return."
+    },
+    {
+      "start": 467.55,
+      "end": 471.0237,
+      "text": "And here we are again, with a whole world in front of us."
+    },
+    {
+      "start": 473.4905,
+      "end": 480.2552,
+      "text": "The turning planet brings the ideas together. Its controls do not run one giant physical simulation."
+    },
+    {
+      "start": 482.722,
+      "end": 489.7018,
+      "text": "Our seed has taught us how to ask better questions: what changed, what stayed fixed, and why?"
+    },
+    {
+      "start": 492.1686,
+      "end": 496.0832,
+      "text": "Now it is your turn. Which little rule will you change first?"
+    }
+  ]
+}

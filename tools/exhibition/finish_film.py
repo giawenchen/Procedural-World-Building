@@ -12,10 +12,12 @@ import numpy as np
 parser = argparse.ArgumentParser()
 parser.add_argument('capture', type=Path, nargs='?')
 parser.add_argument('--score-only', type=Path)
+parser.add_argument('--duration', type=int, default=110)
+parser.add_argument('--version', default='v2')
 args = parser.parse_args()
-rate, duration = 44100, 78
+rate, duration = 44100, args.duration
 n = rate * duration
-mix = np.zeros((n, 2), dtype=np.float64)
+mix = np.zeros((n, 2), dtype=np.float32)
 chords = [(50,57,61,64,69), (47,54,57,61,66), (43,50,54,57,62), (45,52,57,59,64)]
 
 def tone(midi, onset, length, gain, pan, pluck=False):
@@ -56,8 +58,8 @@ with wave.open(str(score),'wb') as f:
 print(f'Original score: {score}; peak {np.max(np.abs(mix)):.3f}',flush=True)
 if args.capture:
     destination=Path(__file__).resolve().parents[2]/'docs'/'exhibition'
-    silent=destination/'fieldwork-midterm-silent.mp4'
-    music=destination/'fieldwork-midterm-music.mp4'
-    subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(args.capture),'-an','-t','78','-vf','fps=30','-c:v','libx264','-preset','medium','-crf','23','-pix_fmt','yuv420p','-movflags','+faststart',str(silent)],check=True)
+    silent=destination/f'fieldwork-midterm-{args.version}-silent.mp4'
+    music=destination/f'fieldwork-midterm-{args.version}-music.mp4'
+    subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(args.capture),'-an','-t',str(duration),'-vf','fps=30','-c:v','libx264','-preset','fast','-crf','23','-pix_fmt','yuv420p','-movflags','+faststart',str(silent)],check=True)
     subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(silent),'-i',str(score),'-map','0:v:0','-map','1:a:0','-c:v','copy','-c:a','aac','-b:a','160k','-af','loudnorm=I=-23:TP=-2:LRA=9','-shortest','-movflags','+faststart',str(music)],check=True)
     print(f'Finished: {music}\nSilent: {silent}')

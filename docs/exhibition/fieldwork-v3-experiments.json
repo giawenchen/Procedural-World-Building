@@ -1,0 +1,258 @@
+{
+  "recordedAt": "2026-10-13T20:47:11.795Z",
+  "runtime": "v22.14.0",
+  "measurementScope": "CPU-only model trials; not browser FPS. Three cold-to-warm mesh trials per configuration; order may affect JIT/cache.",
+  "seed": 17,
+  "erosion": [
+    {
+      "rain": 0.005,
+      "steps": 100,
+      "meanCut": 0.43922561625653145,
+      "meanFill": 0.3604106249407791,
+      "meanWater": 0.25590008454860225,
+      "groundSedimentBalance": -0.0000938194862101227
+    },
+    {
+      "rain": 0.05,
+      "steps": 100,
+      "meanCut": 0.7722611719608092,
+      "meanFill": 0.5832008594264326,
+      "meanWater": 2.5590011673010666,
+      "groundSedimentBalance": 0.0040483663469785824
+    }
+  ],
+  "climate": [
+    {
+      "moisture": 0.25,
+      "counts": [
+        4003,
+        366,
+        0,
+        572,
+        348,
+        1199,
+        73
+      ],
+      "trees": 53
+    },
+    {
+      "moisture": 0.8,
+      "counts": [
+        4003,
+        366,
+        881,
+        167,
+        1071,
+        0,
+        73
+      ],
+      "trees": 104
+    }
+  ],
+  "ecology": [
+    {
+      "seconds": 18,
+      "growth": 0,
+      "reproduction": 0,
+      "competition": 5,
+      "trees": 104,
+      "births": 0,
+      "deaths": 0,
+      "meanSize": 0.7179055280157344,
+      "meanHealth": 1
+    },
+    {
+      "seconds": 18,
+      "growth": 2,
+      "reproduction": 0,
+      "competition": 5,
+      "trees": 104,
+      "births": 0,
+      "deaths": 0,
+      "meanSize": 1.2999999999999987,
+      "meanHealth": 1
+    },
+    {
+      "seconds": 18,
+      "growth": 2,
+      "reproduction": 1,
+      "competition": 5,
+      "trees": 232,
+      "births": 128,
+      "deaths": 0,
+      "meanSize": 0.8049726743175115,
+      "meanHealth": 0.9890754310344833
+    },
+    {
+      "seconds": 18,
+      "growth": 2,
+      "reproduction": 1,
+      "competition": 0,
+      "trees": 244,
+      "births": 140,
+      "deaths": 0,
+      "meanSize": 0.8416393442622898,
+      "meanHealth": 1
+    }
+  ],
+  "fluid": [
+    {
+      "grid": 40,
+      "time": 7.999999999999977,
+      "iterations": 0,
+      "before": 2.6586621722511103,
+      "after": 2.6586621722511103
+    },
+    {
+      "grid": 40,
+      "time": 7.999999999999977,
+      "iterations": 40,
+      "before": 0.20235508249964865,
+      "after": 0.13739498346075496
+    }
+  ],
+  "wind": [
+    {
+      "direction": 0,
+      "speed": 4,
+      "time": 8,
+      "meanDistance": 32.000000000000355
+    },
+    {
+      "direction": 90,
+      "speed": 4,
+      "time": 8,
+      "meanDistance": 32.000000000000476
+    }
+  ],
+  "voxel": [
+    {
+      "cells": 32,
+      "chunk": 16,
+      "triangles": 6292,
+      "samples": 39304,
+      "chunks": 8,
+      "localChunks": 1,
+      "ms": 122.46416700000009,
+      "cut": false,
+      "trialsMs": [
+        122.46416700000009,
+        116.15587500000038,
+        75.85220800000025
+      ],
+      "medianMs": 116.15587500000038,
+      "sampleStorageMiB": 0.149932861328125
+    },
+    {
+      "cells": 48,
+      "chunk": 16,
+      "triangles": 14480,
+      "samples": 132651,
+      "chunks": 27,
+      "localChunks": 8,
+      "ms": 205.48099999999977,
+      "cut": false,
+      "trialsMs": [
+        205.48099999999977,
+        163.3442500000001,
+        170.25258399999984
+      ],
+      "medianMs": 170.25258399999984,
+      "sampleStorageMiB": 0.5060234069824219
+    },
+    {
+      "cells": 64,
+      "chunk": 16,
+      "triangles": 26716,
+      "samples": 314432,
+      "chunks": 64,
+      "localChunks": 4,
+      "ms": 381.8320840000006,
+      "cut": false,
+      "trialsMs": [
+        381.8320840000006,
+        449.76695800000016,
+        390.4314999999997
+      ],
+      "medianMs": 390.4314999999997,
+      "sampleStorageMiB": 1.199462890625
+    },
+    {
+      "cells": 48,
+      "chunk": 16,
+      "triangles": 14588,
+      "samples": 132651,
+      "chunks": 27,
+      "localChunks": 8,
+      "ms": 285.93924999999945,
+      "cut": true,
+      "trialsMs": [
+        285.93924999999945,
+        226.52983399999903,
+        220.29991700000028
+      ],
+      "medianMs": 226.52983399999903,
+      "sampleStorageMiB": 0.5060234069824219
+    },
+    {
+      "cells": 48,
+      "chunk": 8,
+      "triangles": 14588,
+      "samples": 157464,
+      "chunks": 216,
+      "localChunks": 12,
+      "ms": 260.0516660000012,
+      "cut": true,
+      "trialsMs": [
+        260.0516660000012,
+        521.0395419999986,
+        304.90387499999997
+      ],
+      "medianMs": 304.90387499999997,
+      "sampleStorageMiB": 0.600677490234375
+    }
+  ],
+  "local": [
+    {
+      "cells": 48,
+      "chunk": 16,
+      "rebuilt": 8,
+      "total": 27,
+      "trialsMs": [
+        146.2112079999988,
+        96.63395900000069,
+        99.78325000000041
+      ],
+      "medianMs": 99.78325000000041
+    },
+    {
+      "cells": 48,
+      "chunk": 8,
+      "rebuilt": 12,
+      "total": 216,
+      "trialsMs": [
+        18.143708999999944,
+        20.889750000000276,
+        18.19404200000099
+      ],
+      "medianMs": 18.19404200000099
+    }
+  ],
+  "sampling": [
+    {
+      "cells": 24,
+      "triangles": 1152,
+      "spacing": 6.666666666666667
+    },
+    {
+      "cells": 48,
+      "triangles": 4608,
+      "spacing": 3.3333333333333335
+    },
+    {
+      "cells": 96,
+      "triangles": 18432,
+      "spacing": 1.6666666666666667
+    }
+  ]
+}

@@ -77,7 +77,7 @@ The tide amplitude is zero in this preset. That keeps flooding from obscuring th
 
 ## 5. Make a backup film without manually performing the sequence
 
-Open **Film & exhibition tools**, then **Record 78-second film**. The app switches between the real renderers, sends the same experiment commands, and composites their frames with English captions and live measurements. Keep the tab visible; switching away stops capture. Download the captioned WebM when it finishes.
+Open **Film & exhibition tools**, then **Record 110-second comparison film**. The app switches between the real renderers, sends the same experiment commands, and composites their frames with English captions and live measurements. Keep the tab visible; switching away stops capture. Download the captioned WebM when it finishes.
 
 The finished submission files are in [the exhibition folder](../exhibition/README.md): a music MP4, a silent MP4, and English SRT captions. Captions are already burned into both films; the SRT is for editing or accessibility workflows, so enabling it on top of the film would duplicate the text.
 
@@ -94,3 +94,27 @@ Keep the live app as the interactive piece. Use the short film when unattended o
 ## Next experiment
 
 Ask one visitor to restore the trail, find the cave opening, and return the forest to its original population without verbal instructions. Record which action needs a clearer label. This audience test has not been performed yet.
+
+
+## Revision 2 — Show the operation, not only the outcome
+
+The revised 110-second film keeps a fixed parameter area beside the world. Its animated slider tracks use the same requested values that drive the rendered model. These are scripted control visualizations, not a recording of a person dragging the desktop UI. Model time is explicitly labeled as a preview clock; it is not a physical parameter.
+
+- Tide: hold the low-tide phase while amplitude moves from 2 to 4; then keep amplitude 4 and advance the clock. Initial reference: water −2 u, 164 exposed tips, 78 u of trail. High tide: +4 u, zero tips and no connected trail. Plant state stays fixed.
+- Cave: move radius from 0 to 5, show the cut, then reverse cut/add order and carve a local pocket. The pocket rebuilds 8 of 27 chunks.
+- Forest: hold time at zero while growth rate moves from 0 to 2. Keep reproduction at 1, then advance to 18 model seconds. This recording ends at 232 trees: 104 initial plants + 128 births − 0 deaths.
+
+Each step has a short out-and-back orbit. Saved reference frames and final comparison frames use the same camera. Soft transitions connect layouts. Captions read actual route availability, births and rebuild counts, so a predicted event is not announced before it appears.
+
+![Tide comparison with a dedicated parameter area](images/2026-10-13/09-film-v2-tide.jpg)
+![Solid and carved volume from the same camera](images/2026-10-13/10-film-v2-cave.jpg)
+![Initial forest and the population after 18 model seconds](images/2026-10-13/11-film-v2-forest.jpg)
+
+These are frames extracted from the actual revised recording. They are not generated illustrations. The older 78-second film remains available for comparison. Revision 2 is a local preview awaiting the owner's visual review.
+
+The [coverage audit](14%20-%20Midterm%20Coverage%20Audit.md) explains why this three-story introduction must be accompanied by the noise, erosion, biome and fluid studies to represent the wider procedural atlas. It also separates implementation from experiments that still need evidence.
+
+
+## Revision 3 — The complete course film
+
+The 5:28 full course film now adds the controlled noise, sampling, shader, rain, biome, voxel, wind, fluid, grammar, growth and crowding experiments. It ends with a 32-second rotating procedural planet. See [Tutorial 15](15%20-%20Controlled%20Experiments%20and%20the%20Planet%20Finale.md) for the time index, measured results and model boundaries. The short films above remain available as focused introductions.

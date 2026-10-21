@@ -1,9 +1,13 @@
+import PocketPortal from './PocketPortal'
+import './PocketIsland.css'
 import './Exhibition.css'
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import './App.css'
 import StudyMark from './StudyMark'
+import FieldGuide from './FieldGuide'
+import { createIllustratedPlanet } from './illustratedPlanet'
 import NoiseLab from './NoiseLab'
 import SimulationMap from './SimulationMap'
 import { makeLayer } from './noiseEngine'
@@ -20,6 +24,9 @@ type Shading = 'standard' | 'lowpoly-hard' | 'lowpoly-soft'
 
 type PlanetSettings = {
   radius: number
+  sea: number
+  moisture: number
+  temperature: number
   resolution: number
   elevation: number
   frequency: number
@@ -31,9 +38,12 @@ type PlanetSettings = {
 
 const initialSettings: PlanetSettings = {
   radius: 2,
-  resolution: 80,
+  sea: -.025,
+  moisture: .64,
+  temperature: .78,
+  resolution: 128,
   elevation: 0.35,
-  frequency: 2.8,
+  frequency: 1.5,
   spin: true,
   topology: 'uv',
   wireframe: false,
@@ -97,7 +107,7 @@ function PlanetCanvas({ settings, appearance }: { settings: PlanetSettings; appe
     const camera = new THREE.PerspectiveCamera(45, 1, .1, 100)
     camera.position.set(0, 1.2, 7.2)
     const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true })
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.setPixelRatio(Math.max(1,Math.min(window.devicePixelRatio, 2)))
     mount.appendChild(renderer.domElement)
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.enableDamping = true
@@ -130,29 +140,27 @@ function PlanetCanvas({ settings, appearance }: { settings: PlanetSettings; appe
       mount.removeChild(renderer.domElement); runtime.current = null
     }
   }, [])
-  const { radius, resolution, elevation, frequency, topology, wireframe, shading } = settings
+  const { radius, resolution, elevation, frequency, topology, wireframe, shading, sea, moisture, temperature } = settings
   useEffect(() => {
     const rt = runtime.current
     if (!rt) return
-    rt.planet.geometry.dispose()
-    rt.planet.geometry = buildPlanetGeometry({ ...initialSettings, radius, resolution, elevation, frequency, topology })
-    rt.ocean.scale.setScalar(radius * 1.01)
-  }, [radius, resolution, elevation, frequency, topology])
-  useEffect(() => {
-    const rt = runtime.current
-    if (!rt) return
-    for (const mesh of [rt.planet, rt.ocean]) {
-      applyAppearance(mesh.material, appearance)
-      mesh.material.uniforms.radius.value = radius
-      mesh.material.uniforms.amplitude.value = elevation
-      mesh.material.uniforms.interval.value = .05
-      mesh.material.uniforms.markScale.value = 5
-      mesh.material.uniforms.flatShading.value = shading !== 'standard'
-      mesh.material.uniforms.hard.value = shading === 'lowpoly-hard'
+    rt.planet.geometry.dispose();rt.planet.material.dispose()
+    if(appearance.surface==='studio'){
+      const globe=createIllustratedPlanet({radius,resolution,relief:elevation,frequency,sea,moisture,temperature,ico:topology==='ico'})
+      rt.planet.geometry=globe.geometry;rt.planet.material=globe.material
+    }else{
+      rt.planet.geometry=buildPlanetGeometry({ ...initialSettings, radius, resolution, elevation, frequency, topology })
+      rt.planet.material=createAtlasMaterial(false)
+      for(const mesh of [rt.planet,rt.ocean]){
+        applyAppearance(mesh.material,appearance)
+        mesh.material.uniforms.radius.value=radius;mesh.material.uniforms.amplitude.value=elevation
+        mesh.material.uniforms.interval.value=.05;mesh.material.uniforms.markScale.value=5
+        mesh.material.uniforms.flatShading.value=shading!=='standard';mesh.material.uniforms.hard.value=shading==='lowpoly-hard'
+      }
     }
-    rt.planet.material.wireframe = wireframe
-    rt.ocean.visible = !wireframe
-  }, [appearance, radius, elevation, wireframe, shading])
+    rt.planet.material.wireframe=wireframe;rt.ocean.scale.setScalar(radius*1.01)
+    rt.ocean.visible=appearance.surface!=='studio'&&!wireframe
+  },[radius,resolution,elevation,frequency,topology,appearance,wireframe,shading,sea,moisture,temperature])
   return <div ref={mountRef} className="planet-canvas" aria-label="Procedural planet preview" />
 }
 
@@ -194,11 +202,11 @@ function OriginalPlanet({ appearance }: { appearance: Appearance }) {
       </section>
 
       <header className="topbar">
-        <div><span className="sim-eyebrow">01 / RADIAL FIELD</span><h1 className="wordmark">Original planet</h1></div>
+        <div><span className="sim-eyebrow">01 / RADIAL FIELD</span><h1 className="wordmark">Procedural planet</h1></div>
         <span className="topbar-note">Noise, topology and a continuous surface.</span>
       </header>
 
-      <div className="world-key planet-key" aria-label="Planet material legend"><span><i className="key-water"/>Ocean</span><span><i className="key-sand"/>Coast</span><span><i className="key-green"/>Vegetation</span><span><i className="key-rock"/>Rock</span><span><i className="key-snow"/>Highland snow</span><small>Illustrative elevation bands, not a climate model.</small></div>
+      <div className="world-key planet-key" aria-label="Planet material legend"><span><i className="key-water"/>Ocean</span><span><i className="key-sand"/>Coast</span><span><i className="key-green"/>Vegetation</span><span><i className="key-rock"/>Rock</span><span><i className="key-snow"/>Highland snow</span><small>Blue ocean · sandy shore · green habitat · rock · polar snow. Procedural geography, not Earth data.</small></div>
       <aside className="control-panel" aria-label="Planet controls"><div className="inspector-heading"><span className="atlas-label">PLANET INSPECTOR</span><span className="inspector-dot"/>Form & surface</div>
         <section className="group">
           <h2>Terrain</h2>
@@ -216,6 +224,11 @@ function OriginalPlanet({ appearance }: { appearance: Appearance }) {
             onChange={(v) => updateSetting('frequency', v)} />
         </section>
 
+        {appearance.surface==='studio'&&<section className="group"><h2>Sea & habitat</h2>
+          <SliderRow index="05" label="Sea level" value={settings.sea.toFixed(2)} min={-.15} max={.15} step={.005} current={settings.sea} onChange={v=>updateSetting('sea',v)}/>
+          <SliderRow index="06" label="Moisture" value={settings.moisture.toFixed(2)} min={0} max={1} step={.01} current={settings.moisture} onChange={v=>updateSetting('moisture',v)}/>
+          <SliderRow index="07" label="Temperature" value={settings.temperature.toFixed(2)} min={0} max={1} step={.01} current={settings.temperature} onChange={v=>updateSetting('temperature',v)}/>
+        </section>}
         <section className="group">
           <h2>Look</h2>
           <ChoiceRow index="05" label="Topology" value={settings.topology}
@@ -224,13 +237,13 @@ function OriginalPlanet({ appearance }: { appearance: Appearance }) {
               { value: 'ico', label: 'Icosphere' },
             ]}
             onChange={(v) => updateSetting('topology', v as Topology)} />
-          <ChoiceRow index="06" label="Shading" value={settings.shading}
+          {appearance.surface!=='studio'&&<ChoiceRow index="06" label="Shading" value={settings.shading}
             options={[
               { value: 'standard', label: 'Standard' },
               { value: 'lowpoly-hard', label: 'Low-poly hard' },
               { value: 'lowpoly-soft', label: 'Low-poly soft' },
             ]}
-            onChange={(v) => updateSetting('shading', v as Shading)} />
+            onChange={(v) => updateSetting('shading', v as Shading)} />}
         </section>
 
         <section className="group">
@@ -243,11 +256,11 @@ function OriginalPlanet({ appearance }: { appearance: Appearance }) {
       </aside>
 
       <footer className="statusline">
-        <span>{shadingLabel[settings.shading]}</span>
+        <span>{appearance.surface==='studio'?'Illustrated light bands':shadingLabel[settings.shading]}</span>
         <span className="dot" />
         <span>{settings.topology === 'uv' ? 'UV sphere' : 'Icosphere'}</span>
         <span className="dot" />
-        <span>{settings.resolution} segments</span><span>Optional radial contours · 0.05 u</span>
+        <span>{settings.resolution} segments</span><span>{appearance.surface==='studio'?'Seed 17 · 512 × 256 scalar texture':'Optional radial contours · 0.05 u'}</span>
       </footer>
     </main>
   )
@@ -342,8 +355,9 @@ function ToggleRow({ index, label, on, onChange }: ToggleRowProps) {
 function App() {
   const [tab, setTab] = useState(() => {
     const workspace = new URLSearchParams(window.location.search).get('workspace')
-    return workspace && ['planet', 'noise', 'simulation', 'living', 'voxels', 'fields'].includes(workspace) ? workspace : 'simulation'
+    return workspace && ['planet', 'noise', 'simulation', 'living', 'voxels', 'fields'].includes(workspace) ? workspace : 'planet'
   })
+  const [guide,setGuide]=useState(()=>new URLSearchParams(location.search).has('intro')||!location.search)
   const [visited,setVisited] = useState<string[]>([tab])
   const changeTab=(id:string)=>{setVisited(v=>v.includes(id)?v:[...v,id]);setTab(id)}
   useEffect(()=>{const url=new URL(window.location.href);url.searchParams.set('workspace',tab);window.history.replaceState(null,'',url)},[tab])
@@ -355,15 +369,15 @@ function App() {
   })
   const [interfacePalette, setInterfacePalette] = useState<Palette>('forest')
   const studies = [
-    { id: 'planet', name: 'Original planet', subtitle: 'Form & topology', number: '01' },
+    { id: 'planet', name: 'Procedural planet', subtitle: 'Form & topology', number: '01' },
     { id: 'noise', name: 'Noise laboratory', subtitle: 'Layers & height fields', number: '02' },
     { id: 'simulation', name: 'Simulation map', subtitle: 'Erosion & height fields', number: '03' },
     { id: 'living', name: 'Living coast', subtitle: 'Biomes, tides & life', number: '04' },
     { id: 'voxels', name: 'Voxel terrain', subtitle: 'Caves & solid space', number: '05' },
     { id: 'fields', name: 'Fluid laboratory', subtitle: 'Wind & transported dye', number: '06' },
   ]
-  return <div className="atlas workbench" data-palette={interfacePalette} data-surface={appearance.surface}>
-    <header className="atlas-masthead"><div className="studio-wordmark"><span className="studio-seal" aria-hidden="true">✳</span><div><span className="atlas-brand">Fieldwork <span>Nature Studio</span></span><p>A small world, a closer look.</p></div></div><a className="exhibition-entry" href="?exhibition=1" target="_blank" rel="noreferrer">Open exhibition ↗</a><span className="atlas-edition">PROCEDURAL WORLD BUILDING<br/><b>OBSERVE · EXPERIMENT · UNDERSTAND</b></span></header>
+  return <><FieldGuide open={guide} onClose={()=>setGuide(false)} onExplore={id=>{changeTab(id);setGuide(false);requestAnimationFrame(()=>document.getElementById(`tab-${id}`)?.focus())}}/><div inert={guide} className="atlas workbench" data-palette={interfacePalette} data-surface={appearance.surface}>
+    <header className="atlas-masthead"><div className="studio-wordmark"><span className="studio-seal" aria-hidden="true">✳</span><div><span className="atlas-brand">Fieldwork <span>Nature Studio</span></span><p>A small world, a closer look.</p></div></div><PocketPortal/><button className="guide-entry" onClick={()=>setGuide(true)}>Ride the Fieldwork Express ↗</button><a className="exhibition-entry" href="?experiments=1" target="_blank" rel="noreferrer">Compare experiments ↗</a><a className="exhibition-entry" href="?exhibition=1" target="_blank" rel="noreferrer">Open exhibition ↗</a><span className="atlas-edition">PROCEDURAL WORLD BUILDING<br/><b>OBSERVE · EXPERIMENT · UNDERSTAND</b></span></header>
     <aside className="studio-library"><span className="atlas-label">YOUR FIELD STUDIES</span><nav className="workspace-nav" role="tablist" aria-label="Workspace" aria-orientation="vertical">
       {studies.map(study=><button key={study.id} role="tab" id={`tab-${study.id}`} aria-controls={`study-${study.id}`} aria-selected={tab===study.id} tabIndex={tab===study.id?0:-1} onKeyDown={event=>{
         const keys=['ArrowDown','ArrowRight','ArrowUp','ArrowLeft','Home','End']
@@ -374,15 +388,15 @@ function App() {
         changeTab(studies[next].id);document.getElementById(`tab-${studies[next].id}`)?.focus()
       }} onClick={()=>changeTab(study.id)}><StudyMark kind={study.id}/><span><strong>{study.name}</strong><small>{study.subtitle}</small></span><i>{study.number}</i></button>)}
     </nav><section className="library-note"><span className="atlas-label">IN THE FIELD</span><h2>Look for the<br/>little connections.</h2><p>Shape the ground.<br/>Follow the water.<br/>Find where trees belong.</p><div className="library-colors" aria-hidden="true"><i/><i/><i/><i/></div></section><div className="library-foot"><span className="inspector-dot"/> An interactive field notebook</div></aside>
-    <div className="atlas-appearance"><div className="appearance-domain"><span className="atlas-label">WORLD</span><label>Rendering<select disabled={["living","voxels","fields"].includes(tab)} aria-label="World rendering" value={appearance.surface} onChange={e=>setAppearance({surface:e.target.value as Surface})}><option value="studio">Natural illustration</option><option value="illustrated">Illustrated map · archive</option><option value="relief">Natural materials</option><option value="contours">Materials + contours</option><option value="stipple">Materials + stipple</option></select></label></div><div className="appearance-domain"><label>Panel accent<select aria-label="Interface accent" value={interfacePalette} onChange={e=>setInterfacePalette(e.target.value as Palette)}><option value="forest">Sage</option><option value="graphite">Graphite</option></select></label></div><span className="atlas-appearance-note">{["living","voxels","fields"].includes(tab)?"This study uses its own material and data views.":"Same world. A different way to see it."}</span></div>
+    <div className="atlas-appearance"><div className="appearance-domain"><span className="atlas-label">WORLD</span><label>Rendering<select disabled={["living","voxels","fields"].includes(tab)} aria-label="World rendering" value={appearance.surface} onChange={e=>setAppearance({surface:e.target.value as Surface})}><option value="studio">Game illustration</option><option value="illustrated">Illustrated map · archive</option><option value="relief">Natural materials</option><option value="contours">Materials + contours</option><option value="stipple">Materials + stipple</option></select></label></div><div className="appearance-domain"><label>Panel accent<select aria-label="Interface accent" value={interfacePalette} onChange={e=>setInterfacePalette(e.target.value as Palette)}><option value="forest">Indigo</option><option value="graphite">Graphite</option></select></label></div><span className="atlas-appearance-note">{["living","voxels","fields"].includes(tab)?"This study uses its own material and data views.":tab==='planet'?(appearance.surface==='studio'?"Shared Perlin sampling · stylized geography.":"Archived sine terrain and surface study."):"Same world. A different way to see it."}</span></div>
     <div className="studio-content" role="tabpanel" id="study-planet" aria-labelledby="tab-planet" hidden={tab!=='planet'}><OriginalPlanet appearance={appearance}/></div>
     <div className="studio-content" role="tabpanel" id="study-noise" aria-labelledby="tab-noise" hidden={tab!=='noise'}><NoiseLab {...{layers,setLayers,solo,setSolo,appearance}}/></div>
-    {(visited.includes('simulation')||tab==='simulation')&&<div hidden={tab!=='simulation'} className="studio-content" role="tabpanel" id="study-simulation" aria-labelledby="tab-simulation"><SimulationMap {...{layers,solo,appearance}} active={tab==='simulation'}/></div>}
+    {(visited.includes('simulation')||tab==='simulation')&&<div hidden={tab!=='simulation'} className="studio-content" role="tabpanel" id="study-simulation" aria-labelledby="tab-simulation"><SimulationMap {...{layers,solo,appearance}} active={tab==='simulation'&&!guide}/></div>}
     <Suspense fallback={<div className="studio-content field-note">Preparing the field study…</div>}>
-      {(visited.includes('living')||tab==='living')&&<div className="studio-content" role="tabpanel" id="study-living" aria-labelledby="tab-living" hidden={tab!=='living'}><LivingWorld layers={layers} solo={solo} active={tab==='living'}/></div>}
-      {(visited.includes('voxels')||tab==='voxels')&&<div className="studio-content" role="tabpanel" id="study-voxels" aria-labelledby="tab-voxels" hidden={tab!=='voxels'}><VoxelLab active={tab==='voxels'}/></div>}
-      {(visited.includes('fields')||tab==='fields')&&<div className="studio-content" role="tabpanel" id="study-fields" aria-labelledby="tab-fields" hidden={tab!=='fields'}><FieldLab active={tab==='fields'}/></div>}
+      {(visited.includes('living')||tab==='living')&&<div className="studio-content" role="tabpanel" id="study-living" aria-labelledby="tab-living" hidden={tab!=='living'}><LivingWorld layers={layers} solo={solo} active={tab==='living'&&!guide}/></div>}
+      {(visited.includes('voxels')||tab==='voxels')&&<div className="studio-content" role="tabpanel" id="study-voxels" aria-labelledby="tab-voxels" hidden={tab!=='voxels'}><VoxelLab active={tab==='voxels'&&!guide}/></div>}
+      {(visited.includes('fields')||tab==='fields')&&<div className="studio-content" role="tabpanel" id="study-fields" aria-labelledby="tab-fields" hidden={tab!=='fields'}><FieldLab active={tab==='fields'&&!guide}/></div>}
     </Suspense>
-  </div>
+  </div></>
 }
 export default App

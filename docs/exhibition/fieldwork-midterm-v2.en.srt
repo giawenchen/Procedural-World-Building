@@ -1,0 +1,79 @@
+1
+00:00:00,000 --> 00:00:04,425
+A changing coast. A carved mountain. A forest that keeps growing.
+
+2
+00:00:04,425 --> 00:00:10,050
+At low tide, the beach and reef tips are exposed. The trail is connected.
+
+3
+00:00:10,050 --> 00:00:13,050
+Drag Tide amplitude from 2 to 4. At this low-tide phase, more shore is exposed.
+
+4
+00:00:13,050 --> 00:00:19,317
+The water is rising. Watch the beach narrow around the same trees.
+
+5
+00:00:19,317 --> 00:00:22,033
+The water has cut the dry connection. The trail is now disconnected.
+
+6
+00:00:22,033 --> 00:00:28,025
+The same coast at high tide: exposed reef tips and the dry trail disappear.
+
+7
+00:00:28,025 --> 00:00:31,075
+The tide is retreating. The trail is still waiting for a dry connection.
+
+8
+00:00:31,075 --> 00:00:38,042
+The trail has reconnected. More reef tips emerge as the water retreats.
+
+9
+00:00:38,042 --> 00:00:42,042
+Low tide restores the shoreline. Compare it with the high-water reference.
+
+10
+00:00:42,042 --> 00:00:48,391
+Begin with solid terrain. There is no tunnel through this volume.
+
+11
+00:00:48,391 --> 00:00:56,266
+Increase the cut radius. The opening widens through real remeshing.
+
+12
+00:00:56,266 --> 00:01:02,116
+The tunnel is empty space beneath solid ground. Compare the same front face.
+
+13
+00:01:02,116 --> 00:01:08,058
+Carve first, then add the pillar. The operation order brings solid material back.
+
+14
+00:01:08,058 --> 00:01:15,275
+A local pocket changes the surface. Only 8 of 27 chunks were rebuilt.
+
+15
+00:01:15,275 --> 00:01:20,016
+Start with the same 104 seeded trees. Tide and branch grammar stay fixed.
+
+16
+00:01:20,016 --> 00:01:23,025
+Drag Growth rate from 0 to 2, then advance time. Reproduction stays at 1.
+
+17
+00:01:23,025 --> 00:01:30,108
+Ecological time is advancing. Watch the original trees grow before seedlings appear.
+
+18
+00:01:30,108 --> 00:01:38,032
+New seedlings are appearing. Existing trees also grow in size.
+
+19
+00:01:38,032 --> 00:01:44,033
+232 living trees, 128 births and 0 deaths. Compare with the original stand.
+
+20
+00:01:44,033 --> 00:01:50,000
+Three experiments. The same question: what changes when a rule changes?

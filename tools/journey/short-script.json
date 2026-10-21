@@ -1,0 +1,128 @@
+[
+  {
+    "id": "depart",
+    "at": 0,
+    "duration": 14,
+    "text": "Come along, little seed. Hills catch the rain. Water shapes a home. And one day, a forest grows. Let us follow the clues."
+  },
+  {
+    "id": "noise",
+    "at": 14,
+    "duration": 10,
+    "text": "First, raise the noise frequency. Broad hills become smaller ridges. The seed stays the same."
+  },
+  {
+    "id": "resolution",
+    "at": 24,
+    "duration": 6,
+    "text": "More samples reveal the same landscape in finer detail."
+  },
+  {
+    "id": "shader",
+    "at": 30,
+    "duration": 8,
+    "text": "Now raise the snow line. The mountain stays still; only its coat changes."
+  },
+  {
+    "id": "erosion",
+    "at": 38,
+    "duration": 12,
+    "text": "Give the same hills more rain. Water carries soil downhill, cutting some slopes and leaving sediment below."
+  },
+  {
+    "id": "climate",
+    "at": 50,
+    "duration": 8,
+    "text": "Add moisture to the same land. The habitat map changes, opening different homes for life."
+  },
+  {
+    "id": "density",
+    "at": 58,
+    "duration": 7,
+    "text": "Inside the mountain, density tells us where solid ground exists."
+  },
+  {
+    "id": "cave",
+    "at": 65,
+    "duration": 12,
+    "text": "Widen the tunnel. A cave opens. Then add a pillar after cutting: the order changes what remains."
+  },
+  {
+    "id": "pocket",
+    "at": 77,
+    "duration": 10,
+    "text": "Carve one small pocket. Only nearby chunks need rebuilding; the distant landscape stays cached."
+  },
+  {
+    "id": "voxel-resolution",
+    "at": 87,
+    "duration": 4,
+    "text": "Finer voxels cost more work."
+  },
+  {
+    "id": "chunks",
+    "at": 91,
+    "duration": 3,
+    "text": "Smaller chunks change that tradeoff."
+  },
+  {
+    "id": "meshing",
+    "at": 94,
+    "duration": 3,
+    "text": "Marching Cubes finds the surface."
+  },
+  {
+    "id": "wind",
+    "at": 97,
+    "duration": 8,
+    "text": "Turn the vector field. The same particles follow a new direction, revealing the invisible wind."
+  },
+  {
+    "id": "fluid",
+    "at": 105,
+    "duration": 12,
+    "text": "In this fluid study, dye follows the flow. Pressure correction reduces divergence. Watch the two versions side by side."
+  },
+  {
+    "id": "grammar",
+    "at": 117,
+    "duration": 8,
+    "text": "Repeat a branching rule. A simple line becomes a tree, one generation at a time."
+  },
+  {
+    "id": "angle",
+    "at": 125,
+    "duration": 4,
+    "text": "Open the angle; spread the crown."
+  },
+  {
+    "id": "growth",
+    "at": 129,
+    "duration": 6,
+    "text": "With births switched off, trees grow larger, not more numerous."
+  },
+  {
+    "id": "population",
+    "at": 135,
+    "duration": 8,
+    "text": "Now allow new seeds. The same starting forest becomes a growing population."
+  },
+  {
+    "id": "competition",
+    "at": 143,
+    "duration": 4,
+    "text": "Crowding changes who can thrive."
+  },
+  {
+    "id": "tide",
+    "at": 147,
+    "duration": 15,
+    "text": "Here comes the tide. Follow the waterline as it climbs. A low path floods, and the route must change. As water retreats, the shore returns."
+  },
+  {
+    "id": "planet",
+    "at": 162,
+    "duration": 14,
+    "text": "A little world, shaped by connected questions. Land, water, and life. These studies remain separate models. The next story begins with the rule you choose."
+  }
+]

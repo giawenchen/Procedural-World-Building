@@ -1,0 +1,11 @@
+/* Interface palette: paper, ink and brass. World materials retain their meaning. */
+.workbench{--paper:#f3eddf;--panel:#fffaf0;--ink:#373442;--muted:#7c746d;--accent:#665481;--line:#e0d6c4;--wash:#ece4d4;background:var(--paper)}
+.workbench[data-palette=graphite]{--accent:#4a4a4d}.workbench .atlas-masthead{border-bottom:1px solid var(--line);margin-bottom:20px;padding:22px 0}.workbench .atlas-brand{color:var(--ink)}
+.workbench .studio-library,.workbench .field-card,.workbench .control-panel,.workbench .lab-controls{background:var(--panel);border-color:var(--line);box-shadow:0 3px 0 #daceb22b;border-radius:9px}
+.workbench .workspace-nav button[aria-selected=true]{background:#eee4ce;border-color:#d1b87a;color:#443751;box-shadow:inset 3px 0 #c6a558}
+.workbench .atlas-appearance{background:#ece3cf;border-color:#e3d6bd}.workbench input[type=range]{accent-color:var(--accent)}.workbench input[type=checkbox]{accent-color:var(--accent)}
+.workbench .sim-primary,.workbench .toggle.active{background:var(--accent);border-color:var(--accent);color:#fff7e5}.workbench .sim-primary:hover:not(:disabled){background:#4c3e63}
+.workbench button:hover:not(:disabled){background:#ede2ca;border-color:#cab793}.workbench .field-scene,.workbench .sim-stage,.workbench .viewport{border-color:#e0d4be}.workbench .field-toolbar,.workbench .field-legend{background:#fff8e8;border-color:#e3d8c2}.workbench .field-stats{background:#eee5cf}.workbench .field-toolbar button[aria-pressed=true]{background:#655581;color:#fff8e8;border-color:#655581}
+.workbench .guide-entry{margin-left:auto;border:1px solid #d6c292;background:#f3e5bd;color:#504364;white-space:nowrap;padding:10px 14px}.workbench .exhibition-entry{margin-left:0;font-size:11px}.workbench .atlas-masthead{gap:18px;flex-wrap:wrap}.workbench .atlas-edition{color:#796e5e}.workbench .studio-seal{color:#655481;background:#f8e8bd}.workbench .sim-status{background:#f8edcf;border-color:#dbc99f}
+.workbench .key-water{background:#196080!important}.workbench .key-green{background:#84a055!important}.workbench .key-sand{background:#dcc78d!important}
+@media(max-width:760px){.workbench .guide-entry{margin-left:0}.workbench .atlas-edition{display:none}.workbench .atlas-masthead{gap:10px}}

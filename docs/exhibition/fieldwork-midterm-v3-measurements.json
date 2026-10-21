@@ -1,0 +1,778 @@
+{
+  "duration": 328,
+  "capturedAt": "2026-10-13T20:52:06.955Z",
+  "observations": {
+    "intro": {
+      "at": 7.999480000000002,
+      "metrics": "Noise · shaders · erosion · biomes · voxels · vector fields · L-systems · ecosystems",
+      "controls": [
+        {
+          "label": "Noise frequency",
+          "value": 2,
+          "min": 1,
+          "max": 4,
+          "note": "Spherical 3D sampling",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Relief",
+          "value": 0.23,
+          "min": 0,
+          "max": 0.5,
+          "note": "Radial displacement",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Sea level",
+          "value": 0.015,
+          "min": -0.1,
+          "max": 0.1,
+          "note": "Ocean radius",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Moisture",
+          "value": 0.55,
+          "min": 0,
+          "max": 1,
+          "note": "Land cover + habitat points",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Temperature",
+          "value": 0.66,
+          "min": 0,
+          "max": 1,
+          "note": "Latitude + altitude bands",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Wind strength",
+          "value": 1.5,
+          "min": 0,
+          "max": 3,
+          "note": "Prescribed tracer speed",
+          "active": false,
+          "unit": ""
+        }
+      ],
+      "measurements": {
+        "frequency": 2,
+        "relief": 0.23,
+        "sea": 0.015,
+        "moisture": 0.55,
+        "temperature": 0.66,
+        "wind": 1.5
+      }
+    },
+    "noise": {
+      "at": 25.966279999999966,
+      "metrics": "Frequency 4.00 / 64² cells / 8,192 triangles",
+      "controls": [
+        {
+          "label": "Frequency",
+          "value": 4,
+          "min": 1,
+          "max": 4,
+          "note": "1 → 4 · seed 17",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Octaves",
+          "value": 3,
+          "min": 1,
+          "max": 6,
+          "note": "Held fixed",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Relief amplitude",
+          "value": 22,
+          "min": 0,
+          "max": 40,
+          "note": "Held at 22 u",
+          "active": false,
+          "unit": " u"
+        }
+      ],
+      "measurements": {}
+    },
+    "resolution": {
+      "at": 39.99978000000072,
+      "metrics": "96² cells / 18,432 triangles / 1.67 u per cell",
+      "controls": [
+        {
+          "label": "Cells per side",
+          "value": 96,
+          "min": 24,
+          "max": 96,
+          "note": "24 → 48 → 96",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Frequency",
+          "value": 4,
+          "min": 1,
+          "max": 4,
+          "note": "Same noise field",
+          "active": false,
+          "unit": ""
+        }
+      ],
+      "measurements": {}
+    },
+    "shader": {
+      "at": 51.99958000000222,
+      "metrics": "Snow threshold 16.0 u / same 8,192 triangles",
+      "controls": [
+        {
+          "label": "Snow threshold",
+          "value": 16,
+          "min": 6,
+          "max": 16,
+          "note": "6 → 16 · material only",
+          "active": false,
+          "unit": " u"
+        },
+        {
+          "label": "Relief amplitude",
+          "value": 22,
+          "min": 0,
+          "max": 40,
+          "note": "Geometry held fixed",
+          "active": false,
+          "unit": ""
+        }
+      ],
+      "measurements": {}
+    },
+    "erosion": {
+      "at": 73.9993800000035,
+      "metrics": "100 steps / rain .050 / cut 0.772 / deposit 0.583",
+      "controls": [
+        {
+          "label": "Rain A",
+          "value": 0.005,
+          "min": 0,
+          "max": 0.06,
+          "note": "Fixed low rainfall",
+          "active": false,
+          "unit": " u/step"
+        },
+        {
+          "label": "Rain B",
+          "value": 0.05,
+          "min": 0,
+          "max": 0.06,
+          "note": "Fixed high rainfall",
+          "active": false,
+          "unit": " u/step"
+        },
+        {
+          "label": "Equal steps",
+          "value": 100,
+          "min": 0,
+          "max": 100,
+          "note": "Both trials advance together",
+          "active": false,
+          "unit": ""
+        }
+      ],
+      "measurements": {
+        "steps": 100,
+        "a": {
+          "cut": 0.43922561625653145,
+          "fill": 0.3604106249407791,
+          "waterMean": 0.25590008454860225
+        },
+        "b": {
+          "cut": 0.7722611719608092,
+          "fill": 0.5832008594264326,
+          "waterMean": 2.5590011673010666
+        }
+      }
+    },
+    "climate": {
+      "at": 91.99938000000446,
+      "metrics": "Moisture 0.80 / forest cells 1071 / 104 eligible initial trees",
+      "controls": [
+        {
+          "label": "Moisture",
+          "value": 0.8,
+          "min": 0,
+          "max": 1,
+          "note": ".25 → .80 · fixed terrain",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Temperature",
+          "value": 0.75,
+          "min": 0,
+          "max": 1,
+          "note": "Held at .75",
+          "active": false,
+          "unit": ""
+        }
+      ],
+      "measurements": {
+        "counts": [
+          4003,
+          366,
+          881,
+          167,
+          1071,
+          0,
+          73
+        ],
+        "trees": 104
+      }
+    },
+    "density": {
+      "at": 107.98998000000536,
+      "metrics": "Noise volume / 48³ cells / 7,016 triangles",
+      "controls": [
+        {
+          "label": "Shape index",
+          "value": 3,
+          "min": 1,
+          "max": 3,
+          "note": "Noise volume",
+          "active": true,
+          "unit": ""
+        },
+        {
+          "label": "Shape radius",
+          "value": 13,
+          "min": 6,
+          "max": 18,
+          "note": "Held at 13 u",
+          "active": false,
+          "unit": ""
+        }
+      ],
+      "measurements": {}
+    },
+    "cave": {
+      "at": 127.99908000000549,
+      "metrics": "Terrain / 48³ cells / 14,728 triangles",
+      "controls": [
+        {
+          "label": "Cave radius",
+          "value": 5,
+          "min": 0,
+          "max": 9,
+          "note": "0 → 5 · cylinder subtraction",
+          "active": false,
+          "unit": " u"
+        }
+      ],
+      "measurements": {}
+    },
+    "pocket": {
+      "at": 139.9901800000061,
+      "metrics": "Terrain / 48³ cells / 14,836 triangles / 8 / 27 local rebuilds",
+      "controls": [
+        {
+          "label": "Pocket radius",
+          "value": 4,
+          "min": 0,
+          "max": 6,
+          "note": "Local edit centered at (8,6,12)",
+          "active": true,
+          "unit": " u"
+        }
+      ],
+      "measurements": {}
+    },
+    "voxel-resolution": {
+      "at": 153.9821800000073,
+      "metrics": "64³ / 16³ chunks / 26,716 triangles / median 227.2 ms",
+      "controls": [
+        {
+          "label": "Volume cells",
+          "value": 64,
+          "min": 32,
+          "max": 64,
+          "note": "32 → 48 → 64",
+          "active": true,
+          "unit": ""
+        },
+        {
+          "label": "Chunk cells",
+          "value": 16,
+          "min": 8,
+          "max": 16,
+          "note": "16 → 8",
+          "active": false,
+          "unit": ""
+        }
+      ],
+      "measurements": {
+        "cells": 64,
+        "chunk": 16,
+        "triangles": 26716,
+        "samples": 314432,
+        "chunks": 64,
+        "localChunks": 4,
+        "ms": 229.8999999910593,
+        "medianMs": 227.20000000298023
+      }
+    },
+    "chunks": {
+      "at": 165.99888000000826,
+      "metrics": "48³ / 8³ chunks / 14,588 triangles / median 89.1 ms",
+      "controls": [
+        {
+          "label": "Volume cells",
+          "value": 48,
+          "min": 32,
+          "max": 64,
+          "note": "32 → 48 → 64",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Chunk cells",
+          "value": 8,
+          "min": 8,
+          "max": 16,
+          "note": "16 → 8",
+          "active": true,
+          "unit": ""
+        }
+      ],
+      "measurements": {
+        "cells": 48,
+        "chunk": 8,
+        "triangles": 14588,
+        "samples": 157464,
+        "chunks": 216,
+        "localChunks": 12,
+        "ms": 89.09999999403954,
+        "medianMs": 89.09999999403954
+      }
+    },
+    "meshing": {
+      "at": 173.998780000009,
+      "metrics": "Alternative methods are explained here, not presented as implemented benchmarks.",
+      "controls": [
+        {
+          "label": "Implemented mesher",
+          "value": 1,
+          "min": 0,
+          "max": 1,
+          "note": "Marching Cubes",
+          "active": false,
+          "unit": ""
+        }
+      ],
+      "measurements": {}
+    },
+    "wind": {
+      "at": 191.94858000001068,
+      "metrics": "Speed 4 u/s / equal time 8.0 s / distance 32.0 u",
+      "controls": [
+        {
+          "label": "Direction A",
+          "value": 0,
+          "min": 0,
+          "max": 360,
+          "note": "Constant field · swirl 0",
+          "active": false,
+          "unit": "°"
+        },
+        {
+          "label": "Direction B",
+          "value": 90,
+          "min": 0,
+          "max": 360,
+          "note": "Same speed 4 u/s",
+          "active": false,
+          "unit": "°"
+        },
+        {
+          "label": "Equal time",
+          "value": 8,
+          "min": 0,
+          "max": 8,
+          "note": "Both trials advance together",
+          "active": false,
+          "unit": " s"
+        }
+      ],
+      "measurements": {
+        "a": {
+          "time": 8,
+          "distance": 32,
+          "direction": 0
+        },
+        "b": {
+          "time": 8,
+          "distance": 32,
+          "direction": 90
+        }
+      }
+    },
+    "fluid": {
+      "at": 211.98178000001235,
+      "metrics": "Time 8.0 s / B divergence 0.20236 → 0.13739",
+      "controls": [
+        {
+          "label": "Pressure A",
+          "value": 0,
+          "min": 0,
+          "max": 100,
+          "note": "No projection iterations",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Pressure B",
+          "value": 40,
+          "min": 0,
+          "max": 100,
+          "note": "Jacobi projection",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Equal time",
+          "value": 7.999999999999977,
+          "min": 0,
+          "max": 8,
+          "note": "Both 40² grids advance together",
+          "active": false,
+          "unit": " s"
+        }
+      ],
+      "measurements": {
+        "a": {
+          "time": 7.999999999999977,
+          "before": 2.6586621722511103,
+          "after": 2.6586621722511103
+        },
+        "b": {
+          "time": 7.999999999999977,
+          "before": 0.20235508249964865,
+          "after": 0.13739498346075496
+        }
+      }
+    },
+    "grammar": {
+      "at": 229.98158000001482,
+      "metrics": "3 iterations / 125 segments / angle 30°",
+      "controls": [
+        {
+          "label": "Iterations",
+          "value": 3,
+          "min": 1,
+          "max": 3,
+          "note": "Parallel F replacement",
+          "active": true,
+          "unit": ""
+        },
+        {
+          "label": "Branch angle",
+          "value": 30,
+          "min": 15,
+          "max": 45,
+          "note": "Turtle turn angle",
+          "active": false,
+          "unit": "°"
+        }
+      ],
+      "measurements": {}
+    },
+    "angle": {
+      "at": 237.9982800000152,
+      "metrics": "3 iterations / 125 segments / angle 45°",
+      "controls": [
+        {
+          "label": "Iterations",
+          "value": 3,
+          "min": 1,
+          "max": 3,
+          "note": "Parallel F replacement",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Branch angle",
+          "value": 45,
+          "min": 15,
+          "max": 45,
+          "note": "Turtle turn angle",
+          "active": true,
+          "unit": "°"
+        }
+      ],
+      "measurements": {}
+    },
+    "growth": {
+      "at": 245.99808000001593,
+      "metrics": "18.0 s / 104 trees / mean size A 0.72 vs B 1.30",
+      "controls": [
+        {
+          "label": "Growth A",
+          "value": 0,
+          "min": 0,
+          "max": 3,
+          "note": "Frozen size",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Growth B",
+          "value": 2,
+          "min": 0,
+          "max": 3,
+          "note": "Same 104 existing plants",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Equal time",
+          "value": 18,
+          "min": 0,
+          "max": 18,
+          "note": "Reproduction off in both",
+          "active": false,
+          "unit": " s"
+        }
+      ],
+      "measurements": {
+        "time": 18,
+        "a": {
+          "trees": 104,
+          "births": 0,
+          "deaths": 0,
+          "meanSize": 0.7179055280157344,
+          "meanHealth": 1
+        },
+        "b": {
+          "trees": 104,
+          "births": 0,
+          "deaths": 0,
+          "meanSize": 1.2999999999999987,
+          "meanHealth": 1
+        }
+      }
+    },
+    "population": {
+      "at": 267.99788000001354,
+      "metrics": "18.0 model seconds / 232 trees / +128 births / 0 deaths",
+      "controls": [
+        {
+          "label": "Growth rate",
+          "value": 2,
+          "min": 0,
+          "max": 3,
+          "note": "Same in both trials",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Reproduction B",
+          "value": 1,
+          "min": 0,
+          "max": 3,
+          "note": "A = 0 · B = 1",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Equal time",
+          "value": 18,
+          "min": 0,
+          "max": 18,
+          "note": "Same starting seed 17",
+          "active": false,
+          "unit": " s"
+        }
+      ],
+      "measurements": {
+        "time": 18,
+        "a": {
+          "trees": 104,
+          "births": 0,
+          "deaths": 0,
+          "meanSize": 1.2999999999999987,
+          "meanHealth": 1
+        },
+        "b": {
+          "trees": 232,
+          "births": 128,
+          "deaths": 0,
+          "meanSize": 0.8049726743175115,
+          "meanHealth": 0.9890754310344833
+        }
+      }
+    },
+    "competition": {
+      "at": 275.9979800000116,
+      "metrics": "18.0 s / B 232 trees / health 0.9891 / deaths 0",
+      "controls": [
+        {
+          "label": "Competition A",
+          "value": 0,
+          "min": 0,
+          "max": 8,
+          "note": "No crowding neighborhood",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Competition B",
+          "value": 5,
+          "min": 0,
+          "max": 8,
+          "note": "Same growth and reproduction",
+          "active": false,
+          "unit": ""
+        },
+        {
+          "label": "Equal time",
+          "value": 18,
+          "min": 0,
+          "max": 18,
+          "note": "Same initial population",
+          "active": false,
+          "unit": " s"
+        }
+      ],
+      "measurements": {
+        "time": 18,
+        "a": {
+          "trees": 244,
+          "births": 140,
+          "deaths": 0,
+          "meanSize": 0.8416393442622898,
+          "meanHealth": 1
+        },
+        "b": {
+          "trees": 232,
+          "births": 128,
+          "deaths": 0,
+          "meanSize": 0.8049726743175115,
+          "meanHealth": 0.9890754310344833
+        }
+      }
+    },
+    "tide": {
+      "at": 295.9978800000078,
+      "metrics": "Water -4.00 u / trail 78 u / fixed 104 trees",
+      "controls": [
+        {
+          "label": "Tide amplitude",
+          "value": 4,
+          "min": 0,
+          "max": 4,
+          "note": "2 → 4, then held",
+          "active": false,
+          "unit": " u"
+        },
+        {
+          "label": "Tide period",
+          "value": 24,
+          "min": 8,
+          "max": 60,
+          "note": "Held fixed",
+          "active": false,
+          "unit": " s"
+        },
+        {
+          "label": "Preview time",
+          "value": 42,
+          "min": 18,
+          "max": 42,
+          "note": "Clock scrub, not a physics slider",
+          "active": false,
+          "unit": " s"
+        }
+      ],
+      "measurements": {
+        "time": 42,
+        "amplitude": 4,
+        "sea": -4,
+        "path": 77.9411254969543
+      }
+    },
+    "planet": {
+      "at": 328,
+      "metrics": "Jiawen Chen / AI-assisted procedural atlas / Sessions 1–7",
+      "controls": [
+        {
+          "label": "Noise frequency",
+          "value": 2.069929522910296,
+          "min": 1,
+          "max": 4,
+          "note": "Spherical 3D sampling",
+          "active": true,
+          "unit": ""
+        },
+        {
+          "label": "Relief",
+          "value": 0.3186413000664405,
+          "min": 0,
+          "max": 0.5,
+          "note": "Radial displacement",
+          "active": true,
+          "unit": ""
+        },
+        {
+          "label": "Sea level",
+          "value": -0.03595145092448157,
+          "min": -0.1,
+          "max": 0.1,
+          "note": "Ocean radius",
+          "active": true,
+          "unit": ""
+        },
+        {
+          "label": "Moisture",
+          "value": 0.4995524673109678,
+          "min": 0,
+          "max": 1,
+          "note": "Land cover + habitat points",
+          "active": true,
+          "unit": ""
+        },
+        {
+          "label": "Temperature",
+          "value": 0.494747314559532,
+          "min": 0,
+          "max": 1,
+          "note": "Latitude + altitude bands",
+          "active": true,
+          "unit": ""
+        },
+        {
+          "label": "Wind strength",
+          "value": 2.572037332394582,
+          "min": 0,
+          "max": 3,
+          "note": "Prescribed tracer speed",
+          "active": true,
+          "unit": ""
+        }
+      ],
+      "measurements": {
+        "frequency": 2.069929522910296,
+        "relief": 0.3186413000664405,
+        "sea": -0.03595145092448157,
+        "moisture": 0.4995524673109678,
+        "temperature": 0.494747314559532,
+        "wind": 2.572037332394582
+      }
+    }
+  }
+}
