@@ -117,3 +117,7 @@ STYLE-GUIDE.md      Design direction and palette tokens
 ```
 
 The tutorials are also accessible through my Obsidian vault. Images stay beside the tutorials in `images/`.
+
+## Session 8 — Agents and ecosystem feedback
+
+The local desktop app now has a separate Agents workspace (`?agents=1`). Click an individual bird to inspect its need, perception radius, state and reason; adjust flocking and visitor rules; then trace spills and rainfall into creek conditions and seed dispersal. Use `cd app && npm run dev` to preview it locally. [Session 8 tutorial and controlled experiment plan](docs/tutorials/22%20-%20Session%208%20-%20Agents,%20Flocking%20and%20Ecosystems.md) · [November 3 progress log](docs/tutorials/2026-11-03%20-%20Progress%20Log.md). This local desktop study has not been published.

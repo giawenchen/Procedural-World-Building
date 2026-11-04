@@ -88,3 +88,8 @@ For every concept I follow the same loop:
 
 > [!tip] Golden rule
 > Never copy code you can't predict the output of. If you can't predict it, that's the next question for the AI.
+
+
+## Session 8 — agents and ecosystems
+
+- [Session 8 — Agents, Flocking and Ecosystems](22%20-%20Session%208%20-%20Agents,%20Flocking%20and%20Ecosystems.md) — finite perception, needs-driven states, flock steering, seed dispersal and environmental feedback. The tutorial marks proposed comparisons separately from completed implementation.

@@ -33,7 +33,7 @@ export default function ControlledStudies() {
   },[playing,study,complete])
   function choose(next:StudyId){setPlaying(false);setId(next);setValue(STUDIES.find(s=>s.id===next)!.min)}
   return <main className="controlled-studies">
-    <header><a href="?workspace=living&spin=0">Fieldwork <em>Nature Studio</em></a><span>ONE CHANGE. TWO POSSIBILITIES.</span><a href="?exhibition=1">Exhibition ↗</a></header>
+    <header><a href="?workspace=living&spin=0">Fieldwork <em>Nature Studio</em></a><span>ONE CHANGE. TWO POSSIBILITIES.</span><a href="?story=forest" target="_blank" rel="noreferrer">Forest story ↗</a><a href="?exhibition=1">Exhibition ↗</a></header>
     <nav aria-label="Controlled experiments">{STUDIES.slice(0,3).map(s=><button key={s.id} aria-pressed={id===s.id} onClick={()=>choose(s.id)}>{s.title}</button>)}<label>More studies<select aria-label="More studies" value={STUDIES.slice(0,3).some(s=>s.id===id)?'':id} onChange={e=>choose(e.target.value as StudyId)}><option value="" disabled>Terrain, caves & more</option>{STUDIES.slice(3).map(s=><option key={s.id} value={s.id}>S{s.session} · {s.title}</option>)}</select></label><button className="rules-toggle" aria-pressed={rules} onClick={()=>setRules(v=>!v)}>{rules?'Hide rules':'Show rules'}</button></nav>
     <section className="study-question"><small>SESSION {study.session} / {study.title.toUpperCase()}</small><h1>{study.question}</h1><p>{study.fixed}</p></section>
     {error&&<p role="alert">{error}</p>}

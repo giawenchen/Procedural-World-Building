@@ -17,6 +17,12 @@ const JourneyExport = lazy(() => import('./JourneyExport.tsx'))
 const PocketIsland = lazy(() => import('./PocketIsland'))
 // oxlint-disable-next-line react/only-export-components
 const ControlledStudies = lazy(() => import('./ComparisonLab.tsx'))
+// oxlint-disable-next-line react/only-export-components
+const ForestHeist = lazy(() => import('./ForestHeist.tsx'))
+const isForestStory = new URLSearchParams(location.search).get('story') === 'forest'
+const isAgentsLab = new URLSearchParams(location.search).has('agents')
+// oxlint-disable-next-line react/only-export-components
+const AgentsLab = lazy(() => import('./AgentsLab'))
 const isExperiments = new URLSearchParams(location.search).has('experiments')
 const isMobile = new URLSearchParams(location.search).has('mobile')
 const isJourneyExport = new URLSearchParams(location.search).has('journeyexport')
@@ -28,6 +34,6 @@ const root:Root=import.meta.hot?.data.root??createRoot(document.getElementById('
 if(import.meta.hot)import.meta.hot.data.root=root
 root.render(
   <StrictMode>
-    {isMobile ? <Suspense fallback={<p>Preparing your island…</p>}><PocketIsland /></Suspense> : isExperiments ? <Suspense fallback={<p>Preparing comparisons…</p>}><ControlledStudies /></Suspense> : isJourneyExport ? <Suspense fallback={<p>Preparing film export…</p>}><JourneyExport /></Suspense> : isAtlasFilm ? <Suspense fallback={<p>Preparing course experiments…</p>}><AtlasFilm /></Suspense> : isExhibition ? <Suspense fallback={<p>Preparing the exhibition…</p>}><Exhibition /></Suspense> : <App />}
+    {isAgentsLab ? <Suspense fallback={<p>Preparing the agent field…</p>}><AgentsLab /></Suspense> : isForestStory ? <Suspense fallback={<p>Preparing a rather questionable expedition…</p>}><ForestHeist /></Suspense> : isMobile ? <Suspense fallback={<p>Preparing your island…</p>}><PocketIsland /></Suspense> : isExperiments ? <Suspense fallback={<p>Preparing comparisons…</p>}><ControlledStudies /></Suspense> : isJourneyExport ? <Suspense fallback={<p>Preparing film export…</p>}><JourneyExport /></Suspense> : isAtlasFilm ? <Suspense fallback={<p>Preparing course experiments…</p>}><AtlasFilm /></Suspense> : isExhibition ? <Suspense fallback={<p>Preparing the exhibition…</p>}><Exhibition /></Suspense> : <App />}
   </StrictMode>,
 )

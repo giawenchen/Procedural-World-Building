@@ -305,3 +305,16 @@ Desktop and mobile remain independent. No cross-device control or synchronized e
 - [ ] Verify the latest independent mobile tracked-seed revision on the public host and physical devices.
 
 The new viewpoint does not complete the future-course topics. Existing instancing, population caps and local chunk rebuilding are partial optimization work. No explicit light-competition model is implemented. [Tutorial and model boundaries](../tutorials/20%20-%20A%20Seed%20Finds%20a%20Home.md). No new push or public deployment.
+
+## November 3 — Session 8 agents
+
+- [x] Add an independent desktop Agents workspace with a clickable individual-state inspector and a live agent-to-world connection panel.
+- [x] Implement finite perception, energy-driven FSM states, separation/alignment/cohesion flock steering and scheduled visitors from a bounded pool.
+- [x] Couple bird berry foraging and seed carrying to plant establishment on open island ground.
+- [x] Couple surface residue to rain runoff, creek organic load, a relative oxygen readout and shoreline plant response.
+- [x] Distinguish local cleanup from gradual creek recovery; document model boundaries and real references.
+- [ ] Run and record personal matched comparisons for 3 m vs 16 m perception and 0.1 vs 1.4 flock response.
+- [ ] Compare dry vs rainy shore conditions from a reset state and record creek recovery after cleanup.
+- [ ] Explore ant stigmergy, crowd motion, behavior trees, hearing and occlusion if a clear course question motivates them.
+
+See [Session 8 learning tutorial](../tutorials/22%20-%20Session%208%20-%20Agents,%20Flocking%20and%20Ecosystems.md) and [November 3 progress log](../tutorials/2026-11-03%20-%20Progress%20Log.md). Implementation is recorded; personal parameter observations remain open.

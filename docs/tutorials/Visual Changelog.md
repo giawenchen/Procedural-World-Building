@@ -424,3 +424,9 @@ The test run recorded one birth with background reproduction disabled. Water cau
 ## October 21 — public midterm checkpoint
 
 The latest desktop studies, seed lifecycle and documented experiments are now published independently of Pocket Island. [Publication checks and screenshot](2026-10-21%20-%20Progress%20Log.md). Rain A/B results were verified on the public page; no new disaster simulation is claimed.
+
+## 022 — Agents in the field / November 3, 2026
+
+A separate desktop Session 8 study makes individual needs, local perception, flock steering and ecosystem feedback visible around the living island. Click a bird to inspect its current finite state and reason; change vision and flock response; add a spill or visitor; trace rain from land into the creek; then compare cleanup with slower downstream recovery. Island, bird-follow and creek cameras support comparisons at different scales.
+
+The UI uses a warm paper inspector and a soft, dimensional island. A small cause panel shows bird attention, plant dispersal, runoff and shoreline response together. The phone build remains an independent experience. [Session 8 tutorial](22%20-%20Session%208%20-%20Agents,%20Flocking%20and%20Ecosystems.md) documents the simplified model and proposes controlled experiments; those trials are not yet personal learning results.

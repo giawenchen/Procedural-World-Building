@@ -308,3 +308,5 @@
     display: none;
   }
 }
+
+.forest-heist-link{display:flex;align-items:center;gap:10px;margin:10px 0;padding:15px 10px;border:1px dashed #b9baa5;border-radius:6px;color:#62516e!important;text-decoration:none;font-size:12px}.forest-heist-link small{display:block;font-size:9px;color:#7f8274;margin-top:4px}.forest-heist-link b{font-size:24px;font-weight:400}.forest-heist-link:hover{background:#eae4d4}
